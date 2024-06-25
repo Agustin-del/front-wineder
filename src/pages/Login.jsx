@@ -18,12 +18,12 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center h-screen bg-gray-100">
-            <div className=' w-full max-w-xs my-5'>
+        <div className="flex items-center justify-center  bg-gray-100">
+            {/* <div className=' w-full max-w-xs my-5'>
                 <img src="./assets/login.jpg" alt="" />
-            </div>
+            </div> */}
 
-            <div className="w-full max-w-xs mt-5 absolute">
+            <div className="w-full max-w-xs mt-5 ">
                 <h2 className='text-3xl text-center mb-10'>Login</h2>
                 <form onSubmit={handleLogin} className="bg-white bg-opacity-30 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <div className="mb-4">

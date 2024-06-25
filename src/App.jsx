@@ -32,7 +32,9 @@ function App() {
             <Route path="/wines" element={<Wines />} />
             <Route path="/wines/:id" element={<WineDetails />} />
             <Route path="/carrito" element={<Carrito />} />
-            <Route path="/winesIncome" element={<WineIncome />} />
+            <Route path="/wineIncome" element={<WineIncome />} />
+            <Route path="/wineDetails" element={<WineDetails />} />
+
 
 
           </Routes>

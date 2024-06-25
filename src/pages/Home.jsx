@@ -5,7 +5,6 @@ const Home = () => {
 
     return (
         <>
-
             <div className="bg-[#F0E9E1]">
 
                 <div className="bg-cover object-cover bg-center h-[300px] bg-no-repeat bg-fixed" style={{ backgroundImage: `url('./assets/img-home.jpg')` }}>
@@ -15,6 +14,7 @@ const Home = () => {
                         <h3>At Wineder, we believe that wine is more than just a drink: it’s an experience, a tradition, and a celebration of life. We are dedicated to offering you a carefully curated selection of the finest wines from the most prestigious wineries, both national and international.</h3>
                     </div>
                 </div>
+
                 <div className="w-[90%] mx-auto flex justify-center bg-slate-400 h-2 my-5"></div>
 
                 <section className="m-5 ">
@@ -41,10 +41,10 @@ const Home = () => {
 
                     <CardHomeWine bgColor="bg-[#D0C9BD]" name="Sparkling wine" image="./assets/vino-espumante.png" />
 
-                    <CardHomeWine bgColor="bg-[#D1C7BD]" name="Rose wine" image="./assets/vino-rosado.png" />
+                    <CardHomeWine bgColor="bg-[#DCC8C9]" name="Rose wine" image="./assets/vino-rosado.png" />
 
                 </section>
-
+               
                 <div className="w-[90%] mx-auto flex justify-center bg-slate-400 h-2 my-5"></div>
 
 
