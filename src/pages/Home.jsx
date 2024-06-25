@@ -7,16 +7,26 @@ const Home = () => {
         <>
             <div className="bg-[#F0E9E1]">
 
-                <div className="bg-cover object-cover bg-center h-[300px] bg-no-repeat bg-fixed" style={{ backgroundImage: `url('./assets/img-home.jpg')` }}>
-                    <div className="p-5 ">
-                        <h1 className="text-3xl ">Welcome to Wineder!</h1>
-                        <h2 className="text-xl pt-5">Where every sip tells a story</h2>
-                        <h3>At Wineder, we believe that wine is more than just a drink: it’s an experience, a tradition, and a celebration of life. We are dedicated to offering you a carefully curated selection of the finest wines from the most prestigious wineries, both national and international.</h3>
+                <div className="bg-cover object-cover bg-center  h-[300px] bg-no-repeat bg-fixed " style={{ backgroundImage: `url('./assets/img-home.jpg')` }}>
+                    <div className="p-5 bg-black bg-opacity-50 flex items-center flex-col">
+                        <h1 className="text-3xl text-white">Welcome to Wineder!</h1>
+                        <h2 className="text-xl pt-5 text-white">Where every sip tells a story</h2>
+                        <h3 className="text-white">At Wineder, we believe that wine is more than just a drink: it’s an experience, a tradition, and a celebration of life. We are dedicated to offering you a carefully curated selection of the finest wines from the most prestigious wineries, both national and international.</h3>
                     </div>
                 </div>
 
                 <div className="w-[90%] mx-auto flex justify-center bg-slate-400 h-2 my-5"></div>
 
+                <section className="my-5">
+                    <div className="flex justify-center">
+                        <video className="w-[90%] max-w-xl" autoPlay loop muted>
+                            <source src="./assets/videoSirviendoCopa.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </section>
+
+                
                 <section className="m-5 ">
                     <h3 className='text-3xl'>Our Selection</h3>
                     <p>Discover our wide range of red, white, rosé, and sparkling wines, carefully chosen to satisfy the most discerning palates. From classics to the latest innovations in winemaking, here you will find the perfect bottle for every occasion.</p>
@@ -31,6 +41,11 @@ const Home = () => {
                     <p>Raise your glass and celebrate life with Wineder!</p>
                 </section>
 
+                <div>
+
+
+                </div>
+
                 <div className="w-[90%] mx-auto flex justify-center bg-slate-400 h-2 my-5"></div>
 
                 <section className="flex flex-col justify-around items-center my-5 gap-5">
@@ -44,9 +59,10 @@ const Home = () => {
                     <CardHomeWine bgColor="bg-[#DCC8C9]" name="Rose wine" image="./assets/vino-rosado.png" />
 
                 </section>
-               
+
                 <div className="w-[90%] mx-auto flex justify-center bg-slate-400 h-2 my-5"></div>
 
+              
 
             </div>
 
