@@ -1,20 +1,42 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../redux/actions/authActions';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useDispatch()
     const navigate = useNavigate();
+    const token = useSelector(store => store.authReducer.token)
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        // Aquí puedes agregar la lógica para manejar la autenticación
-        if (username === 'admin' && password === 'password') {
-            console.log('Login successful');
-            navigate('/dashboard'); // Redirige a la página del dashboard
-        } else {
-            console.log('Login failed');
+        const requestBody = {
+            email:username,
+            password: password
         }
+        try {
+            const response = await axios.post('http://localhost:8080/api/auth/login', requestBody)
+            dispatch(login(response.data))
+            const current = await axios.get('http://localhost:8080/api/auth/current', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            console.log(current)    
+        } catch (e) {
+            console.error(e)
+        }
+
+        // // Aquí puedes agregar la lógica para manejar la autenticación
+        // if (username === 'a1dmin' && password === 'password') {
+        //     console.log('Login successful');
+        //     navigate('/dashboard'); // Redirige a la página del dashboard
+        // } else {
+        //     console.log('Login failed');
+        // }
     };
 
     return (
@@ -25,7 +47,7 @@ const Login = () => {
 
             <div className="w-full max-w-xs mt-5 ">
                 <h2 className='text-3xl text-center mb-10'>Login</h2>
-                <form onSubmit={handleLogin} className="bg-white bg-opacity-30 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <form className="bg-white bg-opacity-30 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                             Username
@@ -53,11 +75,11 @@ const Login = () => {
                         />
                     </div>
                     <div className="flex items-center justify-between">
-                        <button
+                        <button onClick={handleLogin}
                             type="submit"
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         >
-                            Sign In
+                            Login
                         </button>
                     </div>
                 </form>
