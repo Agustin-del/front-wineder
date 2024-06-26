@@ -6,4 +6,4 @@ export const login = createAction("auth/login", (token) => {
     }
 })
 
-export const logout =createAction("auth/logout")
+export const logout = createAction("auth/logout")
