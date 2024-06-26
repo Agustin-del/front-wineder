@@ -2,9 +2,21 @@ import React from 'react'
 
 import { Link } from 'react-router-dom';
 
-const CartsWines = (props) => {
+const CartsWines = ({bgColor, ...props}) => {
+
+    switch (bgColor) {
+        case 'WHITE': 
+            bgColor= "bg-[#D4B891]"
+            break;
+        case 'RED': 
+            bgColor="bg-[#5e2a30]"
+            break
+        case "PINK":
+            bgColor="bg-[#DCC8C9]"
+            break
+    }
     return (
-        <div className={`relative group cursor-pointer overflow-hidden duration-500 w-64 h-80 ${props.bgColor} text-gray-50 p-5`}>
+        <div className={`relative group cursor-pointer overflow-hidden duration-500 w-64 h-8 ${bgColor} text-gray-50 p-5 ` }>
             <div className="">
                 <div className="group-hover:scale-110 w-full h-60  duration-500" >
                     <img src={props.image} alt="img-home" className='w-full h-full object-cover' />

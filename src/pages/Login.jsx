@@ -11,7 +11,6 @@ const Login = () => {
     const [alert, setAlert] = useState(null)
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    const token = useSelector(store => store.authReducer.token)
 
     const handleLogin = async (e) => {
         e.preventDefault();
