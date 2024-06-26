@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../redux/actions/authActions';
+import { Alert } from 'flowbite-react';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [alert, setAlert] = useState(null)
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const token = useSelector(store => store.authReducer.token)
@@ -22,21 +24,22 @@ const Login = () => {
             dispatch(login(response.data))
             const current = await axios.get('http://localhost:8080/api/auth/current', {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${response.data}`
                 }
             })
-            console.log(current)    
-        } catch (e) {
-            console.error(e)
-        }
+            if (current.data.role === "admin") {
+                navigate('/admin')
+            }
 
-        // // Aquí puedes agregar la lógica para manejar la autenticación
-        // if (username === 'a1dmin' && password === 'password') {
-        //     console.log('Login successful');
-        //     navigate('/dashboard'); // Redirige a la página del dashboard
-        // } else {
-        //     console.log('Login failed');
-        // }
+            if (current.data.role === "client") {
+                navigate('/')
+            }
+        } catch (e) {
+            setAlert({type:"failure", message:e.response.data})
+            setTimeout(() => {
+                setAlert(null)
+            }, 1500);
+        }
     };
 
     return (
@@ -73,6 +76,7 @@ const Login = () => {
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="******************"
                         />
+                        {alert && <Alert color={alert.type}>{alert.message}</Alert>}
                     </div>
                     <div className="flex items-center justify-between">
                         <button onClick={handleLogin}
@@ -81,6 +85,7 @@ const Login = () => {
                         >
                             Login
                         </button>
+                        
                     </div>
                 </form>
             </div>

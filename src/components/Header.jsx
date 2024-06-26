@@ -1,15 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Anchor from './Anchor.jsx';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/actions/authActions.js';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const isAuthenticated = useSelector(store => store.authReducer.isAuthenticated)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
         console.log('toggleMenu called');
     };
 
+    const handleLogout = () => {                                       
+        dispatch(logout())
+        console.log(isAuthenticated)
+        navigate("/")    
+
+    }
 
 
     return (
@@ -18,9 +29,13 @@ const Header = () => {
                 {/* IMAGEN LOGO */}
                 <img src="/assets/logo-2.png" className="w-[100px]" alt="logo-home" />
 
-
-                <button className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]' > <Anchor href="/login" text="Login" /></button>
-                <button className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]'><Anchor href="/registerClient" text="Register" /></button>
+                {!isAuthenticated ? <>
+                    <button className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]' > <Anchor href="/login" text="Login" /></button>
+                    <button className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]'><Anchor href="/registerClient" text="Register" /></button>
+                    </> : 
+                    <button onClick={handleLogout} className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]'><Anchor href="/" text="Logout" /></button>
+                }
+                
 
                 {/* CARRITO */}
                 <NavLink to="/carrito">
@@ -43,7 +58,6 @@ const Header = () => {
                         </div>
                     </nav>
                 </div>
-
             </header>
         </section>
     );

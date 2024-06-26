@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { Alert } from 'flowbite-react';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterClient = () => {
     const [form, setForm] = useState({
@@ -9,9 +12,9 @@ const RegisterClient = () => {
         confirmPassword: '',
         address: ''
     });
-
+    const [alert, setAlert] = useState(null)
     const [errors, setErrors] = useState({});
-
+    const navigate = useNavigate()
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm({
@@ -33,12 +36,37 @@ const RegisterClient = () => {
         return Object.keys(tempErrors).length === 0;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validate()) {
-            console.log('Form submitted successfully', form);
-            // Aquí puedes agregar la lógica para manejar el registro del usuario
+        validate()
+        const requestBody = {
+            email:form.email,
+            password:form.password,
+            name:form.firstName,
+            lastName:form.lastName,
+            address:form.address
         }
+        try {
+            const response = await axios.post("http://localhost:8080/api/auth/register/client", requestBody)
+            setAlert({type:"success", message: response.data})
+            setTimeout(async () => {
+                const response = await axios.post('http://localhost:8080/api/auth/login', {
+                    email:form.email,
+                    password:form.password
+                })
+                console.log(response)
+                navigate('/')
+            }, 1000)
+        } catch (e) {
+            setAlert({type:"failure", message: e.response.data})
+            setTimeout(() => {
+                setAlert(null)
+            }, 1500)
+        }
+        // if (validate()) {
+        //     console.log('Form submitted successfully', form);
+        //     // Aquí puedes agregar la lógica para manejar el registro del usuario
+        // }
     };
 
     return (
@@ -108,8 +136,9 @@ const RegisterClient = () => {
                             {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
                         </div>
                         
-                        <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
+                        <div className="mb-4 flex flex-col gap-2">
+                            <div>
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
                                 Confirm Password
                             </label>
                             <input
@@ -121,6 +150,10 @@ const RegisterClient = () => {
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Confirm Password"
                             />
+                            </div>
+                            <div>
+                                <p>The password must have a number, an uppercase letter, a lowercase letter and have eight characters.</p>
+                            </div>
                             {errors.confirmPassword && <p className="text-red-500 text-xs italic">{errors.confirmPassword}</p>}
                         </div>
                         <div className="mb-4">
@@ -137,6 +170,7 @@ const RegisterClient = () => {
                                 placeholder="Address"
                             />
                             {errors.address && <p className="text-red-500 text-xs italic">{errors.address}</p>}
+                            
                         </div>
                         <div className="flex items-center justify-between">
                             <button
@@ -145,6 +179,7 @@ const RegisterClient = () => {
                             >
                                 Register
                             </button>
+                            {alert && <Alert color={alert.type}>{alert.message}</Alert>}
                         </div>
                     </form>
                 </div>
