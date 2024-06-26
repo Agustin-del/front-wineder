@@ -14,6 +14,7 @@ import WineIncome from './pages/WineIncome'
 import Contact from './pages/Contact'
 import Admin from './pages/Admin'
 import Client from './pages/Client';
+import WinesType from './pages/WinesType';
 
 
 
@@ -38,6 +39,8 @@ function App() {
             <Route path="/wineDetails" element={<WineDetails />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/client" element={<Client />} />
+            <Route path="/winesType" element={<WinesType />} />
+            <Route path="/winesType/:type" element={<WinesType />} />
 
 
 
