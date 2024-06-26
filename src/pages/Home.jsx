@@ -1,5 +1,6 @@
 import React from 'react'
 import CardHomeWine from '../components/CardHomeWine'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
 
@@ -49,20 +50,15 @@ const Home = () => {
                 <div className="w-[90%] mx-auto flex justify-center bg-slate-400 h-2 my-5"></div>
 
                 <section className="flex flex-col justify-around items-center my-5 gap-5">
-
-                    <CardHomeWine bgColor="bg-[#70383F]" name="Red wine" image="./assets/tinto.png" />
-
-                    <CardHomeWine bgColor="bg-[#D4B891]" name="White wine" image="./assets/blanco.png" />
-
-                    <CardHomeWine bgColor="bg-[#D0C9BD]" name="Sparkling wine" image="./assets/espumante.png" />
-
-                    <CardHomeWine bgColor="bg-[#DCC8C9]" name="Rose wine" image="./assets/rosado.png" />
-
+                    <Link to={'/winesType/RED'}><CardHomeWine bgColor="bg-[#70383F]" name="Red wine" image="./assets/tinto.png" /></Link>
+                    <Link to={'/winesType/WHITE'} ><CardHomeWine bgColor="bg-[#D4B891]" name="White wine" image="./assets/blanco.png" /> </Link>
+                    <Link to={'/winesType/SPARKLING'} ><CardHomeWine bgColor="bg-[#D0C9BD]" name="Sparkling wine" image="./assets/espumante.png" /></Link>
+                    <Link to={'/winesType/ROSE'}><CardHomeWine bgColor="bg-[#DCC8C9]" name="Rose wine" image="./assets/rosado.png" /></Link>
                 </section>
 
                 <div className="w-[90%] mx-auto flex justify-center bg-slate-400 h-2 my-5"></div>
 
-              
+
 
             </div>
 
