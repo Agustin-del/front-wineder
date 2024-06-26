@@ -13,6 +13,7 @@ import Carrito from './pages/Carrito'
 import WineIncome from './pages/WineIncome'
 import Contact from './pages/Contact'
 import Admin from './pages/Admin'
+import Client from './pages/Client';
 
 
 
@@ -36,6 +37,7 @@ function App() {
             <Route path="/wineIncome" element={<WineIncome />} />
             <Route path="/wineDetails" element={<WineDetails />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/client" element={<Client />} />
 
 
 

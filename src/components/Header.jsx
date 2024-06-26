@@ -40,6 +40,7 @@ const Header = () => {
                             <Anchor href="/wines" text="Wines" />
                             <Anchor href="/contact" text="Contact" />
                             <Anchor href="/admin" text="Admin" />
+                            <Anchor href="/client" text="Client" />
                         </div>
                     </nav>
                 </div>
