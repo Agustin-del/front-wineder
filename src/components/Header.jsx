@@ -19,9 +19,7 @@ const Header = () => {
         dispatch(logout())
         console.log(isAuthenticated)
         navigate("/")    
-
     }
-
 
     return (
         <section>
@@ -36,7 +34,6 @@ const Header = () => {
                     <button onClick={handleLogout} className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]'><Anchor href="/" text="Logout" /></button>
                 }
                 
-
                 {/* CARRITO */}
                 <NavLink to="/carrito">
                     <img src="./assets/cart.png" alt="" className="w-8 h-8" />
