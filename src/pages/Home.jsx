@@ -26,7 +26,7 @@ const Home = () => {
                     </div>
                 </section>
 
-                
+
                 <section className="m-5 ">
                     <h3 className='text-3xl'>Our Selection</h3>
                     <p>Discover our wide range of red, white, rosé, and sparkling wines, carefully chosen to satisfy the most discerning palates. From classics to the latest innovations in winemaking, here you will find the perfect bottle for every occasion.</p>
@@ -50,13 +50,13 @@ const Home = () => {
 
                 <section className="flex flex-col justify-around items-center my-5 gap-5">
 
-                    <CardHomeWine bgColor="bg-[#70383F]" name="Red wine" image="./assets/vino-tinto.png" />
+                    <CardHomeWine bgColor="bg-[#70383F]" name="Red wine" image="./assets/tinto.png" />
 
-                    <CardHomeWine bgColor="bg-[#D4B891]" name="White wine" image="./assets/vino-blanco.png" />
+                    <CardHomeWine bgColor="bg-[#D4B891]" name="White wine" image="./assets/blanco.png" />
 
-                    <CardHomeWine bgColor="bg-[#D0C9BD]" name="Sparkling wine" image="./assets/vino-espumante.png" />
+                    <CardHomeWine bgColor="bg-[#D0C9BD]" name="Sparkling wine" image="./assets/espumante.png" />
 
-                    <CardHomeWine bgColor="bg-[#DCC8C9]" name="Rose wine" image="./assets/vino-rosado.png" />
+                    <CardHomeWine bgColor="bg-[#DCC8C9]" name="Rose wine" image="./assets/rosado.png" />
 
                 </section>
 
