@@ -9,10 +9,10 @@ const Home = () => {
             <div className="bg-[#F0E9E1]">
 
                 <div className="bg-cover object-cover bg-center  h-[300px] bg-no-repeat bg-fixed " style={{ backgroundImage: `url('./assets/img-home.jpg')` }}>
-                    <div className="p-5 bg-black bg-opacity-50 flex items-center flex-col">
-                        <h1 className="text-3xl text-white">Welcome to Wineder!</h1>
-                        <h2 className="text-xl pt-5 text-white">Where every sip tells a story</h2>
-                        <h3 className="text-white">At Wineder, we believe that wine is more than just a drink: it’s an experience, a tradition, and a celebration of life. We are dedicated to offering you a carefully curated selection of the finest wines from the most prestigious wineries, both national and international.</h3>
+                    <div className="p-5 bg-black bg-opacity-70 flex items-center flex-col lg:w-[60%] lg:ml-[20%] ">
+                        <h1 className="text-3xl text-white lg:text-5xl">Welcome to Wineder!</h1>
+                        <h2 className="text-xl pt-5 text-white lg:text-3xl lg:pb-5">Where every sip tells a story</h2>
+                        <h3 className="text-white lg:text-xl">At Wineder, we believe that wine is more than just a drink: it’s an experience, a tradition, and a celebration of life. We are dedicated to offering you a carefully curated selection of the finest wines from the most prestigious wineries, both national and international.</h3>
                     </div>
                 </div>
 
@@ -28,7 +28,7 @@ const Home = () => {
                 </section>
 
 
-                <section className="m-5 ">
+                <section className="m-5 lg:w-[80%] lg:justify-center">
                     <h3 className='text-3xl'>Our Selection</h3>
                     <p>Discover our wide range of red, white, rosé, and sparkling wines, carefully chosen to satisfy the most discerning palates. From classics to the latest innovations in winemaking, here you will find the perfect bottle for every occasion.</p>
 
@@ -58,7 +58,7 @@ const Home = () => {
 
                 <div className="w-[90%] mx-auto flex justify-center bg-slate-400 h-2 my-5"></div>
 
-
+                <img className=' w-[90%] flex items-center mx-auto mb-5 lg:w-[70%] shadow-[0_3px_10px_rgb(0,0,0,0.2)]' src="./assets/campoUvasHome.jpg" alt="" />
 
             </div>
 

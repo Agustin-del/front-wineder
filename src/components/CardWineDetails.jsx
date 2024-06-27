@@ -12,7 +12,7 @@ const CardWineDetails = () => {
     }, [])
 
     return (
-        <div className='flex flex-row items-center border-2 rounded-lg w-full bg-[#E5D1D2]'>
+        <div className='flex flex-row items-center border-2 rounded-lg w-full bg-[#E5D1D2] md:justify-center md:w-[80%]'>
 
             <img className='w-[200px]' src="./assets/vino-tinto.png" alt="" />
             <div className='flex flex-col gap-2'>
