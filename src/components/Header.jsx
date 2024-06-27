@@ -3,19 +3,21 @@ import Anchor from './Anchor.jsx';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/actions/authActions.js';
+import { eraseRole } from '../redux/actions/roleActions.js';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const isAuthenticated = useSelector(store => store.authReducer.isAuthenticated)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
+    const role = useSelector(store => store.roleReducer.role)
     const toggleMenu = () => {
         setIsOpen(!isOpen);
         console.log('toggleMenu called');
     };
 
     const handleLogout = () => {                                       
+        dispatch(eraseRole())
         dispatch(logout())
         navigate("/")    
     }
@@ -30,13 +32,17 @@ const Header = () => {
                     <button className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]' > <Anchor href="/login" text="Login" /></button>
                     <button className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]'><Anchor href="/registerClient" text="Register" /></button>
                     </> : 
-                    <button onClick={handleLogout} className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]'><Anchor href="/" text="Logout" /></button>
+                    <>
+                        <button onClick={handleLogout} className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]'><Anchor href="/" text="Logout" /></button>
+                        <NavLink to="/carrito">
+                            <img src="./assets/cart.png" alt="" className="w-8 h-8" />
+                        </NavLink>
+                    </>
                 }
                 
                 {/* CARRITO */}
-                <NavLink to="/carrito">
-                    <img src="./assets/cart.png" alt="" className="w-8 h-8" />
-                </NavLink>
+                
+                
 
                 <div>
                     {/* Botón de menú hamburguesa para vistas móviles */}
@@ -50,8 +56,8 @@ const Header = () => {
                             <Anchor href="/" text="Home" />
                             <Anchor href="/wines" text="Wines" />
                             <Anchor href="/contact" text="Contact" />
-                            <Anchor href="/admin" text="Admin" />
-                            <Anchor href="/client" text="Client" />
+                            {role === "admin" ? <Anchor href="/admin" text="Admin" />
+                            : role==="client" && <Anchor href="/client" text="Client" />}
                         </div>
                     </nav>
                 </div>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../redux/actions/authActions';
 import { Alert } from 'flowbite-react';
+import { getRole } from '../redux/actions/roleActions';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -11,6 +12,7 @@ const Login = () => {
     const [alert, setAlert] = useState(null)
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const token = useSelector(store => store.authReducer.token)
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -26,6 +28,7 @@ const Login = () => {
                     'Authorization': `Bearer ${response.data}`
                 }
             })
+            dispatch(getRole(current.data.role))
             if (current.data.role === "admin") {
                 navigate('/admin')
             }
