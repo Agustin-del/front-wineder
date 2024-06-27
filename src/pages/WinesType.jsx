@@ -20,14 +20,14 @@ const WinesType = () => {
       console.log(error);
     }
   };
-  
+
 
   return (
     <div>
       <h2 className='text-2xl text-center'>WinesType - {type}</h2>
-      <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10'>
+      <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10 '>
         {wineType.map(wine => (
-          <CartsWines key={wine.name} name={wine.name} winery={wine.winery} price={wine.price} image={wine.image} wineDescription={wine.wineDescription} />
+          <CartsWines key={wine.name} name={wine.name} winery={wine.winery} price={wine.price} image={wine.image} wineDescription={wine.wineDescription} bgColor={wine.wineDescription.wineType}/>
         ))}
       </div>
     </div>
