@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const CartsWines = ({ bgColor, ...props }) => {
@@ -17,13 +18,11 @@ const CartsWines = ({ bgColor, ...props }) => {
         default:
             bgColor = "";
     }
-
-
+    const isAuthenticated = useSelector(store => store.authReducer.isAuthenticated)
+    console.log(props)
     const handleClickCart = () => {
         setIsGreen(!isGreen);
     }
-
-   
 
     return (
         <div className={`relative group cursor-pointer overflow-hidden duration-500 w-64 h-64 ${bgColor} text-gray-50 p-5 ` }>
@@ -38,12 +37,13 @@ const CartsWines = ({ bgColor, ...props }) => {
                     <h3>{props.winery}</h3>
                     <p className='mb-3'>{props.price}</p>
                     <div className='flex justify-between items-center'>
-                        <Link to="/wineDetails" className="group-hover:opacity-100 p-2 duration-500 opacity-0 bg-gradient-to-r from-[#743339] to-[#6d484c] border border-[#967b6a] rounded-lg">
+                        <Link to={`/wineDetails/`} className="group-hover:opacity-100 p-2 duration-500 opacity-0 bg-gradient-to-r from-[#743339] to-[#6d484c] border border-[#967b6a] rounded-lg">
                             Details...
                         </Link>
-                        <button onClick={handleClickCart} className="p-2">
+                        {isAuthenticated && <button onClick={handleClickCart} className="p-2">
                             <img className="w-8" src={`${isGreen ? './assets/cartGreen.png' : './assets/cart.png'}`} alt="cart icon" />
-                        </button>
+                        </button>}
+                        
                     </div>
                 </div>
             </div>

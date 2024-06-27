@@ -1,14 +1,21 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
 
 //Componente que tiene la img del vino y el boton de agregar al carrito
 const CardWineDetails = () => {
+    async function rating () {
+        const response = await axios.get("http://localhost:8080/api/reviews/all")
+        console.log(response)
+    }
+    useEffect(() => {
+        rating()
+    }, [])
+
     return (
         <div className='flex flex-row items-center border-2 rounded-lg w-full bg-[#E5D1D2]'>
 
             <img className='w-[200px]' src="./assets/vino-tinto.png" alt="" />
             <div className='flex flex-col gap-2'>
-
-
 
                 <div class="flex items-center gap-2 bg-[#5E2A30] p-2 rounded ">
                     <svg class="w-4 h-4 text-yellow-300 ms-1 shadow-[0_10px_20px_rgba(240,_46,_170,_0.7)] " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
@@ -34,7 +41,6 @@ const CardWineDetails = () => {
                     <button className='bg-[#5e2a30] px-4 py-2 rounded-lg text-white'>Add to Cart</button>
                 </div>
             </div>
-
         </div>
     )
 }
