@@ -7,7 +7,7 @@ const Admin = () => {
     const [client , setClient] = useState([])
     const [order , setOrder] = useState()
     const[product , setProduct] = useState()
-  //  const isAuthenticated = useSelector(store => store.authReducer.isAuthenticated)
+    const token = useSelector(store => store.authReducer.token)
 
     useEffect(() => {
         getData()
@@ -16,14 +16,14 @@ const Admin = () => {
 
     const getData = async () => {
 
-        const client = await axios.get('http://localhost:8080/api/clients/all', {
+        const clients = await axios.get('http://localhost:8080/api/clients/all', {
             headers: {
-                'Authorization': `Bearer ${client.data}`
+                'Authorization': `Bearer ${token}`
             }
         })
 
-        setClient(client.data)
-        console.log(client.data);
+        console.log(clients.data);
+        // setClient(clients.data)
       
         // const order = await axios.get('http://localhost:8080/api/')
         // setOrder(order.data)
