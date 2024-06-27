@@ -15,7 +15,7 @@ const Admin = () => {
 
 
     const getData = async () => {
-        
+
         const client = await axios.get('http://localhost:8080/api/clients/all', {
             headers: {
                 'Authorization': `Bearer ${client.data}`
@@ -25,7 +25,7 @@ const Admin = () => {
         setClient(client.data)
         console.log(client.data);
       
-        // const order = await axios.get('http://localhost:3001/api/order')
+        // const order = await axios.get('http://localhost:8080/api/')
         // setOrder(order.data)
        
         const product = await axios.get("http://localhost:8080/api/products/all")
