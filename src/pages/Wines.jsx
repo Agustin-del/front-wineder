@@ -23,9 +23,9 @@ const Wines = () => {
           
            {/* COMPONETE DE LAS CARD DE WINE, ESTA EN COMPONENTS-CartsWines.jsx  */}
 
-            {wines.map(wine => {
+            {wines.map(wine => { 
                 if(wine.wineDescription !== null) {
-                    return <CartsWines key={wine.id} name = {wine.name} price ={wine.price} winery={wine.provider} image='./assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
+                    return <CartsWines name = {wine.name} price ={wine.price} winery={wine.provider} image='./assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
                 } 
                 
             })}           
