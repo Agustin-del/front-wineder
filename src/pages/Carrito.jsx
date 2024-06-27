@@ -31,8 +31,9 @@ const Carrito = () => {
                                 <p class="text-gray-800 font-semibold mx-2">{count}</p>
                                 <button onClick={() => setCount(count => count + 1)} className="">+</button>
                             </div>
-                            <div>
+                            <div className='flex items-center flex-col mt-7'>
                                 <p class="text-gray-800 font-semibold">$24.99</p>
+                                <button  className='w-20 hover:text-green-500'><strong>Buy latter</strong></button>
                             </div>
                             <button onClick={handleClickCart} className="p-2">
                                 <img className="w-8" src={`${isGreen ? './assets/deleteRed.png' : './assets/deleteGreen.png'}`} alt="cart icon" />
