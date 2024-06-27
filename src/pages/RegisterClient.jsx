@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Alert } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getRole } from '../redux/actions/roleActions';
+import { login } from '../redux/actions/authActions';
 
 const RegisterClient = () => {
     const [form, setForm] = useState({
@@ -12,9 +15,11 @@ const RegisterClient = () => {
         confirmPassword: '',
         address: ''
     });
+
     const [alert, setAlert] = useState(null)
     const [errors, setErrors] = useState({});
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm({
@@ -48,25 +53,41 @@ const RegisterClient = () => {
         }
         try {
             const response = await axios.post("http://localhost:8080/api/auth/register/client", requestBody)
-            setAlert({type:"success", message: response.data})
-            setTimeout(async () => {
-                const response = await axios.post('http://localhost:8080/api/auth/login', {
-                    email:form.email,
-                    password:form.password
-                })
-                console.log(response)
-                navigate('/')
+            
+            setAlert({ type: 'success', message: 'Registration successful' })
+            setTimeout (async () => {
+                try {
+                    const loginResponse = await axios.post("http://localhost:8080/api/auth/login", {
+                        email:form.email,
+                        password:form.password
+                    })
+                    dispatch(login(loginResponse.data))
+                    setTimeout(async () => {
+                        const currentResponse = await axios.get('http://localhost:8080/api/auth/current', {
+                            headers: {
+                                Authorization: `Bearer ${loginResponse.data}`
+                            }
+                        })
+                        dispatch(getRole(currentResponse.data.role))
+                        if (currentResponse.data.role === "admin") {
+                            navigate('/admin')
+                        }
+            
+                        if (currentResponse.data.role === "client") {
+                            navigate('/')
+                        }
+                    }, 1000)
+                } catch (e) {
+                    console.error(e)
+                }
             }, 1000)
+
         } catch (e) {
             setAlert({type:"failure", message: e.response.data})
             setTimeout(() => {
                 setAlert(null)
             }, 1500)
         }
-        // if (validate()) {
-        //     console.log('Form submitted successfully', form);
-        //     // Aquí puedes agregar la lógica para manejar el registro del usuario
-        // }
     };
 
     return (
