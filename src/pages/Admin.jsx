@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 const Admin = () => {
-    const [client , setClient] = useState()
+    const [client , setClient] = useState([])
     const [order , setOrder] = useState()
     const[product , setProduct] = useState()
   //  const isAuthenticated = useSelector(store => store.authReducer.isAuthenticated)
