@@ -1,9 +1,13 @@
 import React from 'react'
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+});
 
 const TablaProductAdmin = ({ name, col1, col2, col3, col4, data }) => {
     return (
         <div>
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -33,9 +37,12 @@ const TablaProductAdmin = ({ name, col1, col2, col3, col4, data }) => {
                                 <td className="px-6 py-4">
                                     {item.provider || item.lastName || item.active}
                                 </td>
+                                
                                 <td className="px-6 py-4">
-                                    {item.price || item.address || item.productName}
+                                    {  item.address || item.productName}
+                                    {/* //formatter.format(item.price) || */}
                                 </td>
+
                                 <td className="px-6 py-4">
                                     {item.stock || item.quantity}
                                 </td>

@@ -124,7 +124,7 @@ const RegisterProvider = () => {
                             />
                             {errors.cuit && <p className="text-red-500 text-xs italic">{errors.cuit}</p>}
                         </div>
-                        <div className="mb-4">
+                        {/* <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">Payment Method</label>
                             <div className="flex items-center">
                                 <input
@@ -160,9 +160,9 @@ const RegisterProvider = () => {
                                 <label htmlFor="payMethod" className="text-gray-700">
                                     Card Debit
                                 </label>
-                            </div>
+                            </div> 
                             {errors.payMethod && <p className="text-red-500 text-xs italic">{errors.payMethod}</p>}
-                        </div>
+                        </div>*/}
                         <div className="flex items-center justify-between">
                             <button
                                 type="submit"
