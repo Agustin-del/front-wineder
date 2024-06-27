@@ -4,7 +4,7 @@ import TextWineDetails from '../components/TextWineDetails'
 
 const WineDetails = () => {
     return (
-        <div className='flex flex-col items-center gap-4 my-5' >
+        <div className='flex flex-col items-center gap-4 my-5 md:justify-center' >
             <h2 className='text-4xl text-center'>Wine Details</h2>
 
             <h3>Red wine name</h3> 

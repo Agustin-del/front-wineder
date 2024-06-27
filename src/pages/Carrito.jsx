@@ -15,9 +15,9 @@ const Carrito = () => {
                     <h1 class="text-3xl font-semibold text-gray-800 mb-6">Shopping Cart</h1>
 
 
-                    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                    <div class="bg-white shadow-md rounded-lg overflow-hidden md:w-[90%] md:ml-10 lg:w-[70%] lg:ml-[20%]">
 
-                        <div class="flex items-center justify-between border-b border-gray-200 py-4">
+                        <div class="flex items-center justify-between border-b border-gray-200 py-4 ">
                             <div class="flex items-center space-x-8">
                                 <img src="./assets/vino-tinto.png   " alt="Product" class="h-16 w-16 flex  object-cover rounded" />
 

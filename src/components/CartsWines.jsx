@@ -21,9 +21,7 @@ const CartsWines = ({ bgColor, ...props }) => {
 
     const handleClickCart = () => {
         setIsGreen(!isGreen);
-    }
-
-   
+    }   
 
     return (
         <div className={`relative group cursor-pointer overflow-hidden duration-500 w-64 h-64 ${bgColor} text-gray-50 p-5 ` }>
