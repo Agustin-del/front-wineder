@@ -24,6 +24,7 @@ const Header = () => {
 
     return (
         <section>
+<<<<<<< HEAD
             <header className="bg-[#73383E] h-[100px] md:h-[150px] flex flex-row justify-between  items-center px-5 relative z-50">
                 {/* IMAGEN LOGO */}
                 <img src="/assets/logo-2.png" className="w-[100px] md:w-[150px] " alt="logo-home" />
@@ -44,6 +45,31 @@ const Header = () => {
                         {role === "client" && <NavLink to="/carrito">
                             <img src="./assets/cart.png" alt="cart" className="w-8 h-8" />
                         </NavLink>}
+=======
+    <header className="bg-[#73383E] h-[100px] md:h-[150px] flex flex-row justify-between  items-center px-5 relative z-50 " >
+        {/* IMAGEN LOGO */}
+        <img src="/assets/logo-2.png" className="w-[100px] md:w-[150px] lg:w-[200px] " alt="logo-home" />
+
+
+        {!isAuthenticated ? <>
+            <button className=' bg-[#5e2a30] w-[80px] md:ml-[100px] lg:ml-[600px] flex justify-center px-4  py-2 rounded-lg text-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]' > 
+                <Anchor href="/login" text="Login" />
+            </button>
+            <button className=' bg-[#5e2a30] px-4 w-[80px] flex justify-center py-2 rounded-lg text-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
+                <Anchor href="/registerClient" text="Register" />
+            </button>
+        </> : 
+        <>
+            <button onClick={handleLogout} className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white  shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
+                <Anchor href="/" text="Logout" />
+            </button>
+            {role === "client" && <NavLink to="/carrito">
+                <img src="./assets/cart.png" alt="cart" className="w-8 h-8" />
+            </NavLink>}
+            
+        </>
+        }
+>>>>>>> 3a686f9f6156be98c14926ebff81b35014ae2d55
 
                     </>
                 }

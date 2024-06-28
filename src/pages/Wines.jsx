@@ -42,7 +42,7 @@ const Wines = () => {
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
                 </div>) : (
 
-                <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10'>
+                <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10 lg:mx-5'>
 
                     {/* COMPONETE DE LAS CARD DE WINE, ESTA EN COMPONENTS-CartsWines.jsx  */}
 

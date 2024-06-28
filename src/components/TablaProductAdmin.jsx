@@ -29,10 +29,10 @@ const TablaProductAdmin = ({ name, col1, col2, col3, col4, data }) => {
                             <th scope="col" className="px-6 py-3">
                                 {col1}
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-1 py-3">
                                 {col2}
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-1 py-3">
                                 {col3}
                             </th>
                             <th scope="col" className="px-6 py-3">
@@ -40,22 +40,22 @@ const TablaProductAdmin = ({ name, col1, col2, col3, col4, data }) => {
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         {data.map((item, index) => (
                             <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {item.name || item.id}
                                 </th>
-                                <td className={`px-6 py-4 ${getAlignmentClass(item.provider || item.lastName || item.active)}`}>
+                                <td className={` ${getAlignmentClass(item.provider || item.lastName || item.active)}`}>
                                     {item.provider || item.lastName || item.active}
                                 </td>
-                                <td className={`px-6 py-4 ${getAlignmentClass(item.price || item.address || item.productName)}`}>
+                                <td className={`w-[72px] px-6  ${getAlignmentClass(item.price || item.address || item.productName)}`}>
                                     {formatField(col2, item.price) || item.address || item.productName}
                                 </td>
-                                <td className={`px-6 py-4 ${getAlignmentClass(item.stock || item.quantity)}`}>
+                                <td className={`w-[72px] ${getAlignmentClass(item.stock || item.quantity)}`}>
                                     {item.stock || item.quantity}
                                 </td>
-                                <td className={`px-6 py-4 ${getAlignmentClass(item.provider || '')}`}>
+                                <td className={` ${getAlignmentClass(item.provider || '')}`}>
                                     {item.provider || ''}
                                 </td>
                             </tr>
