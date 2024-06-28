@@ -15,6 +15,8 @@ const CartsWines = ({ bgColor, ...props }) => {
         case 'PINK':
             bgColor = "bg-[#DCC8C9]";
             break;
+        case 'SPARKLING':
+            bgColor = "bg-[#A39D92]";
         default:
             bgColor = "";
     }

@@ -61,7 +61,7 @@ const Login = () => {
             }
 
             if (current.data.role === "client") {
-                navigate('/')
+                navigate('/client')
             }
         } catch (e) {
             setAlert({ type: "failure", message: e.response.data })

@@ -1,10 +1,22 @@
 import React from 'react'
+
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD'
 });
 
 const TablaProductAdmin = ({ name, col1, col2, col3, col4, data }) => {
+    const formatField = (field, value) => {
+        if (field.toLowerCase().includes('price') && typeof value === 'number') {
+            return formatter.format(value);
+        }
+        return value;
+    };
+
+    const getAlignmentClass = (value) => {
+        return typeof value === 'number' ? 'text-right' : 'text-left';
+    };
+
     return (
         <div>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
@@ -34,19 +46,16 @@ const TablaProductAdmin = ({ name, col1, col2, col3, col4, data }) => {
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {item.name || item.id}
                                 </th>
-                                <td className="px-6 py-4">
+                                <td className={`px-6 py-4 ${getAlignmentClass(item.provider || item.lastName || item.active)}`}>
                                     {item.provider || item.lastName || item.active}
                                 </td>
-                                
-                                <td className="px-6 py-4">
-                                    {  item.address || item.productName}
-                                    {/* //formatter.format(item.price) || */}
+                                <td className={`px-6 py-4 ${getAlignmentClass(item.price || item.address || item.productName)}`}>
+                                    {formatField(col2, item.price) || item.address || item.productName}
                                 </td>
-
-                                <td className="px-6 py-4">
+                                <td className={`px-6 py-4 ${getAlignmentClass(item.stock || item.quantity)}`}>
                                     {item.stock || item.quantity}
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className={`px-6 py-4 ${getAlignmentClass(item.provider || '')}`}>
                                     {item.provider || ''}
                                 </td>
                             </tr>

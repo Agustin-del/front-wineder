@@ -12,7 +12,7 @@ const Contact = () => {
   }, []);
 
   return (
-    <main className='h-screen'>
+    <main className=''>
       {loading ? (
         <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
           <img className='w-[300px]' src="./assets/copa.gif" alt="" />

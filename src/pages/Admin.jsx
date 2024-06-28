@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useSelector } from 'react-redux'
 import TablaProductAdmin from '../components/TablaProductAdmin'
 import { Link } from 'react-router-dom'
+import { Button } from 'flowbite-react'
 
 const Admin = () => {
     const [data, setData] = useState([])
@@ -87,8 +88,16 @@ const Admin = () => {
                         <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full lg:w-[70%] lg:mt-5">
                             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                                 {activeTab === 'clients' && <TablaProductAdmin name="Client" col1="Last Name" col2="Adrress" data={data} />}
-                                {activeTab === 'orders' && <TablaProductAdmin name="Order" col1="price" col4="Quantity" data={data} />}
+                                {activeTab === 'orders' && <TablaProductAdmin name="Order" col2="price" col3="Quantity" col4="Product name" data={data}  /> }
+                                
                                 {activeTab === 'products' && <TablaProductAdmin name="Product" col1="Name" col2="Price" col3="Stock" col4="Provider" data={data} />}
+                                {activeTab === 'products' && (
+                                    <Link to="/wineIncome">
+                                        <button className="w-[80%] md:w-[50%] lg:w-[40%] my-5 bg-[#5e2a30] hover:bg-[#3a1f22] text-white font-bold py-2 px-4 rounded">
+                                            Create product
+                                        </button>
+                                    </Link>
+                                )}
 
                             </div>
                         </div>
