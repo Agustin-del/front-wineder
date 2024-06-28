@@ -3,7 +3,7 @@ import AnchorSocialFooter from './AnchorSocialFooter'
 
 const Footer = () => {
   return (
-    <div className="bg-[#723a3f] h-[400px] p-5 flex flex-col justify-between ">
+    <div className="bg-[#8f5459] h-[400px] p-5 flex flex-col justify-between ">
       <div className="flex flex-col gap-3 justify-between items-center  md:flex-row lg:flex-row">
         <h2 className="text-3xl text-white">Wineder &copy;</h2>
         <img src="./assets/iconsUva.png" alt="" className='lg:w-[60px] w-[30px] md:w-[50px]' />
