@@ -1,4 +1,4 @@
-import axios from 'axios'
+
 import React, { useEffect } from 'react'
 
 //Componente que tiene la img del vino y el boton de agregar al carrito
