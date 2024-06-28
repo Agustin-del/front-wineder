@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 const Contenedor = ({ children }) => {
   return (
-    <div className="h-screen w-screen flex flex-col ">
+    <div className="h-screen w-full flex flex-col ">
       <Header />
 
       {children}
