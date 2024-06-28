@@ -38,8 +38,8 @@ const UploadImage = () => {
     return (
         <div>
             <h2>Upload Image</h2>
-            <input type="file" onChange={handleFileChange} className='bg-[#5e2a30]'/>
-            <button onClick={handleUpload} className='bg-[#5e2a30]'>Upload</button>
+            <input type="file" onChange={handleFileChange} />
+            <button onClick={handleUpload}>Upload</button>
             <h2>Uploaded Images</h2>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {images.map((image) => (
