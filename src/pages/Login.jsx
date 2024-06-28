@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { login } from '../redux/actions/authActions';
 import { Alert } from 'flowbite-react';
 import { getRole } from '../redux/actions/roleActions';
-import { GoogleLogin } from '@react-oauth/google';
+// import { GoogleLogin } from '@react-oauth/google';
 
 
 const Login = () => {
@@ -17,29 +17,29 @@ const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
-    const token = useSelector(store => store.authReducer.token)
+    // const token = useSelector(store => store.authReducer.token)
     const [loading, setLoading] = useState(true);
 
 
 
-    const responseMessage = (response) => {
-        setUser(response)
-        navigate('/')
-    }
-    useEffect(() => {
-        const userDetails = async() => {
-            try {
-                const response = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.credential}`)
-                console.log(response)
-            } catch (e) {
-                console.error(e)
-            }
-        }
-    }, [user])
+    // const responseMessage = (response) => {
+    //     setUser(response)
+    //     navigate('/')
+    // }
+    // useEffect(() => {
+    //     const userDetails = async() => {
+    //         try {
+    //             const response = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.credential}`)
+    //             console.log(response)
+    //         } catch (e) {
+    //             console.error(e)
+    //         }
+    //     }
+    // }, [user])
 
-    const errorMessage = (error) => {
-        setAlert({type:"failure", message:error})
-    }
+    // const errorMessage = (error) => {
+    //     setAlert({type:"failure", message:error})
+    // }
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -125,7 +125,7 @@ const Login = () => {
                             <div className="flex items-center justify-between">
                                 <button onClick={handleLogin}
                                     type="submit"
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                    className="bg-[#5e2a30] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 >
                                     Login
                                 </button>
@@ -133,11 +133,9 @@ const Login = () => {
                             </div>
                         </form>
                     </div>
-
                 </div>)}
                 </div>
-
             );
-};
+        };
 
             export default Login;
