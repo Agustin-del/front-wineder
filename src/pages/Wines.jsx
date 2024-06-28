@@ -14,7 +14,7 @@ const Wines = () => {
 
     useEffect (() => {
         getWines()
-    }, [wines])
+    }, [])
 
     return (
         <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10'>
@@ -23,7 +23,7 @@ const Wines = () => {
 
             {wines.map(wine => { 
                 if(wine.wineDescription !== null) {
-                    return <CartsWines name = {wine.name} price ={wine.price} winery={wine.provider} image='./assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
+                    return <CartsWines id= {wine.id} name = {wine.name} price ={wine.price} winery={wine.provider} image='./assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
                 }                 
             })}           
            {/* <CartsWines name= 'Red Wines' winery='winery name' price='price' image='./assets/vino-tinto.png' bgColor='bg-[#5e2a30]'/>
