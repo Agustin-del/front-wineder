@@ -3,6 +3,7 @@ import { Alert } from 'flowbite-react';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import UploadImage from '../components/UploadImage';
 
 const WineIncome = () => {
     const [loading, setLoading] = useState(true);
@@ -20,6 +21,7 @@ const WineIncome = () => {
         wineType:'',
         region:'',
         companyName:''
+
     })
 
     useEffect(() => {
@@ -83,8 +85,8 @@ const WineIncome = () => {
                 <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
                 </div>) : (
-                <div className="container mx-auto px-4 py-8">
-                    <h1 className="text-3xl font-semibold text-gray-800 mb-6">Product Form</h1>
+                <div className="container mx-auto px-4 py-8 lg:w-[40%] md:w-[60%]">
+                    <h1 className="text-3xl font-semibold text-gray-800 mb-6 ">Product Form</h1>
 
                     <form onSubmit={handleSubmit} class="bg-white shadow-md rounded-lg overflow-hidden">
                         <div className="flex items-center border-b border-gray-200 px-6 py-4">
@@ -175,6 +177,7 @@ const WineIncome = () => {
                             </div>
                             <div className="flex justify-end bg-gray-100 px-6 py-4">
                                 <button type="submit"
+
                                 className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none">Submit</button>
                             </div>
                         </>}                        
