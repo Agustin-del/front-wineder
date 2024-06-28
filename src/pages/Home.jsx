@@ -33,48 +33,14 @@ const Home = () => {
 
                     <section className="my-5 flex justify-center">
                         <div className="relative w-[90%] max-w-xl">
-                            <div className="absolute inset-0 bg-white filter blur-2xl"></div>
-                            <video className="relative w-full z-10" autoPlay loop muted>
-                                <source src="./assets/videoClientPromo.mp4" type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                    </section>
-
-
-                    <section className="my-5 flex justify-center">
-                        <div className="relative w-[90%] max-w-xl">
-                            <div className="absolute inset-0 border-4 border-transparent bg-clip-padding filter blur-lg"></div>
-                            <video className="relative w-full rounded-[50%] " autoPlay loop muted>
-                                <source src="./assets/videoSirviendoCopa.mp4" type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                    </section>
-
-                    <section className="my-5 flex justify-center">
-                        <div className="relative w-[90%] max-w-xl">
                             <div className="absolute inset-0 bg-white filter blur-3xl rounded-full"></div>
                             <video className="relative w-full z-10 rounded-full" autoPlay loop muted>
                                 <source src="./assets/videoSirviendoCopa.mp4" type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
                         </div>
+                        
                     </section>
-
-                    <section className="my-5 flex justify-center">
-                        <div className="relative w-[90%] max-w-xl">
-                            <div className="absolute inset-0 border-4 border-transparent bg-clip-padding filter blur-3xl rounded-full"></div>
-                            <video className="relative w-full rounded-full" autoPlay loop muted>
-                                <source src="./assets/videoSirviendoCopa.mp4" type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                    </section>
-
-
-
-
 
                     <section className="m-5 lg:w-[80%] lg:justify-center lg:pl-[10%] ">
                         <h3 className='text-3xl'>Our Selection</h3>
