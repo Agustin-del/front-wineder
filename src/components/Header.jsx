@@ -49,17 +49,17 @@ const Header = () => {
         } */}
 
                 {/* Menú de navegación */}
-                <nav className={`absolute md:static lg:static top-[84px] lg:mr-10 left-0 right-0 bg-[#73383E] md:bg-transparent lg:bg-transparent transition-max-height duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-screen' : 'max-h-0'} z-50 md:max-h-full lg:max-h-full md:flex md:items-center lg:flex lg:items-center`}>
+                <nav className={`absolute md:static lg:static top-[84px] md:items-center lg:mr-10 left-0 right-0 bg-[#73383E] md:bg-transparent lg:bg-transparent transition-max-height duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-screen' : 'max-h-0'} z-50 md:max-h-full lg:max-h-full md:flex md:items-center lg:flex lg:items-center`}>
                     <div className="flex flex-col md:flex-row lg:flex-row items-center md:text-xl md:gap-5 text-white my-5 md:my-0 lg:my-0">
                         <Anchor href="/" text="Home" />
                         <Anchor href="/wines" text="Wines" />
                         <Anchor href="/contact" text="Contact" />
                         {role === "admin" ? <Anchor href="/admin" text="Admin" /> : role === "client" && <Anchor href="/client" text="Client" />}
                     </div>
-                    <div className='flex flex-col md:flex-row lg:flex-row '>
+                    <div className='flex flex-col md:flex-row lg:flex-row md:'>
 
                         {!isAuthenticated ? <>
-                            <button className='  md:ml-[100px] lg:ml-[600px] flex justify-center px-4  py-2 rounded-lg text-white' >
+                            <button className='  md:ml-[100px] lg:ml-[600px] flex justify-center px-4   rounded-lg text-white' >
                                 <Anchor href="/login" text="Login" />
                             </button>
                             <button className='  px-4 flex justify-center pb-4 text-white '>
