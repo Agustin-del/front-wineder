@@ -2,10 +2,19 @@ import React, { useState, useEffect } from 'react';
 
 const Carrito = () => {
     const [loading, setLoading] = useState(true);
-    const [cartItems, setCartItems] = useState([
-        { id: 1, name: 'Vino Tinto', description: 'Description of the product.', price: 24.99, quantity: 0, isGreen: true, imgSrc: './assets/vino-tinto.png' },
-        { id: 2, name: 'Vino Rosado', description: 'Description of the product.', price: 24.99, quantity: 0, isGreen: true, imgSrc: './assets/vino-rosado.png' }
-    ]);
+    const [cartItems, setCartItems] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('/api/products/all');
+                setCartItems(response.data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
     const handleClickCart = (id) => {
         setCartItems(cartItems.map(item =>
