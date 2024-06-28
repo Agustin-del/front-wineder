@@ -1,21 +1,45 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../redux/actions/authActions';
 import { Alert } from 'flowbite-react';
 import { getRole } from '../redux/actions/roleActions';
+import { GoogleLogin } from '@react-oauth/google';
 
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [user, setUser] = useState([])
     const [alert, setAlert] = useState(null)
     const dispatch = useDispatch()
     const navigate = useNavigate();
+
     const token = useSelector(store => store.authReducer.token)
     const [loading, setLoading] = useState(true);
 
+
+
+    const responseMessage = (response) => {
+        setUser(response)
+        navigate('/')
+    }
+    useEffect(() => {
+        const userDetails = async() => {
+            try {
+                const response = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.credential}`)
+                console.log(response)
+            } catch (e) {
+                console.error(e)
+            }
+        }
+    }, [user])
+
+    const errorMessage = (error) => {
+        setAlert({type:"failure", message:error})
+    }
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -68,7 +92,6 @@ const Login = () => {
                     {/* <div className=' w-full max-w-xs my-5'>
                 <img src="./assets/login.jpg" alt="" />
             </div> */}
-
                     <div className="w-full max-w-xs mt-5 ">
                         <h2 className='text-3xl text-center mb-10'>Login</h2>
                         <form className="bg-white bg-opacity-30 shadow-md rounded px-8 pt-6 pb-8 mb-4">

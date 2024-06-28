@@ -10,8 +10,6 @@ const Wines = () => {
     const [loading, setLoading] = useState(true);
 
 
-    
-
     const getWines = async () => {
         try{
             const response = await axios.get("http://localhost:8080/api/products/all")
@@ -46,19 +44,15 @@ const Wines = () => {
           
            {/* COMPONETE DE LAS CARD DE WINE, ESTA EN COMPONENTS-CartsWines.jsx  */}
 
-            {wines.map(wine => {
+            {wines.map(wine => { 
                 if(wine.wineDescription !== null) {
-                    return <CartsWines key={wine.id} name = {wine.name} price ={wine.price} winery={wine.provider} image='./assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
-                } 
-                
+                    return <CartsWines id= {wine.id} name = {wine.name} price ={wine.price} winery={wine.provider} image='./assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
+                }                 
             })}           
            {/* <CartsWines name= 'Red Wines' winery='winery name' price='price' image='./assets/vino-tinto.png' bgColor='bg-[#5e2a30]'/>
            <CartsWines name= 'White Wines' winery='winery name' price='price' image='./assets/vino-blanco.png' bgColor='bg-[#D4B891]'/>
            <CartsWines name= 'Red Wines' winery='winery name' price='price' image='./assets/vino-rosado.png' bgColor='bg-[#DCC8C9]'/>
            <CartsWines name= 'Red Wines' winery='winery name' price='price' image='./assets/vino-espumante.png' bgColor='bg-[#D0C9BD]'/> */}
-
-       
-           
         </div>
     )}
 

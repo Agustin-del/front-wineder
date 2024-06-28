@@ -11,9 +11,9 @@ const Header = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const role = useSelector(store => store.roleReducer.role)
+    
     const toggleMenu = () => {
         setIsOpen(!isOpen);
-        console.log('toggleMenu called');
     };
 
     const handleLogout = () => {                                       
@@ -28,11 +28,12 @@ const Header = () => {
         {/* IMAGEN LOGO */}
         <img src="/assets/logo-2.png" className="w-[100px] md:w-[150px] " alt="logo-home" />
 
+
         {!isAuthenticated ? <>
-            <button className=' bg-[#5e2a30] px-4 py-2  rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]' > 
+            <button className=' bg-[#5e2a30] w-[80px] flex justify-center px-4 py-2  rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]' > 
                 <Anchor href="/login" text="Login" />
             </button>
-            <button className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
+            <button className=' bg-[#5e2a30] px-4 w-[80px] flex justify-center py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
                 <Anchor href="/registerClient" text="Register" />
             </button>
         </> : 
@@ -40,9 +41,10 @@ const Header = () => {
             <button onClick={handleLogout} className=' bg-[#5e2a30] px-4 py-2 rounded-lg text-white hover:bg-[#bd7079] shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
                 <Anchor href="/" text="Logout" />
             </button>
-            <NavLink to="/carrito">
+            {role === "client" && <NavLink to="/carrito">
                 <img src="./assets/cart.png" alt="cart" className="w-8 h-8" />
-            </NavLink>
+            </NavLink>}
+            
         </>
         }
 
