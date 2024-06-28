@@ -13,6 +13,7 @@ const WineDetails = () => {
     const [averageRating, setAverageRating] = useState(0)
     const [rating, setRating] = useState(0)
     const token = useSelector(store => store.authReducer.token)
+    const[wines, setWines] = useState([])
 
     const formatDate = () => {
         const date = new Date();
@@ -40,6 +41,7 @@ const WineDetails = () => {
                     Authorization: `Bearer ${token}`
                 }
             })
+            console.log(response.data)
         } catch (e) {
             console.error(e)
         } finally {
@@ -51,13 +53,26 @@ const WineDetails = () => {
         try {
             const response = await axios.get("http://localhost:8080/api/reviews/product/" + id)
             setReviews(response.data)
+            console.log(response.data);
         } catch (e) {
             console.error(e)
         }
     }
+
+    const getWines = async () => {
+        try {
+            const response = await axios.get("http://localhost:8080/api/products/" + id) 
+            setWines(response.data)
+            console.log(response.data);
+        }
+          catch (error) {
+            console.log(error)
+          }  
+    }
     
     useEffect(() => {
         getReviews()
+        getWines()
     }, [])
 
     useEffect(() => {
@@ -68,22 +83,25 @@ const WineDetails = () => {
 
     return (
         <div className='flex flex-col items-center gap-4 my-5 md:justify-center' >
-            <h2 className='text-4xl text-center'>Wine Details</h2>
+            <h2 className='text-4xl text-center lg:text-5xl'><strong>Wine Details</strong></h2>
 
-            <h3>Red wine name</h3> 
+            <h3 className='text-2xl text-center lg:text-4xl'>{wines.name}</h3> 
 
             {/* Card que contiene una imganen y precio del vino mas el boton de agregar al carrito */}
-            <CardWineDetails rating={averageRating}/>
+            <CardWineDetails rating={averageRating}  />
 
              {/* Componente que contiene los detalles descriptivo del vino */}
+             <div className='flex flex-col gap-4 p-5 lg:w-[60%]'>
+
             <TextWineDetails title="Wine Region" text="Hailing from the sun-drenched vineyards of Napa Valley, known for producing bold and expressive wines." />
             <TextWineDetails title="Wine Style" text="Rich and full-bodied, showcasing complex fruit flavors and a velvety texture." />
             <TextWineDetails title="Wine Origin" text="Sourced from hand-picked grapes grown in the high-altitude vineyards of the Andes Mountains, imparting unique terroir characteristics." />
             <TextWineDetails title="Wine Color" text="Deep ruby red with hints of garnet, reflecting its aging in oak barrels." />
             <TextWineDetails title="Wine Type" text="Red, dry, and rich with flavors of blackberry, blackcurrant, and white pepper." />
-
+             </div>
+            
             {reviews.map(review => {
-                return  <article className="p-4">
+                return  <article className="p-4 ">
                 <div class="flex items-center mb-4">
                     <div class="font-medium dark:text-white">
                         <p>{review.reviewer}</p>
