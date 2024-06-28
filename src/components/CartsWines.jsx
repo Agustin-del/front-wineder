@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const CartsWines = ({ bgColor, ...props }) => {
@@ -17,8 +18,8 @@ const CartsWines = ({ bgColor, ...props }) => {
         default:
             bgColor = "";
     }
-
-
+    const role = useSelector(store => store.roleReducer.role)
+    
     const handleClickCart = () => {
         setIsGreen(!isGreen);
     }   
@@ -36,12 +37,13 @@ const CartsWines = ({ bgColor, ...props }) => {
                     <h3>{props.winery}</h3>
                     <p className='mb-3'>{props.price}</p>
                     <div className='flex justify-between items-center'>
-                        <Link to="/wineDetails" className="group-hover:opacity-100 p-2 duration-500 opacity-0 bg-gradient-to-r from-[#743339] to-[#6d484c] border border-[#967b6a] rounded-lg">
+                        <Link to={`/wineDetails/${props.id}`} className="group-hover:opacity-100 p-2 duration-500 opacity-0 bg-gradient-to-r from-[#743339] to-[#6d484c] border border-[#967b6a] rounded-lg">
                             Details...
                         </Link>
-                        <button onClick={handleClickCart} className="p-2">
+                        {role =="client" && <button onClick={handleClickCart} className="p-2">
                             <img className="w-8" src={`${isGreen ? './assets/cartGreen.png' : './assets/cart.png'}`} alt="cart icon" />
-                        </button>
+                        </button>}
+                        
                     </div>
                 </div>
             </div>

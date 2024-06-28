@@ -1,18 +1,38 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../redux/actions/authActions';
 import { Alert } from 'flowbite-react';
 import { getRole } from '../redux/actions/roleActions';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [user, setUser] = useState([])
     const [alert, setAlert] = useState(null)
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    const token = useSelector(store => store.authReducer.token)
+
+    const responseMessage = (response) => {
+        setUser(response)
+        navigate('/')
+    }
+    useEffect(() => {
+        const userDetails = async() => {
+            try {
+                const response = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.credential}`)
+                console.log(response)
+            } catch (e) {
+                console.error(e)
+            }
+        }
+    }, [user])
+
+    const errorMessage = (error) => {
+        setAlert({type:"failure", message:error})
+    }
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -80,14 +100,14 @@ const Login = () => {
                         />
                         {alert && <Alert color={alert.type}>{alert.message}</Alert>}
                     </div>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between flex-col gap-2">
                         <button onClick={handleLogin}
                             type="submit"
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            className=" bg-[#5e2a30] hover:bg-[#bd7079] w-[200px] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         >
                             Login
                         </button>
-                        
+                        <GoogleLogin clientId='425906653251-mvs7u9t4dkfghnu4haro3q2ock1fnhla.apps.googleusercontent.com' onSuccess={responseMessage} onError={errorMessage}/>
                     </div>
                 </form>
             </div>
