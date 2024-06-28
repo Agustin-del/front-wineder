@@ -49,7 +49,9 @@ const WineIncome = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formData)
+        const formatData = new FormData()
+        formatData.append('text', formData)
+        console.log(formatData)
         try {
             const response = await axios.post('http://localhost:8080/api/products/create', formData, {
                 headers: {

@@ -12,7 +12,6 @@ const UploadImage = () => {
     const handleUpload = async () => {
         const formData = new FormData();
         formData.append('file', selectedFile);
-
         try {
             const response = await axios.post('http://localhost:8080/api/products/create', {formData, selectedFile }, {
                 headers: {
