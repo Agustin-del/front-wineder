@@ -12,9 +12,8 @@ const UploadImage = () => {
     const handleUpload = async () => {
         const formData = new FormData();
         formData.append('file', selectedFile);
-
         try {
-            const response = await axios.post('http://localhost:8080/api/products/create', formData, {
+            const response = await axios.post('http://localhost:8080/api/products/create', {formData, selectedFile }, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -38,8 +37,8 @@ const UploadImage = () => {
     return (
         <div>
             <h2>Upload Image</h2>
-            <input type="file" onChange={handleFileChange} className='bg-[#5e2a30]'/>
-            <button onClick={handleUpload} className='bg-[#5e2a30]'>Upload</button>
+            <input type="file" onChange={handleFileChange} />
+            <button onClick={handleUpload}>Upload</button>
             <h2>Uploaded Images</h2>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {images.map((image) => (

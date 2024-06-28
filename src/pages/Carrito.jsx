@@ -3,18 +3,18 @@ import React, { useState, useEffect } from 'react';
 const Carrito = () => {
     const [loading, setLoading] = useState(true);
     const [cartItems, setCartItems] = useState([
-        { id: 1, name: 'Vino Tinto', description: 'Description of the product.', price: 24.99, quantity: 0, isGreen: false, imgSrc: './assets/vino-tinto.png' },
-        { id: 2, name: 'Vino Rosado', description: 'Description of the product.', price: 24.99, quantity: 0, isGreen: false, imgSrc: './assets/vino-rosado.png' }
+        { id: 1, name: 'Vino Tinto', description: 'Description of the product.', price: 24.99, quantity: 0, isGreen: true, imgSrc: './assets/vino-tinto.png' },
+        { id: 2, name: 'Vino Rosado', description: 'Description of the product.', price: 24.99, quantity: 0, isGreen: true, imgSrc: './assets/vino-rosado.png' }
     ]);
 
     const handleClickCart = (id) => {
-        setCartItems(cartItems.map(item => 
+        setCartItems(cartItems.map(item =>
             item.id === id ? { ...item, isGreen: !item.isGreen } : item
         ));
     }
 
     const handleQuantityChange = (id, delta) => {
-        setCartItems(cartItems.map(item => 
+        setCartItems(cartItems.map(item =>
             item.id === id ? { ...item, quantity: item.quantity + delta } : item
         ));
     }

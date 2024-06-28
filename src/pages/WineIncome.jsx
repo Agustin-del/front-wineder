@@ -21,7 +21,7 @@ const WineIncome = () => {
         wineType:'',
         region:'',
         companyName:''
-
+    
     })
 
     useEffect(() => {
@@ -49,7 +49,9 @@ const WineIncome = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formData)
+        const formatData = new FormData()
+        formatData.append('text', formData)
+        console.log(formatData)
         try {
             const response = await axios.post('http://localhost:8080/api/products/create', formData, {
                 headers: {
@@ -175,12 +177,12 @@ const WineIncome = () => {
                                 <input type="text" id="companyName" name="companyName" value={formData.companyName} onChange={handleChange} placeholder="Enter wine company"
                                 className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
                             </div>
-                            <div className="flex justify-end bg-gray-100 px-6 py-4">
-                                <button type="submit"
-
-                                className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none">Submit</button>
-                            </div>
-                        </>}                        
+                        </>}
+                        <UploadImage/>
+                        <div className="flex justify-end bg-gray-100 px-6 py-4">
+                            <button type="submit"
+                            className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none">Submit</button>
+                        </div>
                     </form>
                     {alert && <Alert color={alert.type}>{alert.message}</Alert>}
                 </div>
