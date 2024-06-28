@@ -18,22 +18,22 @@ const Header = () => {
         }
     }, [isOpen]);
 
-const handleClick = () => {
-    console.log('Button clicked');
-};
+    const handleClick = () => {
+        console.log('Button clicked');
+    };
 
     return (
         <section className="bg-[#73383E] h-[100px] flex flex-row justify-between items-center px-5">
 
-            <button onClick={() =>  console.log('Button clicked') } style={{ padding: '10px', backgroundColor: 'blue', color: 'white' }}>
+            <button onClick={() => console.log('Button clicked')} style={{ padding: '10px', backgroundColor: 'blue', color: 'white' }}>
                 Click me
             </button>
 
-            <div onClick={handleClick } style={{ padding: '10px', backgroundColor: 'blue', color: 'white' }}>
+            <div onClick={handleClick} style={{ padding: '10px', backgroundColor: 'blue', color: 'white' }}>
                 Click me
             </div>
 
-            
+
 
             <img src="./assets/logo-2.png" className="w-[100px]" alt="logo-home" />
 
