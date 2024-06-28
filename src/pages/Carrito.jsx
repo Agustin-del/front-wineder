@@ -1,94 +1,81 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
 const Carrito = () => {
-    const [isGreen, setIsGreen] = useState(false);
-    const [count, setCount] = useState(0);
     const [loading, setLoading] = useState(true);
-    const handleClickCart = () => {
-        setIsGreen(!isGreen);
+    const [cartItems, setCartItems] = useState([
+        { id: 1, name: 'Vino Tinto', description: 'Description of the product.', price: 24.99, quantity: 0, isGreen: false, imgSrc: './assets/vino-tinto.png' },
+        { id: 2, name: 'Vino Rosado', description: 'Description of the product.', price: 24.99, quantity: 0, isGreen: false, imgSrc: './assets/vino-rosado.png' }
+    ]);
+
+    const handleClickCart = (id) => {
+        setCartItems(cartItems.map(item => 
+            item.id === id ? { ...item, isGreen: !item.isGreen } : item
+        ));
     }
+
+    const handleQuantityChange = (id, delta) => {
+        setCartItems(cartItems.map(item => 
+            item.id === id ? { ...item, quantity: item.quantity + delta } : item
+        ));
+    }
+
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
         }, 2000);
-
     }, []);
-
 
     return (
         <div>
             {loading ? (
                 <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
-                </div>) : (
+                </div>
+            ) : (
+                <div className="bg-gray-100">
+                    <div className="container mx-auto px-4 py-8">
+                        <h1 className="text-3xl font-semibold text-gray-800 mb-6">Shopping Cart</h1>
 
-                <body class="bg-gray-100">
-                    <div class="container mx-auto px-4 py-8">
-                        <h1 class="text-3xl font-semibold text-gray-800 mb-6">Shopping Cart</h1>
-
-
-                        <div class="bg-white shadow-md rounded-lg overflow-hidden md:w-[90%] md:ml-10 lg:w-[70%] lg:ml-[20%]">
-
-                            <div class="flex items-center justify-between border-b border-gray-200 py-4 ">
-                                <div class="flex items-center space-x-8">
-                                    <img src="./assets/vino-tinto.png   " alt="Product" class="h-16 w-16 flex  object-cover rounded" />
-
-                                    <div>
-                                        <p class="text-gray-800 font-semibold">Product Name</p>
-                                        <p class="text-gray-600">Description of the product.</p>
+                        <div className="bg-white shadow-md rounded-lg overflow-hidden md:w-[90%] md:ml-10 lg:w-[70%] lg:ml-[20%]">
+                            {cartItems.map(item => (
+                                <div key={item.id} className="flex items-center justify-between border-b border-gray-200 py-4">
+                                    <div className="flex items-center space-x-8">
+                                        <img src={item.imgSrc} alt="Product" className="h-16 w-16 object-cover rounded" />
+                                        <div>
+                                            <p className="text-gray-800 font-semibold">{item.name}</p>
+                                            <p className="text-gray-600">{item.description}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="flex items-center mr-5">
-                                    <button onClick={() => setCount(count => count - 1)} className="">-</button>
-                                    <p class="text-gray-800 font-semibold mx-2">{count}</p>
-                                    <button onClick={() => setCount(count => count + 1)} className="">+</button>
-                                </div>
-                                <div className='flex items-center flex-col mt-7'>
-                                    <p class="text-gray-800 font-semibold">$24.99</p>
-                                    <button className='w-20 hover:text-green-500'><strong>Buy latter</strong></button>
-                                </div>
-                                <button onClick={handleClickCart} className="p-2">
-                                    <img className="w-8" src={`${isGreen ? './assets/deleteRed.png' : './assets/deleteGreen.png'}`} alt="cart icon" />
-                                </button>
-                            </div>
-                            {/* Initialize count state */}
-
-
-                            <div class="flex items-center justify-between border-b border-gray-200 px-6 py-4">
-                                <div class="flex items-center space-x-4">
-                                    <img src="./assets/vino-rosado.png" alt="Product" class="h-16 w-16 object-cover rounded" />
-                                    <div>
-                                        <p class="text-gray-800 font-semibold">Another Product</p>
-                                        <p class="text-gray-600">Description of another product.</p>
+                                    <div className="flex items-center mr-5">
+                                        <button onClick={() => handleQuantityChange(item.id, -1)} className="">-</button>
+                                        <p className="text-gray-800 font-semibold mx-2">{item.quantity}</p>
+                                        <button onClick={() => handleQuantityChange(item.id, 1)} className="">+</button>
                                     </div>
+                                    <div className="flex items-center flex-col mt-7">
+                                        <p className="text-gray-800 font-semibold">${item.price}</p>
+                                        <button className='w-20 hover:text-green-500'><strong>Buy later</strong></button>
+                                    </div>
+                                    <button onClick={() => handleClickCart(item.id)} className="p-2">
+                                        <img className="w-8" src={item.isGreen ? './assets/deleteRed.png' : './assets/deleteGreen.png'} alt="cart icon" />
+                                    </button>
                                 </div>
-                                <div>
-                                    <p class="text-gray-800 font-semibold">$19.99</p>
-                                </div>
+                            ))}
+
+                            <div className="flex justify-end items-center bg-gray-100 px-6 py-4">
+                                <div className="text-gray-800 font-semibold mr-4">Subtotal:</div>
+                                <div className="text-xl text-gray-800">${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}</div>
                             </div>
-
-
-
-                            <div class="flex justify-end items-center bg-gray-100 px-6 py-4">
-                                <div class="text-gray-800 font-semibold mr-4">Subtotal:</div>
-                                <div class="text-xl text-gray-800">$44.98</div>
-                            </div>
-
-
-
                         </div>
 
-                        <div class="flex justify-end mt-6 gap-4">
-                            <button class="bg-white border-2 border-[#73383E] hover:bg-blue-600 text-[#73383E] px-4 py-2 rounded-lg">Clear basket</button>
-                            <button class="bg-[#73383E] hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Checkout</button>
+                        <div className="flex justify-end mt-6 gap-4">
+                            <button className="bg-white border-2 border-[#73383E] hover:bg-blue-600 text-[#73383E] px-4 py-2 rounded-lg">Clear basket</button>
+                            <button className="bg-[#73383E] hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Checkout</button>
                         </div>
-
                     </div>
-                </body>
+                </div>
             )}
         </div>
     )
 }
 
-export default Carrito
+export default Carrito;

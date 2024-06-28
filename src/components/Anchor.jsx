@@ -3,7 +3,16 @@ import { NavLink } from 'react-router-dom'
 
 const Anchor = ({ href, text }) => {
   return (
-    <NavLink to={href}>{text}</NavLink>
+    <NavLink
+      to={href}
+      className={({ isActive }) =>
+        ` ${
+          isActive ? 'text-black font-bold' : 'text-white'
+        }  hover:text-green-300 hover:font-bold`
+      }
+    >
+      {text}
+    </NavLink>
    
   )
 }
