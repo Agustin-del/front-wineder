@@ -43,18 +43,18 @@ const Home = () => {
                     </section>
 
 
-                    <section className="m-5 lg:w-[80%] lg:justify-center">
+                    <section className="m-5 lg:w-[80%] lg:justify-center lg:pl-[10%] ">
                         <h3 className='text-3xl'>Our Selection</h3>
-                        <p>Discover our wide range of red, white, rosé, and sparkling wines, carefully chosen to satisfy the most discerning palates. From classics to the latest innovations in winemaking, here you will find the perfect bottle for every occasion.</p>
+                        <p className='pb-5'>Discover our wide range of red, white, rosé, and sparkling wines, carefully chosen to satisfy the most discerning palates. From classics to the latest innovations in winemaking, here you will find the perfect bottle for every occasion.</p>
 
                         <h3 className='text-3xl'>Our Promise</h3>
-                        <p>Quality: Every wine in our collection has been selected for its exceptional quality and taste.
+                        <p className='pb-5'>Quality: Every wine in our collection has been selected for its exceptional quality and taste.
                             Passion: We are passionate about the world of wine and want to share that passion with you through every bottle.
                             Exclusivity: We work directly with wineries and producers to offer you exclusive wines that you won’t find anywhere else.</p>
 
                         <h3 className='text-3xl'>Join Our Community</h3>
                         <p>We don’t just sell wine; we invite you to be part of our community of wine lovers. Subscribe to our newsletter to receive the latest news, personalized recommendations, and access to exclusive events.</p>
-                        <p>Raise your glass and celebrate life with Wineder!</p>
+                        <p className='pb-5'>Raise your glass and celebrate life with Wineder!</p>
                     </section>
 
                     <div>
@@ -64,11 +64,16 @@ const Home = () => {
 
                     <div className="w-[90%] mx-auto flex justify-center bg-slate-400 h-2 my-5"></div>
 
-                    <section className="flex flex-col justify-around items-center my-5 gap-5">
+                    <section className="flex flex-col justify-around items-center my-5 gap-5  ">
+                       
+
                         <Link to={'/winesType/RED'}><CardHomeWine bgColor="bg-[#70383F]" name="Red wine" image="./assets/tinto.png" /></Link>
                         <Link to={'/winesType/WHITE'} ><CardHomeWine bgColor="bg-[#D4B891]" name="White wine" image="./assets/blanco.png" /> </Link>
+                     
+
                         <Link to={'/winesType/SPARKLING'} ><CardHomeWine bgColor="bg-[#a39d92] " name="Sparkling wine" image="./assets/espumante.png" /></Link>
                         <Link to={'/winesType/PINK'}><CardHomeWine bgColor="bg-[#af9fa0]" name="Rose wine" image="./assets/rosado.png" /></Link>
+                       
                     </section>
 
                     <div className="w-[90%] mx-auto flex justify-center bg-slate-400 h-2 my-5"></div>

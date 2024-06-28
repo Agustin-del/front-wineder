@@ -37,8 +37,8 @@ const WinesType = () => {
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
                 </div>) : (
                 <div>
-      <h2 className='text-2xl text-center'>WinesType - {type}</h2>
-      <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10 '>
+      <h2 className='text-2xl text-center lg:text-4xl lg:my-5'>WinesType - {type}</h2>
+      <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10  lg:mx-6'>
         {wineType.map(wine => (
          <CartsWines key={wine.id} id= {wine.id} name = {wine.name} price ={wine.price} winery={wine.provider} image='/assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
         ))}
