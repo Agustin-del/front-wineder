@@ -21,7 +21,7 @@ const WineIncome = () => {
         wineType:'',
         region:'',
         companyName:''
-
+    
     })
 
     useEffect(() => {
