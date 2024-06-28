@@ -7,7 +7,7 @@ const Anchor = ({ href, text }) => {
       to={href}
       className={({ isActive }) =>
         ` ${
-          isActive ? 'text-black font-bold' : 'text-white'
+          isActive ? 'text-green-200 font-bold' : 'text-white'
         }  hover:text-green-300 hover:font-bold`
       }
     >
