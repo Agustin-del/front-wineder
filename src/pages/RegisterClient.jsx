@@ -187,7 +187,7 @@ const RegisterClient = () => {
                             />
                             </div>
                             <div>
-                                <p>The password must have a number, an uppercase letter, a lowercase letter and have eight characters.</p>
+                                <p>The password must have a number, an uppercase letter, a lowercase letter and eight characters.</p>
                             </div>
                             {errors.confirmPassword && <p className="text-red-500 text-xs italic">{errors.confirmPassword}</p>}
                         </div>
