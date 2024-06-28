@@ -55,10 +55,10 @@ const Header = () => {
 =======
 
         {!isAuthenticated ? <>
-            <button className=' bg-[#5e2a30] w-[80px] flex justify-center px-4 py-2  rounded-lg text-white  shadow-[0_3px_10px_rgb(0,0,0,0.2)]' > 
+            <button className=' bg-[#5e2a30] w-[80px] flex justify-center px-4 py-2 rounded-lg text-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]' > 
                 <Anchor href="/login" text="Login" />
             </button>
-            <button className=' bg-[#5e2a30] px-4 w-[80px] flex justify-center py-2 rounded-lg text-white  shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
+            <button className=' bg-[#5e2a30] px-4 w-[80px] flex justify-center py-2 rounded-lg text-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
                 <Anchor href="/registerClient" text="Register" />
             </button>
         </> : 

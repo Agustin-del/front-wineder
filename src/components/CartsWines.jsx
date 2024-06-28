@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const CartsWines = ({ bgColor, ...props }) => {
     const [isGreen, setIsGreen] = useState(false);
-
+    
     switch (bgColor) {
         case 'WHITE': 
             bgColor = "bg-[#D4B891]";
@@ -31,7 +31,7 @@ const CartsWines = ({ bgColor, ...props }) => {
             <div>
                 <div className="group-hover:scale-110 w-full h-60  duration-500" >
 
-                    <img src={props.image} alt="img-home" className='w-full h-full object-cover' />
+                    <img src={props.image} alt="wine bottle" className='w-full h-full object-cover' />
                 </div>
                 <div className="absolute w-56 left-0 p-5 my-4 -bottom-20 duration-500 group-hover:-translate-y-12">
                     <div className="absolute -z-10 left-0 w-64 h-40 opacity-0 duration-500 group-hover:opacity-50 group-hover:bg-[#1b1213]"></div>
