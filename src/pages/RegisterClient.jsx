@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import axios from 'axios';
 import { Alert } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { getRole } from '../redux/actions/roleActions';
 import { login } from '../redux/actions/authActions';
 
 const RegisterClient = () => {
+    const [loading, setLoading] = useState(true);
     const [form, setForm] = useState({
         firstName: '',
         lastName: '',
@@ -27,6 +28,7 @@ const RegisterClient = () => {
             [name]: value
         });
     };
+   
 
     const validate = () => {
         let tempErrors = {};
@@ -87,11 +89,23 @@ const RegisterClient = () => {
             setTimeout(() => {
                 setAlert(null)
             }, 1500)
+
         }
+        setLoading(false)
     };
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+
+    }, []);
 
     return (
         <div className="flex items-center justify-center ">
+             {loading ? (
+                <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
+                    <img className='w-[300px]' src="./assets/copa.gif" alt="" />
+                </div>) : (
             <div className="w-full max-w-md mx-auto">
                 <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <h2 className="text-2xl font-bold text-center mb-6">Register </h2>
@@ -205,6 +219,7 @@ const RegisterClient = () => {
                     </form>
                 </div>
             </div>
+                )}
         </div>
     );
 };

@@ -3,22 +3,45 @@ import CartsWines from '../components/CartsWines';
 import axios from 'axios';
 
 
+
 const Wines = () => {
 
     const [wines, setWines] = useState([]);
+    const [loading, setLoading] = useState(true);
+
 
     
 
     const getWines = async () => {
-        const response = await axios.get("http://localhost:8080/api/products/all")
-        setWines(response.data)
+        try{
+            const response = await axios.get("http://localhost:8080/api/products/all")
+            setWines(response.data)
+
+        }catch(error){
+            console.log(error)
+        }
+        setLoading(false)
     }
 
     useEffect (() => {
         getWines()
     }, [])
 
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+
+    }, []);
+
+
     return (
+        <main>
+             {loading ? (
+                <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
+                    <img className='w-[300px]' src="./assets/copa.gif" alt="" />
+                </div>) : (
+      
         <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10'>
           
            {/* COMPONETE DE LAS CARD DE WINE, ESTA EN COMPONENTS-CartsWines.jsx  */}
@@ -37,6 +60,9 @@ const Wines = () => {
        
            
         </div>
+    )}
+
+        </main>
     );
 };
 
