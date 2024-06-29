@@ -100,11 +100,10 @@ const WineDetails = () => {
              <div className='flex flex-col gap-4 p-5 lg:w-[60%]'>
 
             <TextWineDetails title="Description" description={wine.description}/>
-            <TextWineDetails title="Region" region={wine.wineDescription.region}/>
-            <TextWineDetails title="Varietal" varietal={wine.wineDescription.varietal} />
-            <TextWineDetails title="Wine Color" text="Deep ruby red with hints of garnet, reflecting its aging in oak barrels." />
-            <TextWineDetails title="Wine Type" text="Red, dry, and rich with flavors of blackberry, blackcurrant, and white pepper." />
-            <TextWineDetails title="Year of elaboration" year={wine.wineDescription.wineYear}/>
+            {/* <TextWineDetails title="Region" region={wine.wineDescription.region}/> */}
+            {/* <TextWineDetails title="Varietal" varietal={wine.wineDescription.varietal} /> */}
+            {/* <TextWineDetails title="Wine Color" wineType={wine.wineDescription.wineType}/>
+            <TextWineDetails title="Year of elaboration" year={wine.wineDescription.wineYear}/> */}
              </div>
             
             {reviews.map(review => {
