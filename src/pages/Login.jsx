@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -49,13 +48,18 @@ const Login = () => {
         }
         try {
             const response = await axios.post('http://localhost:8080/api/auth/login', requestBody)
+            
             dispatch(login(response.data))
+
             const current = await axios.get('http://localhost:8080/api/auth/current', {
                 headers: {
                     'Authorization': `Bearer ${response.data}`
                 }
             })
+
             dispatch(getRole(current.data.role))
+            console.log(current.data.role);
+
             if (current.data.role === "admin") {
                 navigate('/admin')
             }
