@@ -55,6 +55,8 @@ const Client = () => {
                     </div>
                 </section> */}
 
+      <div>
+
       <h3 className='text-2xl text-center pt-5 lg:text-3xl italic'>Recent Purchases</h3>
       <section className='flex flex-wrap justify-center gap-5 my-5 relative z-10'>
         <CartsWines bgColor="RED" image="./assets/vino-tinto.png" name="Wine name" price="100.00" />
@@ -63,6 +65,9 @@ const Client = () => {
         <CartsWines bgColor="PINK" image="./assets/vino-rosado.png" name="Wine name" price="100.00" />
 
       </section>
+
+      </div>
+
 
 
 {/* 
