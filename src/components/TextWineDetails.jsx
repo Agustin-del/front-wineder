@@ -47,11 +47,28 @@ const TextWineDetails = (props) => {
                 return 'It is a wine with unique characteristics.';
         }
     };
-      
+
+    switch (props.title ) {
+        case ('Description') :
+            message = generateVarietalMessage(props.description)
+            break
+        case ('Varietal'):
+            message = props.varietal
+            break
+        case ('Region'):
+            message = props.region
+            break
+        case ('Wine Color'):
+            message = props.wineType
+            break
+        case ('Year of elaboration'):
+            message = props.year
+            break
+    }
     return (
         <section className='w-[80%] '>
             <h3 className="text-xl mb-3 ">{props.title}</h3>
-            <p className="mb-3">{props.text}</p>
+            <p className="mb-3">{message}</p>
         </section>
     )
 }

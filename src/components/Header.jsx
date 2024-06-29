@@ -86,7 +86,7 @@ const Header = () => {
                                             <Anchor href="/" text="Logout" />
                                         </button>
                                         {role === "client" && <NavLink to="/carrito">
-                                            <img src="./assets/cart.png" alt="cart" className="w-8 lg:h-8 h-11 pb-2 lg:pb-0" />
+                                            <img src="/assets/cart.png" alt="cart" className="w-8 lg:h-8 h-11 pb-2 lg:pb-0" />
                                         </NavLink>}
                                     </div>
 
