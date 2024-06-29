@@ -6,7 +6,7 @@ const Carrito = () => {
     const token = useSelector(store => store.authReducer.token);
     const [loading, setLoading] = useState(true);
     const [cartItems, setCartItems] = useState([]);
-    const [whislist, setWhislist] = useState([]);
+    const [wishlist, setWihslist] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -59,13 +59,13 @@ const Carrito = () => {
             await axios.put(`http://localhost:8080/api/orderproducts/update/${id}`, null, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            setCartItems(cartItems.filter(item => item.id !== id));
+            setCartItems(cartItems.remove(item => item.id !== id));
         } catch (error) {
             console.log(error);
         }
     };
     const clearBasket = async () => {
-        for (const item of cartItems) {
+        for (const item of [...cartItems]) { // clone the array to avoid concurrent modification errors
             try {
                 await axios.delete(`http://localhost:8080/api/orderproducts/delete/${item.id}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
@@ -86,10 +86,21 @@ const Carrito = () => {
             if (cartItems.length === 1) {
                 setCartItems([]);
             }
-            setCartItems(cartItems.filter(item => item.id !== id));
+            setCartItems(cartItems.remove(item => item.id !== id));
         } catch (error) {
             console.log(error);
         }
+    };
+
+    const handleClickCart = () => {
+        try {
+            const response = axios.put(`http://localhost:8080/api/orderproducts/update/${id}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+            setWishlist(wishlist.remove(item => item.id !== id));
+            setCartItems(cartItems.add(wishlist.find(item => item.id === id)))
+        } catch { }
+
     };
 
     // const checkOutClick = async () => {
@@ -117,7 +128,7 @@ const Carrito = () => {
 
                         <div className="bg-white shadow-md rounded-lg overflow-hidden md:w-[90%] md:ml-10 lg:w-[70%] lg:ml-[20%]">
                             {cartItems.length === 0 ? (
-                                <p className='text-gray-800 font-semibold text-xl text-center w-full py-5'> Nothing choose yet :D !!</p>
+                                <p className='text-gray-800 font-semibold text-xl text-center w-full py-5'> Nothing choose yet !!</p>
                             ) : (
                                 cartItems.map((item) => (
                                     <div key={item.id} className="flex items-center justify-between border-b border-gray-200 py-4">
@@ -128,7 +139,7 @@ const Carrito = () => {
                                                 <p className="text-gray-600">{item.description}</p>
                                             </div>
                                         </div>
-                                        <div className='flex flex-col md:flex-row '>
+                                        <div className='flex flex-col md:flex-row  '>
                                             <div className="flex items-center mr-5">
                                                 <button onClick={() => handleQuantityChange(item.id, -1)} className="bg-gray-200 px-2  text-lg shadow-md rounded-[5%]">-</button>
                                                 <p className="text-gray-800 font-semibold mx-2">{item.quantity}</p>
@@ -139,7 +150,7 @@ const Carrito = () => {
                                             </div>
                                         </div>
                                         <div className="flex items-center flex-col mt-7">
-                                            <p className="text-gray-800 font-semibold">${item.price}</p>
+                                            <p className="text-gray-800 font-semibold">${item.quantity * item.price}</p>
                                             <button className='w-20 hover:text-green-500' onClick={() => setOrderProductFalse(item.id)}><strong>Buy later</strong></button>
                                         </div>
                                         <button onClick={() => deleteOrderProduct(item.id)} className="p-2">
@@ -160,16 +171,19 @@ const Carrito = () => {
                         </div>
                     </div>
                     <div className="bg-violet-300  p-5 w-full flex flex-col" >
-                        <h3 className="text-xl font-semibold text-gray-800 mb-6">Your Whishlist</h3>
-                        {whislist.length === 0 ? (<div> Nothing in your whislist yet :D </div>) : (<div className='flex flex-col gap-3 items-center'>
+                        <h3 className="text-xl font-semibold text-gray-800 mb-6">Your Wishlist</h3>
+                        {wishlist.length === 0 ? (<div> Nothing in your wishlist yet !! </div>) : (<div className='flex flex-col gap-3 items-center'>
 
-                            {whislist.map((product) => (
+                            {wishlist.map((product) => (
                                 <div key={product.id} className='border-2 p-2 rounded-lg flex flex-row gap-3 items-center'>
-                                    <img src={product.image ? product.image : "./assets/vino-tinto.png"} alt={product.productName} className="h-16 w-16 object-cover rounded" />
+                                    <img src={product.image ? product.image : "/assets/vino-tinto.png"} alt={product.productName} className="h-16 w-16 object-cover rounded" />
                                     <div>{product.productName}</div>
                                     <div>{product.quantity} </div>
                                     <div>{product.stock}in stock</div>
-                                    <div>{product.price}</div>
+                                    <div>$ {product.price}</div>
+                                    <button onClick={handleClickCart(product.id)} className="p-2 bg-black rounded-lg">
+                                        <img className="w-8" src='/assets/cartGreen.png' alt="cart icon" />
+                                    </button>
                                 </div>
                             ))}
 
