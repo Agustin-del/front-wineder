@@ -42,6 +42,9 @@ const Admin = () => {
         }
         setLoading(false);
     }
+
+
+
     const handleTabClick = (tab) => {
         setActiveTab(tab)
     }
@@ -91,6 +94,9 @@ const Admin = () => {
                                 {activeTab === 'orders' && < TablaProductAdmin name="Order" col2="price" col3="Quantity" col4="Product name" data={data}  /> }
                                 
                                 {activeTab === 'products' && <TablaProductAdmin name="Product" col1="Name" col2="Price" col3="Stock" col4="Provider" data={data} />}
+
+
+                                
                                 {activeTab === 'products' && (
                                     <Link to="/wineIncome">
                                         <button className="w-[80%] md:w-[50%] lg:w-[40%] my-5 bg-[#5e2a30] hover:bg-[#3a1f22] text-white font-bold py-2 px-4 rounded">
