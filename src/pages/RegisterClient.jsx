@@ -110,6 +110,8 @@ const RegisterClient = () => {
                 <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <h2 className="text-2xl font-bold text-center mb-6">Register </h2>
                     <form onSubmit={handleSubmit}>
+                        <div className="lg:flex lg:gap-2">
+
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
                                 First Name
@@ -120,7 +122,7 @@ const RegisterClient = () => {
                                 name="firstName"
                                 value={form.firstName}
                                 onChange={handleChange}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="First Name"
                             />
                             {errors.firstName && <p className="text-red-500 text-xs italic">{errors.firstName}</p>}
@@ -140,6 +142,7 @@ const RegisterClient = () => {
                             />
                             {errors.lastName && <p className="text-red-500 text-xs italic">{errors.lastName}</p>}
                         </div>
+                        </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                                 Email
@@ -156,41 +159,26 @@ const RegisterClient = () => {
                             {errors.email && <p className="text-red-500 text-xs italic">{errors.email}</p>}
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                value={form.password}
-                                onChange={handleChange}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Password"
-                            />
-                            {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
+                            <div className="flex flex-col gap-2">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                                    Password
+                                </label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    value={form.password}
+                                    onChange={handleChange}
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    placeholder="Password"
+                                />
+                                {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
+                            </div>
+                            <div>
+                                <p className="text-xs font-bold">The password must have a number, an uppercase letter, a lowercase letter and eight characters.</p>
+                            </div>
                         </div>
                         
-                        <div className="mb-4 flex flex-col gap-2">
-                            <div>
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
-                                Confirm Password
-                            </label>
-                            <input
-                                type="password"
-                                id="confirmPassword"
-                                name="confirmPassword"
-                                value={form.confirmPassword}
-                                onChange={handleChange}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Confirm Password"
-                            />
-                            </div>
-                            <div>
-                                <p>The password must have a number, an uppercase letter, a lowercase letter and eight characters.</p>
-                            </div>
-                            {errors.confirmPassword && <p className="text-red-500 text-xs italic">{errors.confirmPassword}</p>}
-                        </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
                                 Address
@@ -202,7 +190,7 @@ const RegisterClient = () => {
                                 value={form.address}
                                 onChange={handleChange}
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Address"
+                                placeholder="La paz 1545"
                             />
                             {errors.address && <p className="text-red-500 text-xs italic">{errors.address}</p>}
                             

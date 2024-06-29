@@ -87,31 +87,32 @@ const WineIncome = () => {
                 <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
                 </div>) : (
-                <div className="container mx-auto px-4 py-8 lg:w-[40%] md:w-[60%]">
+                <div className="container mx-auto px-4 py-8 lg:w-[80%] md:w-[60%] ">
                     <h1 className="text-3xl font-semibold text-gray-800 mb-6 ">Product Form</h1>
 
-                    <form onSubmit={handleSubmit} class="bg-white shadow-md rounded-lg overflow-hidden">
-                        <div className="flex items-center border-b border-gray-200 px-6 py-4">
+                    <form onSubmit={handleSubmit} class="bg-white shadow-md rounded-lg overflow-hidden ">
+                        <div className="lg:flex lg:flex-wrap">
+                        <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
                             <label for="name" class="text-gray-800 font-semibold w-32">Name:</label>
                             <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Enter product name"
                                 className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
                         </div>
-                        <div className="flex items-center border-b border-gray-200 px-6 py-4">
+                        <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
                             <label for="stock" class="text-gray-800 font-semibold w-32">Stock:</label>
                             <input type="text" id="stock" name="stock" value={formData.stock} onChange={handleChange} placeholder="Enter product stock"
                                 className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
                         </div>
-                        <div className="flex items-center border-b border-gray-200 px-6 py-4">
+                        <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
                             <label for="price" class="text-gray-800 font-semibold w-32">Price:</label>
                             <input type="text" id="price" name="price" value={formData.price} onChange={handleChange} placeholder="Enter product price"
                                 className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
                         </div>
-                        <div className="flex items-center border-b border-gray-200 px-6 py-4">
+                        <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
                             <label for="description" className="text-gray-800 font-semibold w-32">Description:</label>
                             <input type="text" id="description" name="description" value={formData.description} onChange={handleChange} placeholder="Enter product description"
                                 className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
                         </div>
-                        <div className="flex items-center border-b border-gray-200 px-6 py-4">
+                        <div className="lg:w-[30%] flex items-center border-b border-gray-200 px-6 py-4">
                             <label htmlFor="isWine" className="text-gray-800 font-semibold w-32">Is Wine:</label>
                             <select id="isWine" name="isWine" value={isWine} onChange={handleIsWineChange}
                                 className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
@@ -120,7 +121,7 @@ const WineIncome = () => {
                             </select>
                         </div>
                         {isWine && <>
-                            <div className="flex items-center border-b border-gray-200 px-6 py-4">
+                            <div className="lg:w-[35%] lg:gap-2 flex items-center border-b border-gray-200 px-6 py-4">
                                 <label for="variety" className="text-gray-800 font-semibold w-32">Wine Variety:</label>
                                 <select id="variety" name="variety" value={formData.variety} onChange={handleChange}
                                     className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
@@ -145,12 +146,12 @@ const WineIncome = () => {
                                     <option value="EXTRA_BRUT">EXTRA_BRUT</option>
                                 </select>
                             </div>
-                            <div className="flex items-center border-b border-gray-200 px-6 py-4">
+                            <div className="lg:w-[35%] lg:gap-2 flex items-center border-b border-gray-200 px-6 py-4">
                                 <label for="wineYear" class="text-gray-800 font-semibold w-32">Wine year:</label>
-                                <textarea id="wineYear" name="wineYear" value={formData.wineYear} onChange={handleChange} placeholder="Enter wine year"
-                                className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"></textarea>
+                                <input id="wineYear" name="wineYear" value={formData.wineYear} onChange={handleChange} placeholder="Enter wine year"
+                                className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"></input>
                             </div>
-                            <div className="flex items-center border-b border-gray-200 px-6 py-4">
+                            <div className="lg:w-[30%] flex items-center border-b border-gray-200 px-6 py-4">
                                 <label for="wineType" class="text-gray-800 font-semibold w-32">Wine Type:</label>
                                 <select id="wineType" name="wineType" value={formData.wineType} onChange={handleChange}
                                     className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
@@ -161,7 +162,7 @@ const WineIncome = () => {
                                     <option value="PINK">PINK</option>
                                 </select>
                             </div>
-                            <div className="flex items-center border-b border-gray-200 px-6 py-4">
+                            <div className="lg:w-[30%] flex items-center border-b border-gray-200 px-6 py-4">
                                 <label for="region" class="text-gray-800 font-semibold w-32">Wine region:</label>
                                 <select id="region" name="region" value={formData.region} onChange={handleChange}
                                     className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
@@ -172,16 +173,19 @@ const WineIncome = () => {
                                     <option value="ATLANTIC">ATLANTIC</option>
                                 </select>
                             </div>
-                            <div className="flex items-center border-b border-gray-200 px-6 py-4">
+                            <div className="lg:w-[40%] lg:gap-2 flex items-center border-b border-gray-200 px-6 py-4">
                                 <label for="companyName" class="text-gray-800 font-semibold w-32">Company name:</label>
                                 <input type="text" id="companyName" name="companyName" value={formData.companyName} onChange={handleChange} placeholder="Enter wine company"
                                 className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
                             </div>
                         </>}
-                        <UploadImage/>
-                        <div className="flex justify-end bg-gray-100 px-6 py-4">
-                            <button type="submit"
-                            className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none">Submit</button>
+                        <div className="lg:flex lg:flex-wrap"> 
+                            <UploadImage/>
+                            <div className=" lg:w-[1000px] flex justify-end bg-gray-100 px-6 py-4">
+                                <button type="submit"
+                                className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none">Submit</button>
+                            </div>
+                        </div>
                         </div>
                     </form>
                     {alert && <Alert color={alert.type}>{alert.message}</Alert>}
