@@ -1,8 +1,32 @@
-
-import React, { useEffect } from 'react'
+import { CiCircleCheck } from "react-icons/ci";
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Modal } from "flowbite-react";
 
 //Componente que tiene la img del vino y el boton de agregar al carrito
-const CardWineDetails = ({ rating }) => {
+const CardWineDetails = ({ rating, id }) => {
+    const [openModal, setOpenModal] = useState (false)
+    const token = useSelector(store => store.authReducer.token)
+    
+    const addProductToCart = async () => {
+        try {
+            const response = await axios.post(`http://localhost:8080/api/orderproducts/create/${id}`, null, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            if(response.status === 200) {
+                setOpenModal(true)
+                setTimeout(() => {
+                    setOpenModal(false)
+                }, 1000)
+            }
+        } catch (e) {
+            console.error(e)
+        }
+        
+    }
     return (
         <div className='flex flex-row items-center justify-around py-5 border-2 lg:w-[60%] rounded-lg w-full bg-[#E5D1D2] md:justify-center md:w-[80%]'>
             <section className='w-[20%] '   >
@@ -17,13 +41,22 @@ const CardWineDetails = ({ rating }) => {
                         </svg>
                     ))}
                 </div>
-
-
                 <div className='flex flex-col p-4 rounded-lg justify-between bg-slate-100 w-[200px]'>
                     <p className='text-xl mb-3' >$1.000</p>
-                    <button className='bg-[#5e2a30] px-4 py-2 rounded-lg text-white'>Add to Cart</button>
+                    <button onClick={addProductToCart} className='bg-[#5e2a30] px-4 py-2 rounded-lg text-white'>Add to Cart</button>
                 </div>
             </div>
+            {openModal &&
+
+        <Modal show={openModal} size="md" onClose ={() => setOpenModal(false)}popup>
+            <div className="text-center flex flex-col p-2 justify-center">
+                <CiCircleCheck className="mx-auto mb-4 h-12 w-12 text-green-400 dark:text-gray-200" />
+                <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                    The product has been added to the cart
+                </h3>
+            </div>
+        </Modal>
+        }
         </div>
     )
 }

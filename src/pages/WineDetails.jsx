@@ -12,12 +12,18 @@ const WineDetails = () => {
     const [reviews, setReviews] = useState([])
     const [averageRating, setAverageRating] = useState(0)
     const [rating, setRating] = useState(0)
+    const [visibleReviews, setVisibleReviews] = useState (5)
+
     const token = useSelector(store => store.authReducer.token)
     const role = useSelector(store => store.roleReducer.role)
     
-    const[wine, setWine] = useState([])
+    const[wine, setWine] = useState({wineDescription: {
+        varietal : '',
+        region : '',
+        wineType: '',
+        wineYear: ''
+    }})
 
-    console.log(wine)
     const formatDate = () => {
         const date = new Date();
         const year = date.getFullYear();
@@ -87,25 +93,32 @@ const WineDetails = () => {
         setAverageRating(averageRating)
     }, [reviews])
 
+    const loadMoreReviews = () => {
+        setVisibleReviews(prevVisibleReviews => prevVisibleReviews + 5)
+    }
     return (
         <div className='flex flex-col items-center gap-4 my-5 md:justify-center' >
             <h2 className='text-4xl text-center lg:text-5xl'><strong>Wine Details</strong></h2>
             <h3 className='text-2xl text-center lg:text-4xl'>{wine.name}</h3> 
 
             {/* Card que contiene una imganen y precio del vino mas el boton de agregar al carrito */}
-            <CardWineDetails rating={averageRating}  />
+            <CardWineDetails rating={averageRating}  id={wine.id}/>
 
              {/* Componente que contiene los detalles descriptivo del vino */}
             <div className='flex flex-col gap-4 p-5 lg:w-[60%]'>
 
-                <TextWineDetails title="Description" description={wine.description}/>
-                {/* <TextWineDetails title="Region" region={wine.wineDescription.region}/> */}
-                {/* <TextWineDetails title="Varietal" varietal={wine.wineDescription.varietal} /> */}
-                {/* <TextWineDetails title="Wine Color" wineType={wine.wineDescription.wineType}/>
-                <TextWineDetails title="Year of elaboration" year={wine.wineDescription.wineYear}/> */}
+                {wine && 
+                <>
+                <TextWineDetails title="Wine Color" wineType={wine.wineDescription.wineType}/>
+                <TextWineDetails title="Varietal" varietal={wine.wineDescription.varietal} />
+                <TextWineDetails title="Region" region={wine.wineDescription.region}/>
+                <TextWineDetails title="Year of elaboration" year={wine.wineDescription.wineYear}/>
+                <TextWineDetails title="Description" description={wine.wineDescription.varietal}/>
+                </>
+                }
             </div>
             <div className='flex flex-col gap-4 p-5 lg:w-[60%] md:flex-wrap md:flex-row'>           
-                {reviews.map(review => {
+                {reviews.slice(0, visibleReviews).map(review => {
                 return  <article className="p-4 ">
                 <div class="flex items-center mb-4">
                     <div class="font-medium dark:text-white">
@@ -123,6 +136,14 @@ const WineDetails = () => {
                     <p class="mb-2 text-gray-500 dark:text-gray-400">{review.comment}</p>
                 </article>
             })}
+            
+            </div>
+            <div className="lg:flex lg:justify-end lg:w-[30%]">
+                {visibleReviews < reviews.length && (
+                    <button className="bg-[#5e2a30] text-white text-sm font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={loadMoreReviews}>
+                        Load more comments
+                    </button>
+                )}
             </div>
             <div className="flex-col flex">   
                 {role!== '' && <div className="flex-col flex">

@@ -105,7 +105,7 @@ const Wines = () => {
 
                     {filteredWines.map(wine => {
                         if (wine.wineDescription !== null) {
-                            return <div className="w-full flex justify-center  md:flex-row md:w-[45%] ">
+                            return <div className=" w-full flex justify-center  md:flex-row md:w-[45%] lg:w-1/4">
                                 <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image='./assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
                             </div> 
                         }
