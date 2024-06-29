@@ -8,9 +8,9 @@ const Footer = () => {
         <h2 className="text-3xl text-white">Wineder &copy;</h2>
         <img src="./assets/uvasBlanco.png" alt="" className='] w-[50px] md:w-[60px]' />
         <div className="flex flex-row gap-4 ">
-          <AnchorSocialFooter href="https://github.com/Agustin-del/front-wineder.git" src="./assets/githubBlanco.png" alt="github" />
-          <AnchorSocialFooter href="https://discord.com" src="./assets/discordBlanco.png" alt="discord" />
-          <AnchorSocialFooter href="https://wa.me/5491165353547" src="./assets/whatsappBlanco.png" alt="whatsapp" />
+          <AnchorSocialFooter href="https://github.com/Agustin-del/front-wineder.git" src="/assets/githubBlanco.png" alt="github" />
+          <AnchorSocialFooter href="https://discord.com" src="/assets/discordBlanco.png" alt="discord" />
+          <AnchorSocialFooter href="https://wa.me/5491165353547" src="/assets/whatsappBlanco.png" alt="whatsapp" />
 
         </div>
       </div>

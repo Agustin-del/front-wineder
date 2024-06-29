@@ -138,7 +138,6 @@ const Wines = () => {
                     </div>
                 </div>
             )}
-
         </main>
     );
 };
