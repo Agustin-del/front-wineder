@@ -93,14 +93,20 @@ const WineIncome = () => {
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ae522e501f3580c6613dc7edc7ef1cc55e06ea53
     
     useEffect(() => {
         getProviders()
     }, [providers])
     
+<<<<<<< HEAD
 =======
 
 >>>>>>> 9bb34abcbcf5e63229d3bf3fe05bdc0e152e1197
+=======
+>>>>>>> ae522e501f3580c6613dc7edc7ef1cc55e06ea53
     return (
         <body className="bg-gray-100">
             {loading ? (
@@ -209,6 +215,7 @@ const WineIncome = () => {
                                 </div>
                             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <div className="lg:w-[40%] lg:gap-2 flex items-center border-b border-gray-200 px-6 py-4">
                                 <label for="region" class="text-gray-800 font-semibold w-32">Wine region:</label>
                                 <select id="companyName" name="companyName" value={formData.companyName} onChange={handleChange}
@@ -229,6 +236,8 @@ const WineIncome = () => {
                         </div>
 =======
 >>>>>>> 9bb34abcbcf5e63229d3bf3fe05bdc0e152e1197
+=======
+>>>>>>> ae522e501f3580c6613dc7edc7ef1cc55e06ea53
                         </div>
                     </form>
                     {alert && <Alert color={alert.type}>{alert.message}</Alert>}

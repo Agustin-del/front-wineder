@@ -125,11 +125,17 @@ const WineDetails = () => {
                 </article>
             })}
 <<<<<<< HEAD
+<<<<<<< HEAD
             {role!== '' && <div className="flex-col flex">
 =======
              </div>
             <div className="flex-col flex">
 >>>>>>> 9bb34abcbcf5e63229d3bf3fe05bdc0e152e1197
+=======
+            
+            {role!== '' && <div className="flex-col flex">
+
+>>>>>>> ae522e501f3580c6613dc7edc7ef1cc55e06ea53
                 <div className="flex gap-4 p-4 ">
                     <h2 className="text-xl font-bold mb-4">Leave a comment</h2>
                     <StarRating onRatingChange={handleRatingChange}/>
