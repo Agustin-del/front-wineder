@@ -33,7 +33,7 @@ const Header = () => {
         dispatch(logout())
         setOpenModal(false)
         navigate("/")
-        
+
     }
 
     return (
@@ -73,54 +73,54 @@ const Header = () => {
                         </div>
                         <div className='flex flex-col md:flex-row lg:flex-row'>
                             {!isAuthenticated ? <>
-                            <button className=' lg:text-xl md:ml-[100px] lg:ml-[600px] flex items-center justify-center px-4    rounded-lg text-white' >
-                                <Anchor href="/login" text="Login" />
-                            </button>
-                            <button className=' lg:text-xl px-4 flex  items-center justify-center pb-4 md:pb-0 text-white '>
-                                <Anchor href="/registerClient" text="Register" />
-                            </button>
-                        </> :
-                            <>
-                                <div className="flex items-center flex-col lg:flex-row">
-                                <button onClick={confirmLogout} className='lg:text-xl px-4 py-2 rounded-lg text-white  '>
-                                    <Anchor href="/" text="Logout" />
+                                <button className=' lg:text-xl md:ml-[100px] lg:ml-[600px] flex items-center justify-center px-4    rounded-lg text-white' >
+                                    <Anchor href="/login" text="Login" />
                                 </button>
-                                {role === "client" && <NavLink to="/carrito">
-                                    <img src="./assets/cart.png" alt="cart" className="w-8 lg:h-8 h-11 pb-2 lg:pb-0" />
-                                </NavLink>}
-                                </div>
+                                <button className=' lg:text-xl px-4 flex  items-center justify-center pb-4 md:pb-0 text-white '>
+                                    <Anchor href="/registerClient" text="Register" />
+                                </button>
+                            </> :
+                                <>
+                                    <div className="flex items-center flex-col md:flex-row lg:flex-row">
+                                        <button onClick={confirmLogout} className='lg:text-xl  md:text-xl px-4 py-2 rounded-lg text-white  '>
+                                            <Anchor href="/" text="Logout" />
+                                        </button>
+                                        {role === "client" && <NavLink to="/carrito">
+                                            <img src="./assets/cart.png" alt="cart" className="w-8 lg:h-8 h-11 pb-2 lg:pb-0" />
+                                        </NavLink>}
+                                    </div>
 
-                            </>}
+                                </>}
                         </div>
                     </div>
 
                     {/* Botón de menú hamburguesa para vistas móviles */}
                     <button className="md:hidden lg:hidden text-white focus:outline-none" onClick={toggleMenu}>
-                        <img  src="./assets/menu.png" className="w-10" alt="menu" />
+                        <img src="./assets/menu.png" className="w-10" alt="menu" />
                     </button>
                 </header>
             </section>
-            { openModal && 
+            {openModal &&
 
-            <Modal show={confirmLogout} size="md" onClose={closeModal} popup>
-                <Modal.Header />
-                <Modal.Body>
-                    <div className="text-center">
-                        <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
-                        <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                            Are you sure you want to logout?
-                        </h3>
-                        <div className="flex justify-center gap-4">
-                            <Button color="failure" onClick={handleLogout}>
-                                {"Yes, I'm sure"}
-                            </Button>
-                            <Button color="gray" onClick={closeModal}>
-                                No, cancel
-                            </Button>
+                <Modal show={confirmLogout} size="md" onClose={closeModal} popup>
+                    <Modal.Header />
+                    <Modal.Body>
+                        <div className="text-center">
+                            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+                            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                Are you sure you want to logout?
+                            </h3>
+                            <div className="flex justify-center gap-4">
+                                <Button color="failure" onClick={handleLogout}>
+                                    {"Yes, I'm sure"}
+                                </Button>
+                                <Button color="gray" onClick={closeModal}>
+                                    No, cancel
+                                </Button>
+                            </div>
                         </div>
-                    </div>
-                </Modal.Body>
-            </Modal>
+                    </Modal.Body>
+                </Modal>
             }
         </>
     );
