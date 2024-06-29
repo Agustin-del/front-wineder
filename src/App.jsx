@@ -16,11 +16,7 @@ import Admin from './pages/Admin'
 import Client from './pages/Client';
 import WinesType from './pages/WinesType';
 
-
-
 function App() {
-
-
   return (
     <>
       <BrowserRouter>

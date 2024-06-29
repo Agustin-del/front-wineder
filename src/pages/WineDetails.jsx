@@ -13,8 +13,11 @@ const WineDetails = () => {
     const [averageRating, setAverageRating] = useState(0)
     const [rating, setRating] = useState(0)
     const token = useSelector(store => store.authReducer.token)
-    const[wines, setWines] = useState([])
+    const role = useSelector(store => store.roleReducer.role)
+    
+    const[wine, setWine] = useState([])
 
+    console.log(wine)
     const formatDate = () => {
         const date = new Date();
         const year = date.getFullYear();
@@ -41,7 +44,7 @@ const WineDetails = () => {
                     Authorization: `Bearer ${token}`
                 }
             })
-            console.log(response.data)
+            await getReviews()
         } catch (e) {
             console.error(e)
         } finally {
@@ -52,27 +55,30 @@ const WineDetails = () => {
     const getReviews = async() => {
         try {
             const response = await axios.get("http://localhost:8080/api/reviews/product/" + id)
-            setReviews(response.data)
-            console.log(response.data);
+            const reviewsWithData = response.data.map(review => ({
+                ...review,
+                reviewDate: new Date (review.reviewDate)
+            }))
+            const sortedReviews = reviewsWithData.sort((a,b) => b.reviewDate - a.reviewDate)
+            setReviews(sortedReviews)
         } catch (e) {
             console.error(e)
         }
     }
 
-    const getWines = async () => {
+    const getWine = async () => {
         try {
             const response = await axios.get("http://localhost:8080/api/products/" + id) 
-            setWines(response.data)
-            console.log(response.data);
+            setWine(response.data)
         }
           catch (error) {
-            console.log(error)
+            console.error(error)
           }  
     }
     
     useEffect(() => {
         getReviews()
-        getWines()
+        getWine()
     }, [])
 
     useEffect(() => {
@@ -84,23 +90,22 @@ const WineDetails = () => {
     return (
         <div className='flex flex-col items-center gap-4 my-5 md:justify-center' >
             <h2 className='text-4xl text-center lg:text-5xl'><strong>Wine Details</strong></h2>
-
-            <h3 className='text-2xl text-center lg:text-4xl'>{wines.name}</h3> 
+            <h3 className='text-2xl text-center lg:text-4xl'>{wine.name}</h3> 
 
             {/* Card que contiene una imganen y precio del vino mas el boton de agregar al carrito */}
             <CardWineDetails rating={averageRating}  />
 
              {/* Componente que contiene los detalles descriptivo del vino */}
-             <div className='flex flex-col gap-4 p-5 lg:w-[60%]'>
+            <div className='flex flex-col gap-4 p-5 lg:w-[60%]'>
 
-            <TextWineDetails title="Wine Region" text="Hailing from the sun-drenched vineyards of Napa Valley, known for producing bold and expressive wines." />
-            <TextWineDetails title="Wine Style" text="Rich and full-bodied, showcasing complex fruit flavors and a velvety texture." />
-            <TextWineDetails title="Wine Origin" text="Sourced from hand-picked grapes grown in the high-altitude vineyards of the Andes Mountains, imparting unique terroir characteristics." />
-            <TextWineDetails title="Wine Color" text="Deep ruby red with hints of garnet, reflecting its aging in oak barrels." />
-            <TextWineDetails title="Wine Type" text="Red, dry, and rich with flavors of blackberry, blackcurrant, and white pepper." />
-             </div>
+                <TextWineDetails title="Description" description={wine.description}/>
+                {/* <TextWineDetails title="Region" region={wine.wineDescription.region}/> */}
+                {/* <TextWineDetails title="Varietal" varietal={wine.wineDescription.varietal} /> */}
+                {/* <TextWineDetails title="Wine Color" wineType={wine.wineDescription.wineType}/>
+                <TextWineDetails title="Year of elaboration" year={wine.wineDescription.wineYear}/> */}
+            </div>
             <div className='flex flex-col gap-4 p-5 lg:w-[60%] md:flex-wrap md:flex-row'>           
-            {reviews.map(review => {
+                {reviews.map(review => {
                 return  <article className="p-4 ">
                 <div class="flex items-center mb-4">
                     <div class="font-medium dark:text-white">
@@ -108,23 +113,26 @@ const WineDetails = () => {
                     </div>
                 </div>
                 <div class="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
-                {[...Array(5)].map((_, index) => (    
+                    {[...Array(5)].map((_, index) => (    
                     <svg key={index} className={`w-4 h-4 ${index < review.rating ? 'text-yellow-300' : 'text-gray-300'}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
                     </svg>
-                ))}
+                    ))}
                 </div>
                 <footer class="mb-5 text-sm text-gray-500 dark:text-gray-400"><p>Reviewed in {new Date(review.reviewDate).toLocaleDateString()}</p></footer>
                     <p class="mb-2 text-gray-500 dark:text-gray-400">{review.comment}</p>
                 </article>
             })}
-             </div>
-            <div className="flex-col flex">
+            </div>
+            <div className="flex-col flex">   
+                {role!== '' && <div className="flex-col flex">
                 <div className="flex gap-4 p-4 ">
                     <h2 className="text-xl font-bold mb-4">Leave a comment</h2>
                     <StarRating onRatingChange={handleRatingChange}/>
                 </div>
                 <Comment onSubmit={handleSubmit}/>
+            
+                </div>}
             </div>
         </div>
     )

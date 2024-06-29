@@ -28,10 +28,9 @@ const CartsWines = ({ bgColor, ...props }) => {
 
     return (
 
-        <div className={`relative group cursor-pointer overflow-hidden duration-500 w-64 h-64 rounded-2xl ${bgColor} text-gray-50 p-5 `}>
+        <div className={` relative group cursor-pointer overflow-hidden duration-500 w-64 h-64 ${bgColor} text-gray-50 p-5` }>
             <div>
                 <div className="group-hover:scale-110 w-full h-60  duration-500" >
-
                     <img src={props.image} alt="wine bottle" className='w-full h-full object-cover' />
                 </div>
                 <div className="absolute w-56 left-0 p-5 my-4 -bottom-20 duration-500 group-hover:-translate-y-12">
