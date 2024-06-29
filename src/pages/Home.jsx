@@ -40,6 +40,7 @@ const Home = () => {
                             </video>
                         </div>
                         
+                        
                     </section>
 
                     <section className="m-5 lg:w-[80%] lg:justify-center lg:pl-[10%] ">
@@ -60,13 +61,15 @@ const Home = () => {
 
                     <section className="flex flex-col justify-around items-center py-5 gap-5  ">
 
-
+                        <div className='md:flex md:flex-row md:gap-5'>
                         <Link to={'/winesType/RED'}><CardHomeWine bgColor="bg-[#70383F]" name="Red wine" image="./assets/tinto.png" /></Link>
                         <Link to={'/winesType/WHITE'} ><CardHomeWine bgColor="bg-[#D4B891]" name="White wine" image="./assets/blanco.png" /> </Link>
+                        </div>
 
-
+                        <div className='md:flex md:flex-row md:gap-5'>
                         <Link to={'/winesType/SPARKLING'} ><CardHomeWine bgColor="bg-[#a39d92] " name="Sparkling wine" image="./assets/espumante.png" /></Link>
                         <Link to={'/winesType/PINK'}><CardHomeWine bgColor="bg-[#af9fa0]" name="Rose wine" image="./assets/rosado.png" /></Link>
+                        </div>
 
                     </section>
 

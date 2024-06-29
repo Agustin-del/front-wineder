@@ -89,15 +89,15 @@ const Login = () => {
 
 
                 <div className="flex items-center justify-center  bg-gray-100">
-                    {/* <div className=' w-full max-w-xs my-5'>
-                <img src="./assets/login.jpg" alt="" />
-            </div> */}
-                    <div className="w-full max-w-xs mt-5 ">
-                        <h2 className='text-3xl text-center mb-10'>Login</h2>
-                        <form className="bg-white bg-opacity-30 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    <div className=' w-[80%] md:w-[50%] lg:w-[30%] my-5'>
+                        <img className='rounded-xl' src="./assets/login.jpg" alt="" />
+                    </div>
+                    <div className="w-full max-w-xs mt-5 absolute">
+                        <h2 className='text-5xl text-center mb-10'>Login</h2>
+                        <form className="bg-white bg-opacity-70 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                                    Username
+                                <label className="block text-black text-sm font-bold mb-2" htmlFor="username">
+                                   <strong> Username </strong>
                                 </label>
                                 <input
                                     type="text"
@@ -109,8 +109,8 @@ const Login = () => {
                                 />
                             </div>
                             <div className="mb-6">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                                    Password
+                                <label className="block text-black text-sm font-bold mb-2" htmlFor="password">
+                                    <strong> Password </strong>
                                 </label>
                                 <input
                                     type="password"
@@ -134,8 +134,8 @@ const Login = () => {
                         </form>
                     </div>
                 </div>)}
-                </div>
-            );
-        };
+        </div>
+    );
+};
 
-            export default Login;
+export default Login;
