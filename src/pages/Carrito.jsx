@@ -1,20 +1,40 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+
+
 
 const Carrito = () => {
+    const token = useSelector(store => store.authReducer.token)
     const [loading, setLoading] = useState(true);
-    const [cartItems, setCartItems] = useState([
-        { id: 1, name: 'Vino Tinto', description: 'Description of the product.', price: 24.99, quantity: 0, isGreen: false, imgSrc: './assets/vino-tinto.png' },
-        { id: 2, name: 'Vino Rosado', description: 'Description of the product.', price: 24.99, quantity: 0, isGreen: false, imgSrc: './assets/vino-rosado.png' }
-    ]);
+    const [cartItems, setCartItems] = useState([]); // Recibe un array de productos
 
-    const handleClickCart = (id) => {
-        setCartItems(cartItems.map(item => 
-            item.id === id ? { ...item, isGreen: !item.isGreen } : item
-        ));
-    }
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(("http://localhost:8080/api/orderproducts/client/all"),
+                    { headers: { 'Authorization': `Bearer ${token}` } });
+                console.log(response);
+                console.log(response.data);
+                if (Array.isArray(response.data)) {
+                    setCartItems(response.data);
+                    console.log(cartItems);
+                }
+            } catch (error) {
+                console.error('Error fetching products:', response.data);
+            }
+        };
+        fetchData();
+    }, []);
+
+    // const handleClickCart = (id) => {
+    //     setCartItems(cartItems.map(item =>
+    //         item.id === id ? { ...item, isGreen: !item.isGreen } : item
+    //     ));
+    // }
 
     const handleQuantityChange = (id, delta) => {
-        setCartItems(cartItems.map(item => 
+        setCartItems(cartItems.map(item =>
             item.id === id ? { ...item, quantity: item.quantity + delta } : item
         ));
     }
@@ -37,30 +57,34 @@ const Carrito = () => {
                         <h1 className="text-3xl font-semibold text-gray-800 mb-6">Shopping Cart</h1>
 
                         <div className="bg-white shadow-md rounded-lg overflow-hidden md:w-[90%] md:ml-10 lg:w-[70%] lg:ml-[20%]">
-                            {cartItems.map(item => (
-                                <div key={item.id} className="flex items-center justify-between border-b border-gray-200 py-4">
-                                    <div className="flex items-center space-x-8">
-                                        <img src={item.imgSrc} alt="Product" className="h-16 w-16 object-cover rounded" />
-                                        <div>
-                                            <p className="text-gray-800 font-semibold">{item.name}</p>
-                                            <p className="text-gray-600">{item.description}</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center mr-5">
-                                        <button onClick={() => handleQuantityChange(item.id, -1)} className="">-</button>
-                                        <p className="text-gray-800 font-semibold mx-2">{item.quantity}</p>
-                                        <button onClick={() => handleQuantityChange(item.id, 1)} className="">+</button>
-                                    </div>
-                                    <div className="flex items-center flex-col mt-7">
-                                        <p className="text-gray-800 font-semibold">${item.price}</p>
-                                        <button className='w-20 hover:text-green-500'><strong>Buy later</strong></button>
-                                    </div>
-                                    <button onClick={() => handleClickCart(item.id)} className="p-2">
-                                        <img className="w-8" src={item.isGreen ? './assets/deleteRed.png' : './assets/deleteGreen.png'} alt="cart icon" />
-                                    </button>
-                                </div>
-                            ))}
+                            {cartItems.length === 0 ? (
+                                <p className='text-gray-800'>No hay productos en el carrito</p>
+                            ) : (
 
+                                cartItems.map((item) => (
+                                    <div key={item.id} className="flex items-center justify-between border-b border-gray-200 py-4">
+                                        <div className="flex items-center space-x-8">
+                                            <img src={item.imgSrc} alt="Product" className="h-16 w-16 object-cover rounded" />
+                                            <div>
+                                                <p className="text-gray-800 font-semibold">{item.productName}</p>
+                                                <p className="text-gray-600">{item.description}</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center mr-5">
+                                            <button onClick={() => handleQuantityChange(item.id, -1)} className="">-</button>
+                                            <p className="text-gray-800 font-semibold mx-2">{item.quantity}</p>
+                                            <button onClick={() => handleQuantityChange(item.id, 1)} className="">+</button>
+                                        </div>
+                                        <div className="flex items-center flex-col mt-7">
+                                            <p className="text-gray-800 font-semibold">${item.price}</p>
+                                            <button className='w-20 hover:text-green-500'><strong>Buy later</strong></button>
+                                        </div>
+                                        <button onClick={() => handleClickCart(item.id)} className="p-2">
+                                            <img className="w-8" src='./assets/deleteRed.png' alt="cart icon" />
+                                        </button>
+                                    </div>
+                                ))
+                            )}
                             <div className="flex justify-end items-center bg-gray-100 px-6 py-4">
                                 <div className="text-gray-800 font-semibold mr-4">Subtotal:</div>
                                 <div className="text-xl text-gray-800">${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}</div>
