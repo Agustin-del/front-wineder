@@ -48,7 +48,7 @@ const Wines = () => {
 
                     {wines.map(wine => {
                         if (wine.wineDescription !== null) {
-                            return <CartsWines id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image='./assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
+                            return <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image='./assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
                         }
                     })}
                     {/* <CartsWines name= 'Red Wines' winery='winery name' price='price' image='./assets/vino-tinto.png' bgColor='bg-[#5e2a30]'/>
@@ -59,25 +59,25 @@ const Wines = () => {
 
                     <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 w-[80%] mx-auto ">
 
-                    <Carousel showThumbs={false} showStatus={false} infiniteLoop autoPlay>
-                        <div>
-                            <img src="./assets/carrusel1.jpg" alt="Slide 1" />
-                        </div>
-                        <div>
-                            <img src="./assets/carrusel2.jpg" alt="Slide 2" />
-                        </div>
-                        <div>
-                            <img src="./assets/carrusel3.jpg" alt="Slide 3" />
-                        </div>
-                        <div>
-                            <img src="./assets/carrusel4.jpg" alt="Slide 4" />
-                        </div>
-                        <div>
-                            <img src="./assets/carrusel5.jpg" alt="Slide 5" />
-                        </div>
-                    </Carousel>
+                        <Carousel showThumbs={false} showStatus={false} infiniteLoop autoPlay>
+                            <div>
+                                <img src="./assets/carrusel1.jpg" alt="Slide 1" />
+                            </div>
+                            <div>
+                                <img src="./assets/carrusel2.jpg" alt="Slide 2" />
+                            </div>
+                            <div>
+                                <img src="./assets/carrusel3.jpg" alt="Slide 3" />
+                            </div>
+                            <div>
+                                <img src="./assets/carrusel4.jpg" alt="Slide 4" />
+                            </div>
+                            <div>
+                                <img src="./assets/carrusel5.jpg" alt="Slide 5" />
+                            </div>
+                        </Carousel>
+                    </div>
                 </div>
-            </div>
 
             )}
 
