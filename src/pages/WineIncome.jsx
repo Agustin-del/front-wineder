@@ -191,7 +191,7 @@ const WineIncome = () => {
                                     </select>
                                 </div>
                                 <div className="lg:w-[40%] lg:gap-2 flex items-center border-b border-gray-200 px-6 py-4">
-                                    <label for="region" class="text-gray-800 font-semibold w-32">Wine region:</label>
+                                    <label for="companyName" class="text-gray-800 font-semibold w-32">Company name:</label>
                                     <select id="companyName" name="companyName" value={formData.companyName} onChange={handleChange}
                                     className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
                                         <option value="">--select--</option>
