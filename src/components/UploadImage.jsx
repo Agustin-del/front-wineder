@@ -39,7 +39,7 @@ const UploadImage = () => {
             <h2>Upload Image</h2>
             <input type="file" onChange={handleFileChange} />
             <button onClick={handleUpload}>Upload</button>
-            <h2>Uploaded Images</h2>
+           
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {images.map((image) => (
                     <div key={image.id} style={{ margin: '10px' }}>
