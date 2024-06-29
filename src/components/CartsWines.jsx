@@ -27,7 +27,7 @@ const CartsWines = ({ bgColor, ...props }) => {
     }   
 
     return (
-        <div className={`relative group cursor-pointer overflow-hidden duration-500 w-64 h-64 ${bgColor} text-gray-50 p-5 ` }>
+        <div className={`relative group cursor-pointer overflow-hidden duration-500 w-64 h-64 rounded-2xl ${bgColor} text-gray-50 p-5 ` }>
             <div>
                 <div className="group-hover:scale-110 w-full h-60  duration-500" >
 
