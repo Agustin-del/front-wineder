@@ -122,7 +122,7 @@ const Login = () => {
                                 />
                                 {alert && <Alert color={alert.type}>{alert.message}</Alert>}
                             </div>
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-center justify-between ">
                                 <button onClick={handleLogin}
                                     type="submit"
                                     className="bg-[#5e2a30] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

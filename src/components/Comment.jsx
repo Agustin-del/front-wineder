@@ -10,7 +10,7 @@ const Comment = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md md:w-[100%] lg:w-[500px]">
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md md:w-[100%] lg:w-[400px]">
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}

@@ -99,7 +99,7 @@ const WineDetails = () => {
             <TextWineDetails title="Wine Color" text="Deep ruby red with hints of garnet, reflecting its aging in oak barrels." />
             <TextWineDetails title="Wine Type" text="Red, dry, and rich with flavors of blackberry, blackcurrant, and white pepper." />
              </div>
-            
+            <div className='flex flex-col gap-4 p-5 lg:w-[60%] md:flex-wrap md:flex-row'>           
             {reviews.map(review => {
                 return  <article className="p-4 ">
                 <div class="flex items-center mb-4">
@@ -118,6 +118,7 @@ const WineDetails = () => {
                     <p class="mb-2 text-gray-500 dark:text-gray-400">{review.comment}</p>
                 </article>
             })}
+             </div>
             <div className="flex-col flex">
                 <div className="flex gap-4 p-4 ">
                     <h2 className="text-xl font-bold mb-4">Leave a comment</h2>
