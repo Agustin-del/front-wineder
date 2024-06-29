@@ -8,6 +8,7 @@ import UploadImage from '../components/UploadImage';
 const WineIncome = () => {
     const [loading, setLoading] = useState(true);
     const [isWine, setIsWine] = useState(true)
+    const [providers, setProviders] = useState([])
     const [alert, setAlert] = useState({})
     const token = useSelector(store => store.authReducer.token)
     const [formData, setFormData] = useState({
@@ -36,6 +37,17 @@ const WineIncome = () => {
             ...formData,
             [name]:value
         })
+    }
+
+    const getProviders = async () => {
+        const response = await axios.get('http://localhost:8080/api/provider/all', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        let providerNames = []
+        providerNames = response.data.map(provider => ([provider.companyName, ...providerNames]))
+        setProviders(providerNames)
     }
 
     const handleIsWineChange = (e) => {
@@ -80,6 +92,10 @@ const WineIncome = () => {
             })
         }
     }
+    
+    useEffect(() => {
+        getProviders()
+    }, [providers])
     
     return (
         <body className="bg-gray-100">
@@ -174,9 +190,14 @@ const WineIncome = () => {
                                 </select>
                             </div>
                             <div className="lg:w-[40%] lg:gap-2 flex items-center border-b border-gray-200 px-6 py-4">
-                                <label for="companyName" class="text-gray-800 font-semibold w-32">Company name:</label>
-                                <input type="text" id="companyName" name="companyName" value={formData.companyName} onChange={handleChange} placeholder="Enter wine company"
-                                className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
+                                <label for="region" class="text-gray-800 font-semibold w-32">Wine region:</label>
+                                <select id="companyName" name="companyName" value={formData.companyName} onChange={handleChange}
+                                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                                    <option value="">--select--</option>
+                                    {providers && providers.map(provider => {
+                                        return <option key={provider} value={provider}>{provider}</option>
+                                    })}
+                                </select>
                             </div>
                         </>}
                         <div className="lg:flex lg:flex-wrap"> 
