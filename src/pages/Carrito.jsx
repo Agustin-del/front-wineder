@@ -31,7 +31,7 @@ const Carrito = () => {
             const response = await axios.get(
                 "http://localhost:8080/api/orderproducts/client/all",
                 {
-                    headers: { Authorization: `Bearer ${token}` },
+                    headers: { 'Authorization': `Bearer ${token}` },
                 }
             );
 
@@ -47,7 +47,7 @@ const Carrito = () => {
             const responseW = await axios.get(
                 "http://localhost:8080/api/orderproducts/client/wishlist",
                 {
-                    headers: { Authorization: `Bearer ${token}` },
+                    headers: { 'Authorization': `Bearer ${token}` },
 
                 }
             );
@@ -88,7 +88,7 @@ const Carrito = () => {
                 `http://localhost:8080/api/orderproducts/update/${id}`,
                 null,
                 {
-                    headers: { Authorization: `Bearer ${token}` },
+                    headers: { 'Authorization': `Bearer ${token}` },
                 }
             );
 
@@ -108,7 +108,7 @@ const Carrito = () => {
                 await axios.delete(
                     `http://localhost:8080/api/orderproducts/delete/${item.id}`,
                     {
-                        headers: { Authorization: `Bearer ${token}` },
+                        headers: { 'Authorization': `Bearer ${token}` },
                     }
                 );
             } catch (error) {
@@ -124,7 +124,7 @@ const Carrito = () => {
             const response = await axios.delete(
                 `http://localhost:8080/api/orderproducts/delete/${id}`,
                 {
-                    headers: { Authorization: `Bearer ${token}` },
+                    headers: { 'Authorization': `Bearer ${token}` },
                 }
             );
             console.log(response.data);
@@ -156,7 +156,7 @@ const Carrito = () => {
                     quantity: itemToAdd.quantity,
                 },
                 {
-                    headers: { Authorization: `Bearer ${token}` },
+                    headers: { 'Authorization': `Bearer ${token}` },
 
                 }
             );
@@ -183,7 +183,7 @@ const Carrito = () => {
         //           quantity: item.quantity,
         //         },
         //         {
-        //           headers: { Authorization: `Bearer ${token}` },
+        //           headers: { 'Authorization': `Bearer ${token}` },
         //         }
         //       );
         //     })
@@ -200,7 +200,7 @@ const Carrito = () => {
                 "http://localhost:8080/api/buyorder/create",
                 aux,
                 {
-                    headers: { Authorization: `Bearer ${token}` },
+                    headers: { 'Authorization': `Bearer ${token}` },
 
                 }
             );
