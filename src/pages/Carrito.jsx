@@ -144,7 +144,7 @@ const Carrito = () => {
         <div>
             {loading ? (
                 <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
-                    <img className='w-[300px]' src="./assets/copa.gif" alt="" />
+                    <img className='w-[300px]' src="/assets/copa.gif" alt="" />
                 </div>
             ) : (
                 <div className="bg-gray-100">
@@ -158,7 +158,7 @@ const Carrito = () => {
                                 cartItems.map((item) => (
                                     <div key={item.id} className="flex items-center justify-between border-b border-gray-200 py-4">
                                         <div className="flex items-center space-x-8">
-                                            <img src={item.image ? item.image : "./assets/vino-tinto.png"} alt={item.productName} className="h-16 w-16 object-cover rounded" />
+                                            <img src={item.image ? item.image : "/assets/vino-tinto.png"} alt={item.productName} className="h-16 w-16 object-cover rounded" />
                                             <div>
                                                 <p className="text-gray-800 font-semibold">{item.productName}</p>
                                                 {/* <p className="text-gray-600">{item.description}</p> */}
@@ -175,18 +175,18 @@ const Carrito = () => {
                                             </div> */}
                                         </div>
                                         <div className="flex items-center flex-col mt-7">
-                                            <p className="text-gray-800 font-semibold">${(item.quantity * item.price).toFixed(2).toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}</p>
+                                            <p className="text-gray-800 font-semibold">${(item.quantity * item.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</p>
                                             <button className='w-20 hover:text-green-500' onClick={() => setOrderProductFalse(item.id)}><strong>Buy later</strong></button>
                                         </div>
                                         <button onClick={() => deleteOrderProduct(item.id)} className="p-2">
-                                            <img className="w-8" src='./assets/deleteRed.png' alt="cart icon" />
+                                            <img className="w-8" src='/assets/deleteRed.png' alt="cart icon" />
                                         </button>
                                     </div>
                                 ))
                             )}
                             <div className="flex justify-end items-center bg-gray-100 px-6 py-4">
                                 <div className="text-gray-800 font-semibold mr-4">Subtotal:</div>
-                                <div className="text-xl text-gray-800">${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2).toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}</div>
+                                <div className="text-xl text-gray-800">${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</div>
                             </div>
                         </div>
 
@@ -204,7 +204,7 @@ const Carrito = () => {
                                     <div>{product.productName}</div>
                                     <div>{product.quantity} </div>
                                     <div>{product.stock} in stock</div>
-                                    <div>${product.price.toFixed(2).toLocaleString('es-AR', { useGrouping: true, style: 'currency', currency: 'ARS' })}</div>
+                                    <div>${product.price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</div>
                                     <button onClick={() => handleClickCart(product.id)} className="p-2 bg-black rounded-lg">
                                         <img className="w-8" src='/assets/cartGreen.png' alt="cart icon" />
                                     </button>
