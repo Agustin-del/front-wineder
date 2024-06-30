@@ -6,11 +6,13 @@ import { CiCircleCheck } from "react-icons/ci";
 import axios from 'axios';
 
 
+
 const CartsWines = ({ bgColor, ...props }) => {
     const [isGreen, setIsGreen] = useState(false);
+
     const [openModal, setOpenModal] = useState (false)
     const token = useSelector(store => store.authReducer.token)
-    
+  
     switch (bgColor) {
         case 'WHITE':
             bgColor = "bg-[#D4B891]";
