@@ -24,9 +24,9 @@ const CardWineDetails = ({ rating, id }) => {
             }
         } catch (e) {
             console.error(e)
-        }
-        
+        }    
     }
+    
     return (
         <div className='flex flex-row items-center justify-around py-5 border-2 lg:w-[60%] rounded-lg w-full bg-[#E5D1D2] md:justify-center md:w-[80%]'>
             <section className='w-[20%] '   >
