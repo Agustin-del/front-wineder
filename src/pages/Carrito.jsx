@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Carrito = () => {
     const token = useSelector(store => store.authReducer.token);
@@ -8,8 +9,7 @@ const Carrito = () => {
     const [cartItems, setCartItems] = useState([]);
     const [wishlist, setWishlist] = useState([]);
 
-    const number = 100000;
-    const formattedNumber = number.toLocaleString('es-AR', { useGrouping: true, minimumFractionDigits: 0 });
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -129,17 +129,27 @@ const Carrito = () => {
         }
     };
 
-    // const checkOutClick = async () => {
-    //     try{
-    //         const updatesQuantity = cartItems.map(item => {
-    //             return {
-    //                 id: item.id,
-    //                 quantity: item.quantity
-    //             }
-    //         })
-    //             }catc
-    //     }
-    // }
+    const checkOutClick = async () => {
+        try {
+            const updateQuantity = await Promise.all(cartItems.map(async item => {
+                await axios.put(`http://localhost:8080/api/orderproducts/update/${item.id}`, {
+                    quantity: item.quantity
+                }, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+            }));
+            const response = await axios.post('http://localhost:8080/api/orders/create', null, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+
+            if (response.status === 200) {
+                // navigate("/debitWineder")
+                console.log(response.data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
 
 
@@ -178,7 +188,7 @@ const Carrito = () => {
                                             </div> */}
                                         </div>
                                         <div className="flex items-center flex-col mt-7">
-                                            <p className="text-gray-800 font-semibold">${(item.quantity * item.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</p>
+                                            <p className="text-gray-800 font-semibold">${(item.quantity * item.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
                                             <button className='w-20 hover:text-green-500' onClick={() => setOrderProductFalse(item.id)}><strong>Buy later</strong></button>
                                         </div>
                                         <button onClick={() => deleteOrderProduct(item.id)} className="p-2">
@@ -189,13 +199,13 @@ const Carrito = () => {
                             )}
                             <div className="flex justify-end items-center bg-gray-100 px-6 py-4">
                                 <div className="text-gray-800 font-semibold mr-4">Subtotal:</div>
-                                <div className="text-xl text-gray-800">${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</div>
+                                <div className="text-xl text-gray-800">${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</div>
                             </div>
                         </div>
 
                         <div className="flex justify-end mt-6 gap-4">
                             <button className="bg-white border-2 border-[#73383E] hover:bg-[#ee9da2] hover:texte-white text-[#73383E] px-4 py-2 rounded-lg" onAbort={clearBasket}>Clear basket</button>
-                            <button className="bg-[#236533] hover:bg-[#e4858b] text-white px-4 py-2 rounded-lg">Checkout</button>
+                            <button className="bg-[#236533] hover:bg-[#e4858b] text-white px-4 py-2 rounded-lg" onClick={checkOutClick} >Checkout</button>
                         </div>
                     </div>
                     <div className="bg-violet-300  p-5 w-full flex flex-col" >
@@ -207,7 +217,7 @@ const Carrito = () => {
                                     <div>{product.productName}</div>
                                     <div>{product.quantity} </div>
                                     <div>{product.stock} in stock</div>
-                                    <div>${product.price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</div>
+                                    <div>${product.price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</div>
                                     <button onClick={() => handleClickCart(product.id)} className="p-2 bg-black rounded-lg">
                                         <img className="w-8" src='/assets/cartGreen.png' alt="cart icon" />
                                     </button>
