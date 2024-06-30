@@ -65,10 +65,15 @@ const Header = () => {
 
                     {/* Menú de navegación */}
                     <div className={`absolute md:static lg:static top-[84px] md:items-center lg:mr-10 left-0 right-0 bg-[#73383E] md:bg-transparent lg:bg-transparent transition-max-height duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-screen' : 'max-h-0'} z-50 md:max-h-full lg:max-h-full md:flex md:items-center lg:flex `}>
+                       
                         <div className="flex flex-col gap-1 md:flex-row lg:flex-row items-center md:text-xl md:gap-5 text-white my-5 md:my-0 lg:my-0 lg:p-2 lg:flex lg:items-center">
                             <Anchor href="/" text="Home" />
+
                             <Anchor href="/wines" text="Wines" />
+
                             <Anchor href="/contact" text="Contact" />
+
+
                             {role === "admin" ? <Anchor href="/admin" text="Admin" /> : role === "client" && <Anchor href="/client" text="Client" />}
                         </div>
                         <div className='flex flex-col md:flex-row lg:flex-row'>
