@@ -15,6 +15,7 @@ import Contact from './pages/Contact'
 import Admin from './pages/Admin'
 import Client from './pages/Client';
 import WinesType from './pages/WinesType';
+import PaymentMethods from './pages/PaymentMethods';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/client" element={<Client />} />
             <Route path="/winesType" element={<WinesType />} />
             <Route path="/winesType/:type" element={<WinesType />} />
+            <Route path="/payment" element={<PaymentMethods/>} />
           </Routes>
         </Contenedor>
       </BrowserRouter>

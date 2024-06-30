@@ -105,15 +105,17 @@ const WineDetails = () => {
             <CardWineDetails rating={averageRating}  id={wine.id}/>
 
              {/* Componente que contiene los detalles descriptivo del vino */}
-            <div className='flex flex-col gap-4 p-5 lg:w-[60%]'>
+            <div className='flex flex-col gap-4 p-5 lg:w-[60%] border-2 rounded-xl '>
 
                 {wine && 
                 <>
+                <div className='lg:flex-row lg:flex'>
                 <TextWineDetails title="Wine Color" wineType={wine.wineDescription.wineType}/>
                 <TextWineDetails title="Varietal" varietal={wine.wineDescription.varietal} />
                 <TextWineDetails title="Region" region={wine.wineDescription.region}/>
                 <TextWineDetails title="Year of elaboration" year={wine.wineDescription.wineYear}/>
-                <TextWineDetails title="Description" description={wine.wineDescription.varietal}/>
+                </div>                
+                <TextWineDetails className='lg:w-full' title="Description" description={wine.wineDescription.varietal}/>             
                 </>
                 }
             </div>
