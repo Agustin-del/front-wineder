@@ -31,6 +31,7 @@ const Carrito = () => {
 
     }, []);
 
+
     useEffect(() => {
         const fetchWishlist = async () => {
             try {
