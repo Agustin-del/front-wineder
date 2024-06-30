@@ -10,7 +10,7 @@ import Wines from './pages/Wines';
 import Home from './pages/Home'
 import WineDetails from './pages/WineDetails'
 import Carrito from './pages/Carrito'
-import WineIncome from './pages/WineIncome'
+import WineIncome2 from './pages/WineIncome2'
 import Contact from './pages/Contact'
 import Admin from './pages/Admin'
 import Client from './pages/Client';
@@ -31,7 +31,7 @@ function App() {
             <Route path="/wines" element={<Wines />} />
             <Route path="/wines/:id" element={<WineDetails />} />
             <Route path="/carrito" element={<Carrito />} />
-            <Route path="/wineIncome" element={<WineIncome />} />
+            <Route path="/wineIncome" element={<WineIncome2 />} />
             <Route path="/wineDetails/:id" element={<WineDetails />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/client" element={<Client />} />
