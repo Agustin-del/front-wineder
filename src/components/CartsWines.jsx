@@ -99,4 +99,4 @@ const CartsWines = ({ bgColor, ...props }) => {
 }
 
 export default CartsWines;
->>>>>>> f78b0a71edd25855fce5aa394223d0f0024f7a2b
+
