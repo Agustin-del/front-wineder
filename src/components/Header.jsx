@@ -78,7 +78,7 @@ const Header = () => {
                         </div>
                         <div className='flex flex-col md:flex-row lg:flex-row'>
                             {!isAuthenticated ? <>
-                                <button className=' lg:text-xl md:ml-[100px] lg:ml-[600px] flex items-center justify-center px-4    rounded-lg text-white' >
+                                <button className=' lg:text-xl flex items-center justify-center px-4    rounded-lg text-white' >
                                     <Anchor href="/login" text="Login" />
                                 </button>
                                 <button className=' lg:text-xl px-4 flex  items-center justify-center pb-4 md:pb-0 text-white '>

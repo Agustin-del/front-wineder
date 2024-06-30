@@ -1,10 +1,16 @@
+import { Modal } from 'flowbite-react';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { CiCircleCheck } from "react-icons/ci";
+import axios from 'axios';
+
 
 const CartsWines = ({ bgColor, ...props }) => {
     const [isGreen, setIsGreen] = useState(false);
-
+    const [openModal, setOpenModal] = useState (false)
+    const token = useSelector(store => store.authReducer.token)
+    
     switch (bgColor) {
         case 'WHITE':
             bgColor = "bg-[#D4B891]";
@@ -22,17 +28,48 @@ const CartsWines = ({ bgColor, ...props }) => {
     }
     const role = useSelector(store => store.roleReducer.role)
 
-    const handleClickCart = () => {
-        setIsGreen(!isGreen);
+    const handleCart = () => {
+        setIsGreen(true);
+    }
+    const handleClickCart = async () => {  
+        handleCart()
+        
+        try {
+            const response = await axios.post(`http://localhost:8080/api/orderproducts/create/${props.id}`, null, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            if(response.status === 200) {
+                setOpenModal(true)
+                setTimeout(() => {
+                    setOpenModal(false)
+                    setIsGreen(false)
+                }, 1000)
+            }
+        } catch (e) {
+            console.error(e)
+        } 
     }
 
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD'
     });
-
+    
     return (
-
+        <>
+        {openModal &&
+    
+        <Modal show={openModal} size="md" onClose ={() => setOpenModal(false)} popup>
+            <div className="text-center flex flex-col p-2 justify-center">
+                <CiCircleCheck className="mx-auto mb-4 h-12 w-12 text-green-400 dark:text-gray-200" />
+                <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                    The product has been added to the cart
+                </h3>
+            </div>
+        </Modal>
+        }
         <div className={` relative group cursor-pointer overflow-hidden duration-500 w-64 h-64 ${bgColor} text-gray-50 p-5` }>
             <div>
                 <div className="group-hover:scale-110 w-full h-60  duration-500" >
@@ -48,13 +85,13 @@ const CartsWines = ({ bgColor, ...props }) => {
                             Details
                         </Link>
                         {role == "client" && <button onClick={handleClickCart} className="p-2">
-                            <img className="w-8" src={`${isGreen ? './assets/cartGreen.png' : './assets/cart.png'}`} alt="cart icon" />
+                            <img className="w-8" src={`${isGreen ? '/assets/cartGreen.png' : '/assets/cart.png'}`} alt="cart icon" />
                         </button>}
-
                     </div>
                 </div>
             </div>
         </div>
+        </>
     );
 }
 
