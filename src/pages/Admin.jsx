@@ -72,7 +72,7 @@ const Admin = () => {
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
                 </div>) : (<>
                     <h2 className='text-3xl text-center py-5'><strong>Admin panel</strong></h2>
-                    <div className="md:flex flex items-center text-center flex-col md:flex-row md:mx-5 md:my-2 lg:flex-col">
+                    <div className="md:flex flex items-center text-center flex-col md:flex-row md:mx-5 md:my-2 lg:mx-20">
                         <ul className="flex-column w-[60%] space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0 lg:w-[20%]">
                             <li>
                                 <a href="#" className={`inline-flex items-center px-4 py-3 text-white bg-[#5e2a30] rounded-lg active w-full ${activeTab === 'clients' ? 'bg-[#0e0d0d] text-white' : ''}`} onClick={() => handleTabClick('clients')}>

@@ -8,9 +8,11 @@ import { useEffect, useState } from 'react';
 const Client = () => {
   const [client, setClient] = useState([])
   const [buyOrders, setBuyOrders] = useState([])
+  const [buyOrdersProducts, setBuyOrdersProducts] = useState([])
   const token = useSelector(store => store.authReducer.token)
   const role = useSelector(store => store.roleReducer.role)
   const[loading, setLoading] = useState(true);
+
   
   const getData = async () => {
     try{
@@ -32,6 +34,14 @@ const Client = () => {
       });
       setBuyOrders(response.data);
       console.log(response.data);
+
+      const buyOrdersProducts = await axios.get('http://localhost:8080/api/buyorder/client/pending', {
+        headers: { 'Authorization': `Bearer ${token}` }
+        
+      })  
+      setBuyOrdersProducts(buyOrdersProducts.data)
+      console.log(buyOrdersProducts.data);
+
     } catch (error) {
       console.error('Error fetching products:', error.response.data);
     }
