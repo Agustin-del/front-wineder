@@ -8,19 +8,16 @@ import { Alert } from 'flowbite-react';
 import { getRole } from '../redux/actions/roleActions';
 // import { GoogleLogin } from '@react-oauth/google';
 
-
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [user, setUser] = useState([])
+    // const [user, setUser] = useState([])
     const [alert, setAlert] = useState(null)
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
     // const token = useSelector(store => store.authReducer.token)
     const [loading, setLoading] = useState(true);
-
-
 
     // const responseMessage = (response) => {
     //     setUser(response)
@@ -129,7 +126,7 @@ const Login = () => {
                                 >
                                     Login
                                 </button>
-
+                                {/* <GoogleLogin/>    */}
                             </div>
                         </form>
                     </div>

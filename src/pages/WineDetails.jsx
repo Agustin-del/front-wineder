@@ -12,7 +12,7 @@ const WineDetails = () => {
     const [reviews, setReviews] = useState([])
     const [averageRating, setAverageRating] = useState(0)
     const [rating, setRating] = useState(0)
-    const [visibleReviews, setVisibleReviews] = useState (5)
+    const [visibleReviews, setVisibleReviews] = useState (6)
 
     const token = useSelector(store => store.authReducer.token)
     const role = useSelector(store => store.roleReducer.role)
@@ -102,7 +102,7 @@ const WineDetails = () => {
             <h3 className='text-2xl text-center lg:text-4xl'>{wine.name}</h3> 
 
             {/* Card que contiene una imganen y precio del vino mas el boton de agregar al carrito */}
-            <CardWineDetails rating={averageRating}  id={wine.id}/>
+            <CardWineDetails rating={averageRating} id={wine.id}/>
 
              {/* Componente que contiene los detalles descriptivo del vino */}
             <div className='flex flex-col gap-4 p-5 lg:w-[60%]'>
@@ -145,13 +145,15 @@ const WineDetails = () => {
                     </button>
                 )}
             </div>
-            <div className="flex-col flex">   
-                {role!== '' && <div className="flex-col flex">
-                <div className="flex gap-4 p-4 ">
+            <div className="flex-col flex lg:w-[57%]">   
+                {role!== '' && <div className=" flex flex-col ">
+                <div className="flex gap-4 p-4  ">
                     <h2 className="text-xl font-bold mb-4">Leave a comment</h2>
                     <StarRating onRatingChange={handleRatingChange}/>
                 </div>
+                <div>
                 <Comment onSubmit={handleSubmit}/>
+                </div>
             
                 </div>}
             </div>
