@@ -138,49 +138,11 @@ const RegisterProvider = () => {
                                         />
                                         {errors.cuit && <p className="text-red-500 text-xs italic">{errors.cuit}</p>}
                                     </div>
-                                    {/* <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2">Payment Method</label>
-                            <div className="flex items-center">
-                                <input
-                                    type="checkbox"
-                                    id="payMethod"
-                                    name="payMethod"
-                                    checked={form.payMethod}
-                                    onChange={handleChange}
-                                    className="mr-2 leading-tight focus:outline-none"
-                                />
-                                <label htmlFor="payMethod" className="text-gray-700">
-                                    Cash
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    id="payMethod"
-                                    name="payMethod"
-                                    checked={form.payMethod}
-                                    onChange={handleChange}
-                                    className="mr-2 leading-tight focus:outline-none"
-                                />
-                                <label htmlFor="payMethod" className="text-gray-700">
-                                    Card Credit
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    id="payMethod"
-                                    name="payMethod"
-                                    checked={form.payMethod}
-                                    onChange={handleChange}
-                                    className="mr-2 leading-tight focus:outline-none"
-                                />
-                                <label htmlFor="payMethod" className="text-gray-700">
-                                    Card Debit
-                                </label>
-                            </div> 
-                            {errors.payMethod && <p className="text-red-500 text-xs italic">{errors.payMethod}</p>}
-                        </div>*/}
+                                  
                                     <div className="flex items-center justify-between">
                                         <button
                                             type="submit"
-                                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                            className="bg-[#73383E] hover:bg-[#4b3538] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                         >
                                             Register
                                         </button>
