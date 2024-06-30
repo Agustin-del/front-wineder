@@ -63,9 +63,9 @@ const Wines = () => {
                 <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
                 </div>) : (
-                <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10 lg:mx-5'>
-                    <div className="w-[60%] flex flex-col md:flex-row md:flex-wrap justify-center gap-2 mb-5">
-                        <div className="flex justify-center ">
+                <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10 lg:flex-col md:flex-col'>
+                    <div className="w-[60%] flex flex-col md:flex-row md:flex-wrap justify-center gap-2 mb-5 lg:flex-row  md:w-[100%] ">
+                        <div className="flex justify-center lg:flex-col md:flex-col ">
                             <input
                                 type="text"
                                 placeholder="Meet your wine"
@@ -74,7 +74,7 @@ const Wines = () => {
                                 onChange={(e) => setSearchText(e.target.value)}
                             />
                         </div>
-                        <div className="md:flex"> 
+                        <div className="flex md:flex justify-center flex-col lg:flex-row"> 
                             <select value={selectedVarietal} onChange={(e) => setSelectedVarietal(e.target.value)} name="varietal" className="focus:border-none focus:ring-0 border-none mb-2 md:mb-0 md:mr-2">
                                 <option value="">All Varietals</option>
                                 {varietals.map((varietal, index) => (
@@ -102,14 +102,16 @@ const Wines = () => {
                         </div>
                     </div>
                     {/* COMPONETE DE LAS CARD DE WINE, ESTA EN COMPONENTS-CartsWines.jsx  */}
+                    <div className='flex flex-col md:flex-row md:flex-wrap md:gap-5 md:mx-6' >
 
                     {filteredWines.map(wine => {
                         if (wine.wineDescription !== null) {
-                            return <div className=" w-full flex justify-center  md:flex-row md:w-[45%] lg:w-1/4">
+                            return <div className=" w-full flex justify-center mb-2 md:flex-row md:w-[30%]  ">
                                 <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image='./assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
                             </div> 
                         }
                     })}
+                    </div>
                     {/* <CartsWines name= 'Red Wines' winery='winery name' price='price' image='./assets/vino-tinto.png' bgColor='bg-[#5e2a30]'/>
            <CartsWines name= 'White Wines' winery='winery name' price='price' image='./assets/vino-blanco.png' bgColor='bg-[#D4B891]'/>
            <CartsWines name= 'Red Wines' winery='winery name' price='price' image='./assets/vino-rosado.png' bgColor='bg-[#DCC8C9]'/>
