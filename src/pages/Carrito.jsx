@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
+
 import axios from 'axios';
 
 const Carrito = () => {
@@ -156,7 +158,7 @@ const Carrito = () => {
 
                         <div className="flex justify-end mt-6 gap-4">
                             <button className="bg-white border-2 border-[#73383E] hover:bg-[#ee9da2] hover:texte-white text-[#73383E] px-4 py-2 rounded-lg" onAbort={clearBasket}>Clear basket</button>
-                            <button className="bg-[#236533] hover:bg-[#e4858b] text-white px-4 py-2 rounded-lg">Checkout</button>
+                            <button className="bg-[#236533] hover:bg-[#e4858b] text-white px-4 py-2 rounded-lg">Pay</button>
                         </div>
                     </div>
                     <div className="bg-violet-300  p-5 w-full flex flex-col" >

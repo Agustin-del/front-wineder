@@ -32,6 +32,7 @@ const WineIncome2 = () => {
   }, []);
 
   const getProviders = async () => {
+    
     const response = await axios.get("http://localhost:8080/api/provider/all", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -70,9 +71,7 @@ const WineIncome2 = () => {
         "companyName": `${companyName}`,
       };
 
-      console.log(selectedFile);
-      console.log(product);
-      console.log(token);
+
 
       
       const formData = new FormData();

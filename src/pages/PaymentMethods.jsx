@@ -3,10 +3,11 @@ import { Alert } from "flowbite-react";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function PaymentMethods() {
   const [loading, setLoading] = useState(true);
-  const [paymentMethod, setPaymentMethods] = useState();
+  const [totalAmount, setTotalAmount] = useState();
 
   const [address, setAddress] = useState("");
   const [number, setNumber] = useState();
@@ -20,16 +21,61 @@ function PaymentMethods() {
   const [cvv, setCvv] = useState(0);
   const [cardType, setCardType] = useState("");
 
+  const navigate = useNavigate();
+
+  const token = useSelector((store) => store.authReducer.token);
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
+      getAmount();
     }, 2000);
   }, []);
 
-  const handleSubmit = (e) => {
+  const getAmount = async (e) => {
+    try {
+      const resp = await axios.get(
+        "http://localhost:8080/api/buyorder/client/pending",
+        [],
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("jdjd");
-    // axios.post("http://localhost:5000/api/payment", {
+
+    try {
+      const data = {
+        totalAmount: `${totalAmount}`,
+        cardNumber: `${cardNumber}`,
+        cvv: `${cvv}`,
+        cardType: `${cardType}`,
+        description: "Wineder purchase order",
+      };
+
+      const response = await axios.post(
+        "https://argentumhomebanking-1.onrender.com/api/clients",
+        data
+      );
+
+
+
+
+      navigate("/home");
+
+
+    } catch (error) {
+      console.log("jhgxdh");
+    }
   };
 
   return (
@@ -173,8 +219,8 @@ function PaymentMethods() {
                   type="text"
                   id="cardholderName"
                   name="cardholderName"
-                  value={cardType}
-                  onChange={(e) => setCardType(e.target.value)}
+                  value={cardholderName}
+                  onChange={(e) => setCardholderName(e.target.value)}
                   placeholder="Enter your St."
                   className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                 />
@@ -222,7 +268,6 @@ function PaymentMethods() {
                   className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                 />
               </div>
-              
             </div>
 
             <div className="flex flex-wrap justify-center">
@@ -234,7 +279,6 @@ function PaymentMethods() {
               </button>
             </div>
           </form>
-          
         </div>
       )}
     </body>
