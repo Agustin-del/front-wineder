@@ -139,6 +139,7 @@ const Wines = () => {
                         </Carousel>
                     </div>
                 </div>
+                
             )}
         </main>
     );
