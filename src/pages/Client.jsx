@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 
 const Client = () => {
   const [client, setClient] = useState([])
+  const [buyOrders, setBuyOrders] = useState([])
   const token = useSelector(store => store.authReducer.token)
   const role = useSelector(store => store.roleReducer.role)
   const[loading, setLoading] = useState(true);
@@ -24,9 +25,22 @@ const Client = () => {
     }  
     setLoading(false)
   }
+  const getBuyOrders = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/buyorder/client/all', {
+          headers: { 'Authorization': `Bearer ${token}` }
+      });
+      setBuyOrders(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching products:', error.response.data);
+    }
+    setLoading(false);
+  };
   
   useEffect(() => {
     getData();
+    getBuyOrders();
   }, [token]);
 
   useEffect(() => {
