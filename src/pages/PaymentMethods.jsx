@@ -234,7 +234,7 @@ function PaymentMethods() {
               </button>
             </div>
           </form>
-          {alert && <Alert color={alert.type}>{alert.message}</Alert>}
+          
         </div>
       )}
     </body>
