@@ -42,7 +42,9 @@ function PaymentMethods() {
           },
         }
       );
+      
       console.log(resp);
+
     } catch (error) {
       console.log(error);
     }

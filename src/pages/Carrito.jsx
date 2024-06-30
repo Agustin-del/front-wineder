@@ -7,6 +7,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 const Carrito = () => {
   const token = useSelector((store) => store.authReducer.token);
+
   const [loading, setLoading] = useState(true);
   const [cartItems, setCartItems] = useState([]);
   const [wishlist, setWishlist] = useState([]);
@@ -14,46 +15,48 @@ const Carrito = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-        try {
-          const response = await axios.get(
-            "http://localhost:8080/api/orderproducts/client/all",
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
-    
-          setCartItems(response.data);
-        } catch (error) {
-            console.error("Error fetching products:", error.response.data);
-        }
-        setLoading(false);
-        console.log(cartItems);
-      };
-
     fetchData();
-
+    setLoading(false);
   }, []);
 
   useEffect(() => {
-    const fetchWishlist = async () => {
-        try {
-          const responseW = await axios.get(
-            "http://localhost:8080/api/orderproducts/client/wishlist",
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
-          setWishlist(responseW.data);
-        } catch (error) {
-          console.log("There is no wishlist", error);
-        }
-      };
-
     fetchWishlist();
+    console.log(wishlist);
+    console.log(cartItems);
   }, [cartItems]);
 
-  
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/api/orderproducts/client/all",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      const aux = response.data;
+      setCartItems(aux);
+    } catch (error) {
+      console.error("Error fetching products:", error.response.data);
+    }
+  };
+
+  const fetchWishlist = async () => {
+    try {
+      const responseW = await axios.get(
+        "http://localhost:8080/api/orderproducts/client/wishlist",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      const aux = responseW.data;
+      setWishlist(aux);
+    } catch (error) {
+      console.log("There is no wishlist", error);
+    }
+  };
+
   const handleQuantityChange = async (id, delta) => {
     try {
       setCartItems(
@@ -70,29 +73,11 @@ const Carrito = () => {
         })
       );
 
-      /////////////
-    //   const aux = cartItems.find((item) => item.id == id).quantity;
-
-    //   const data = {
-    //     id: `${id}`,
-    //     quantity: `${aux}`,
-    //   };
-
-    //   const response = await axios.put(
-    //     `http://localhost:8080/api/orderproducts/update/quantity`,
-    //     data,
-    //     {
-    //       headers: { Authorization: `Bearer ${token}` },
-    //     }
-    //   );
-    //   console.log(response.data);
-
-    //   console.log(cartItems);
     } catch (error) {
       console.log(error);
     }
 
-    //////////////
+
   };
 
   const setOrderProductFalse = async (id) => {
@@ -105,7 +90,8 @@ const Carrito = () => {
         }
       );
 
-      const updateCart = cartItems.filter((item) => item.id !== id);
+      const aux = [...cartItems];
+      const updateCart = aux.filter((item) => item.id !== id);
       setCartItems(updateCart);
 
       console.log(cartItems);
@@ -162,7 +148,7 @@ const Carrito = () => {
       const itemToAdd = wishlist.find((item) => item.id === id);
 
       const response = await axios.put(
-        `http://localhost:8080/api/orderproducts/update/${id}`,
+        `http://localhost:8080/api/orderproducts/updatetrue/${id}`,
         {
           quantity: itemToAdd.quantity,
         },
@@ -185,54 +171,39 @@ const Carrito = () => {
   };
 
   const checkOutClick = async () => {
-    try {
-      //   const updateQuantity = await Promise.all(
-      //     cartItems.map(async (item) => {
-      //       await axios.put(
-      //         `http://localhost:8080/api/orderproducts/update/${item.id}`,
-      //         {
-      //           quantity: item.quantity,
-      //         },
-      //         {
-      //           headers: { 'Authorization': `Bearer ${token}` },
-      //         }
-      //       );
-      //     })
-      //   );
+    //   const updateQuantity = await Promise.all(
+    //     cartItems.map(async (item) => {
+    //       await axios.put(
+    //         `http://localhost:8080/api/orderproducts/update/${item.id}`,
+    //         {
+    //           quantity: item.quantity,
+    //         },
+    //         {
+    //           headers: { Authorization: `Bearer ${token}` },
+    //         }
+    //       );
+    //     })
+    //   );
 
-      const existBO = await axios.get(
-        "http://localhost:8080/api/buyorder/client/pending",
+    try {
+
+
+
+        const aux =[...cartItems]
+
+
+      const response = await axios.post(
+        "http://localhost:8080/api/buyorder/create",
+        aux,
         {
           headers: { Authorization: `Bearer ${token}` },
+   
         }
       );
 
-      if (existBO.status == 200) {
-        const rta = await axios.put(
-          "http://localhost:8080/api/buyorder/modify",
-          null,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        if (rta.status === 200) {
-          navigate("/payment");
-          console.log(rta.data);
-        }
-      } else {
-        const response = await axios.post(
-          "http://localhost:8080/api/buyorder/create",
-          null,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        if (response.status === 200) {
-          navigate("/payment");
-          console.log(response.data);
-        }
+      if (response.status === 200) {
+        navigate("/payment");
+        console.log(response.data);
       }
     } catch (error) {
       console.log(error);

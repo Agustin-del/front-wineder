@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Modal } from 'flowbite-react';
+
 
 const CartsWines = ({ bgColor, ...props }) => {
     const [isGreen, setIsGreen] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
 
     switch (bgColor) {
         case 'WHITE':
@@ -64,6 +67,7 @@ const CartsWines = ({ bgColor, ...props }) => {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 
