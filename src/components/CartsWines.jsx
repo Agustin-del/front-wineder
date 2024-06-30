@@ -23,8 +23,7 @@ const CartsWines = ({ bgColor, ...props }) => {
             break;
         case 'SPARKLING':
             bgColor = "bg-[#A39D92]";
-        default:
-            bgColor = "";
+       
     }
     const role = useSelector(store => store.roleReducer.role)
 
@@ -70,13 +69,13 @@ const CartsWines = ({ bgColor, ...props }) => {
             </div>
         </Modal>
         }
-        <div className={` relative group cursor-pointer overflow-hidden duration-500 w-64 h-64 ${bgColor} text-gray-50 p-5` }>
+        <div className={` relative group cursor-pointer overflow-hidden duration-500 w-64 h-64 ${bgColor} text-black rounded-lg p-5` }>
             <div>
                 <div className="group-hover:scale-110 w-[30%] flex justify-center h-60  duration-500" >
                     <img src={props.image} alt="wine bottle" className='w-full h-full object-cover ml-[150px]' />
                 </div>
                 <div className="absolute w-56 left-0 p-5 my-4 -bottom-20 duration-500 group-hover:-translate-y-12">
-                    <div className="absolute -z-10 left-0 w-64 h-48 opacity-0 duration-500 group-hover:opacity-50 group-hover:bg-[#1b1213]"></div>
+                    <div className="absolute -z-10 left-0 w-64 h-48 opacity-5 duration-500 group-hover:opacity-50 group-hover:bg-[#1b1213]"></div>
                     <span className="text-xl font-bold">{props.name}</span>
                     <h3>{props.winery}</h3>
                     <p className='mb-3'>{formatter.format(props.price)}</p>

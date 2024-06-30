@@ -30,6 +30,7 @@ const Wines = () => {
             setVarietals(uniqueVarietals)
             setRegions(uniqueRegions)
             setWineTypes(uniqueWineTypes)
+            console.log(uniqueWineTypes);
             setProviders(uniqueProviders)
         } catch (error) {
             console.error(error)
