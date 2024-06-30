@@ -6,6 +6,7 @@ import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const Carrito = () => {
+
   const token = useSelector((store) => store.authReducer.token);
 
   const [loading, setLoading] = useState(true);
@@ -47,6 +48,7 @@ const Carrito = () => {
         "http://localhost:8080/api/orderproducts/client/wishlist",
         {
           headers: { Authorization: `Bearer ${token}` },
+
         }
       );
 
@@ -128,6 +130,7 @@ const Carrito = () => {
       console.log(response.data);
       if (cartItems.length === 1) {
         setCartItems([]);
+
       }
       const updateCart = cartItems.filter((item) => item.id !== id);
       setCartItems(updateCart);
@@ -154,6 +157,7 @@ const Carrito = () => {
         },
         {
           headers: { Authorization: `Bearer ${token}` },
+
         }
       );
 
