@@ -30,6 +30,7 @@ const Wines = () => {
             setVarietals(uniqueVarietals)
             setRegions(uniqueRegions)
             setWineTypes(uniqueWineTypes)
+            console.log(uniqueWineTypes);
             setProviders(uniqueProviders)
         } catch (error) {
             console.error(error)
@@ -44,7 +45,7 @@ const Wines = () => {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
-        }, 2000);
+        }, 6000);
 
     }, []);
 
@@ -107,7 +108,7 @@ const Wines = () => {
                     {filteredWines.map(wine => {
                         if (wine.wineDescription !== null) {
                             return <div className=" w-full flex justify-center mb-2 md:flex-row md:w-[30%]  ">
-                                <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image='./assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
+                                <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image={wine.image} bgColor={wine.wineDescription.wineType}></CartsWines>
                             </div> 
                         }
                     })}

@@ -318,12 +318,12 @@ const WineIncome2 = () => {
                   </div>
                 </>
               )}
-              <div className="lg:flex lg:flex-wrap">
+              <div className="lg:flex lg:flex-col lg:w-full m-5">
                 {/*  TRABAJO IMAGENES PARA UPLOAD */}
 
-                <input type="file" onChange={handleFileChange} />
+                <input type="file" className="mb-5" onChange={handleFileChange} />
 
-                <div className=" lg:w-[1000px] flex justify-end bg-gray-100 px-6 py-4">
+                <div className="  lg:w-col lg:w-[100%] flex justify-end bg-gray-100 px-6 py-4">
                   <button
                     type="submit"
                     className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none"
