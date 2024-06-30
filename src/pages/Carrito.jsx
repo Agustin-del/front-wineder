@@ -206,7 +206,7 @@ const Carrito = () => {
                         </div>
                     </div>
                     <div className="bg-violet-300  p-5 w-full flex flex-col" >
-                        <h3 className="text-xl font-semibold text-gray-800 mb-6">Your Wishlist</h3>
+                        <h3 className=" w-full text-xl font-semibold text-gray-800 mb-6">Your Wishlist</h3>
                         {wishlist.length === 0 ? (<div> Nothing in your wishlist yet !! </div>) : (<div className='flex flex-col gap-3 items-center'>
                             {wishlist.map((product) => (
                                 <div key={product.id} className='border-2 p-2 rounded-lg flex flex-row gap-3 items-center'>
