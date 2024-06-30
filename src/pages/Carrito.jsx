@@ -18,6 +18,8 @@ const Carrito = () => {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 setCartItems(response.data);
+                console.log(response.data);
+                console.log("cartItems", cartItems);
             } catch (error) {
                 console.error('Error fetching products:', error.response.data);
             }
@@ -28,6 +30,7 @@ const Carrito = () => {
         fetchData();
 
     }, []);
+
 
     useEffect(() => {
         const fetchWishlist = async () => {
@@ -112,6 +115,7 @@ const Carrito = () => {
             }, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
+            console.log(response.data);
 
             // Remove the item from the wishlist
             const updatedWishlist = wishlist.filter(item => item.id !== id);
