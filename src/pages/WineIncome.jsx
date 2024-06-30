@@ -11,6 +11,9 @@ const WineIncome = () => {
     const [providers, setProviders] = useState([])
     const [alert, setAlert] = useState({})
     const token = useSelector(store => store.authReducer.token)
+    
+    const [selectedFile, setSelectedFile] = useState(null);
+    
     const [formData, setFormData] = useState({
         name: '',
         stock: '',
@@ -24,6 +27,7 @@ const WineIncome = () => {
         companyName: ''
 
     })
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -59,13 +63,26 @@ const WineIncome = () => {
         })
     }
 
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+    };
+
+
+
     const handleSubmit = async (e) => {
+        
         e.preventDefault()
+        
+        
+        console.log(selectedFile)
+
         const formatData = new FormData()
-        formatData.append('text', formData)
-        console.log(formatData)
+        formatData.append('product', formData)
+        formatData.append('file', selectedFile)
+
+
         try {
-            const response = await axios.post('http://localhost:8080/api/products/create', formData, {
+            const response = await axios.post('http://localhost:8080/api/products/create', formatData,  {
                 headers: {
                     Authorization: `bearer ${token}`
                 }
@@ -203,7 +220,16 @@ const WineIncome = () => {
 
                                 </>}
                         <div className="lg:flex lg:flex-wrap"> 
-                            <UploadImage/>
+                            
+{/*  TRABAJO IMAGENES PARA UPLOAD */}
+                           
+
+                             <input type="file" onChange={handleFileChange} />
+                            
+
+
+                      
+{/* <UploadImage/> */}
                             <div className=" lg:w-[1000px] flex justify-end bg-gray-100 px-6 py-4">
                                 <button type="submit"
                                 className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none">Submit</button>
