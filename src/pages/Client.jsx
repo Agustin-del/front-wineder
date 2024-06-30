@@ -50,6 +50,12 @@ const Client = () => {
 
 }, []);
 
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD'
+});
+
+
   return (
     
     <div>
@@ -58,25 +64,30 @@ const Client = () => {
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
                 </div>) : (<>
 
-      <h2 className='text-3xl text-center lg:text-5xl lg:mt-5'><strong>Welcome {client.name} {client.lastName}!</strong></h2>
-      {/*        
-        <section className="my-5">
-                    <div className="flex justify-center">
-                        <video className="w-[90%] max-w-xl" autoPlay loop muted>
-                            <source src="./assets/videoSirviendoCopa.mp4" type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </section> */}
-
+      <h2 className='text-3xl text-center lg:text-5xl mt-5 lg:mt-10'><strong>Welcome {client.name} {client.lastName}!</strong></h2>
+    
       <div>
 
       <h3 className='text-2xl text-center pt-5 lg:text-3xl italic'>Recent Purchases</h3>
       <section className='flex flex-wrap justify-center gap-5 my-5 relative z-10'>
-        <CartsWines bgColor="RED" image="/assets/vino-tinto.png" name="Wine name" price="100.00" />
-        <CartsWines bgColor="PINK" image="/assets/vino-rosado.png" name="Wine name" price="100.00" />
-        <CartsWines bgColor="WHITE" image="/assets/vino-blanco.png" name="Wine name" price="100.00" />
-        <CartsWines bgColor="PINK" image="/assets/vino-rosado.png" name="Wine name" price="100.00" />
+      <table className='table-auto border-2 border-black w-[80%] md:w-[60%] shadow-lg'>
+  <thead className='bg-gray-200'>
+    <tr>
+      <th className='px-4 py-2 border-b-2 border-gray-300 text-center font-semibold text-black'>Order Number</th>
+      <th className='px-4 py-2 border-b-2 border-gray-300 text-center font-semibold text-black'>Total Amount</th>
+      <th className='px-4 py-2 border-b-2 border-gray-300 text-center font-semibold text-black'>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {buyOrders.map((buyOrder) => (
+      <tr key={buyOrder.id} className='hover:bg-gray-100'>
+        <td className='px-4 py-2 border-b text-center text-gray-800'>{buyOrder.orderNumber}</td>
+        <td className='px-4 py-2 border-b text-center text-gray-800'>{formatter.format(buyOrder.totalAmount)}</td>
+        <td className='px-4 py-2 border-b text-center text-gray-800'>{buyOrder.orderDate}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
 
       </section>
 
