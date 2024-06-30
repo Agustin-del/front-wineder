@@ -36,7 +36,6 @@ function PaymentMethods() {
     try {
       const resp = await axios.get(
         "http://localhost:8080/api/buyorder/client/pending",
-        [],
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -66,12 +65,7 @@ function PaymentMethods() {
         data
       );
 
-
-
-
       navigate("/home");
-
-
     } catch (error) {
       console.log("jhgxdh");
     }
