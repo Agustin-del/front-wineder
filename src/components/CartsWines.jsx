@@ -18,7 +18,7 @@ const CartsWines = ({ bgColor, ...props }) => {
             bgColor = "bg-[#D4B891]";
             break;
         case 'RED':
-            bgColor = "bg-[#5e2a30]";
+            bgColor = "bg-[#8f585d]";
             break;
         case 'PINK':
             bgColor = "bg-[#DCC8C9]";
@@ -79,7 +79,7 @@ const CartsWines = ({ bgColor, ...props }) => {
                 </Modal>
             }
 
-            <div className={`w-60 h-[350px] bg-white p-3 flex flex-col gap-1 border-gray-400 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] border-2 rounded-lg group hover:scale-105 duration-500 ${bgColor}`}>
+            <div className={`w-60 h-[350px] bg-white p-3 flex flex-col gap-1 border-gray-400 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] border-2 rounded-lg group hover:scale-105 duration-500 `}>
                 <div className={`duration-500 contrast-30 h-48 ${bgColor} hover:contrast-100 flex items-center justify-center`}>
                     <img className='w-full h-full object-cover' src={props.image ? props.image : '/assets/vinoGenerico.png'} alt="wine bottle" />
                 </div>
@@ -88,7 +88,7 @@ const CartsWines = ({ bgColor, ...props }) => {
                         <span className={`font-bold text-xl text-[#73383E]`}>{formatter.format(props.price)}</span>
                         <div className={`flex flex-col`}>
                             <span className={`text-sm font-bold`}>{props.name}</span>
-                            <p>{props.provider}</p>
+                            <p>{props.provider }</p>
                         </div>
                     </div>
                     <div className="flex justify-between text-center" >
