@@ -106,14 +106,15 @@ const RegisterClient = () => {
                 <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
                 </div>) : (
-                <div className="w-full max-w-md mx-auto mt-5">
-                    <div className="bg-white  rounded px-8 pt-6 pb-8 mb-4 shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
-                        <h2 className="text-2xl font-bold text-center mb-6">Register </h2>
-                        <form onSubmit={handleSubmit}>
-                            <div className="lg:flex lg:gap-2">
+                <div className="w-full max-w-md mx-auto mt-5 text-white " >
+                    <div style={{ backgroundImage: `url('/assets/fondoRegister.jpg')` }} className="shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] mx-2 bg-cover object-cover bg-center lg:h-[550px]  rounded-lg px-8 pt-6 pb-8 mb-4 ">
+                       
+                        <form onSubmit={handleSubmit} className='bg-black  bg-opacity-85 p-5 rounded-lg' >
+                        <h2 className="text-2xl lg:text-4xl font-bold text-center mb-6">Register </h2>
+                            <div className="lg:flex lg:gap-2  " >
 
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
+                                <div className="mb-4 ">
+                                    <label className="block text-white text-sm font-bold mb-2" htmlFor="firstName">
                                         First Name
                                     </label>
                                     <input
@@ -128,7 +129,7 @@ const RegisterClient = () => {
                                     {errors.firstName && <p className="text-red-500 text-xs italic">{errors.firstName}</p>}
                                 </div>
                                 <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
+                                    <label className="block text-white text-sm font-bold mb-2" htmlFor="lastName">
                                         Last Name
                                     </label>
                                     <input
@@ -144,7 +145,7 @@ const RegisterClient = () => {
                                 </div>
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                                <label className="block text-white text-sm font-bold mb-2" htmlFor="email">
                                     Email
                                 </label>
                                 <input
@@ -160,7 +161,7 @@ const RegisterClient = () => {
                             </div>
                             <div className="mb-4">
                                 <div className="flex flex-col gap-2">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                                    <label className="block text-white text-sm font-bold mb-2" htmlFor="password">
                                         Password
                                     </label>
                                     <input
@@ -180,7 +181,7 @@ const RegisterClient = () => {
                             </div>
 
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
+                                <label className="block text-white text-sm font-bold mb-2" htmlFor="address">
                                     Address
                                 </label>
                                 <input

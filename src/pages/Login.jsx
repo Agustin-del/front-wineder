@@ -93,7 +93,7 @@ const Login = () => {
                     <div className='relative w-[80%] md:w-[40%] lg:w-[30%]  my-5'>                        
                         <img className='rounded-xl shadow-md filter blur-[1px] lg:h-[500px] ' src="./assets/login.jpg" alt="" />
                     </div>
-                    <div className="w-full max-w-xs mt-5 absolute z-20 md:w-[30%] lg:w-[20%] lg:mr-[5%]">
+                    <div className="w-full max-w-xs mt-5 absolute z-20 md:w-[30%] lg:w-[20%] lg:mr-[7.5%]">
                         <h2 className='text-6xl text-center mb-10 text-white'><strong>Login</strong></h2>
                         <form className="bg-white bg-opacity-70 shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
                             <div className="mb-4">
