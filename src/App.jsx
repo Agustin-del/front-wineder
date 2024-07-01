@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 import Contenedor from './layouts/Contenedor';
@@ -16,6 +17,9 @@ import Admin from './pages/Admin'
 import Client from './pages/Client';
 import WinesType from './pages/WinesType';
 import PaymentMethods from './pages/PaymentMethods';
+
+
+
 
 function App() {
   return (
