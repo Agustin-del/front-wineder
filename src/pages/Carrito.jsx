@@ -17,47 +17,49 @@ const Carrito = () => {
 
     useEffect(() => {
         fetchData();
+
         setLoading(false);
     }, []);
 
-    useEffect(() => {
-        fetchWishlist();
-        console.log(wishlist);
-        console.log(cartItems);
-    }, [cartItems]);
+    // useEffect(() => {
+    //     fetchWishlist();
+
+    //     console.log(cartItems);
+    // }, [cartItems]);
 
     const fetchData = async () => {
         try {
             const response = await axios.get(
-                "http://localhost:8080/api/orderproducts/client/all",
+                "http://localhost:8080/api/buyorder/client/pending",
                 {
                     headers: { 'Authorization': `Bearer ${token}` },
                 }
             );
 
-            const aux = response.data;
+            const aux = response.data.orderProducts;
+            console.log(response.data)
             setCartItems(aux);
         } catch (error) {
             console.error("Error fetching products:", error.response.data);
         }
     };
 
-    const fetchWishlist = async () => {
-        try {
-            const responseW = await axios.get(
-                "http://localhost:8080/api/orderproducts/client/wishlist",
-                {
-                    headers: { 'Authorization': `Bearer ${token}` },
+    // const fetchWishlist = async () => {
+    //     try {
+    //         const responseW = await axios.get(
+    //             "http://localhost:8080/api/orderproducts/client/wishlist",
+    //             {
+    //                 headers: { 'Authorization': `Bearer ${token}` },
 
-                }
-            );
+    //             }
+    //         );
 
-            const aux = responseW.data;
-            setWishlist(aux);
-        } catch (error) {
-            console.log("There is no wishlist", error);
-        }
-    };
+    //         const aux = responseW.data;
+    //         setWishlist(aux);
+    //     } catch (error) {
+    //         console.log("There is no wishlist", error);
+    //     }
+    // };
 
     const handleQuantityChange = async (id, delta) => {
         try {
@@ -145,59 +147,42 @@ const Carrito = () => {
      * Handle click on the "Add to Cart" button
      * Removes the item from the wishlist and updates the cartItems state
      */
-    const handleClickCart = async (id) => {
-        try {
-            // Get the item from the wishlist and update its quantity in the orderProducts collection
-            const itemToAdd = wishlist.find((item) => item.id === id);
+    // const handleClickCart = async (id) => {
+    //     try {
+    //         // Get the item from the wishlist and update its quantity in the orderProducts collection
+    //         const itemToAdd = wishlist.find((item) => item.id === id);
 
-            const response = await axios.put(
-                `http://localhost:8080/api/orderproducts/updatetrue/${id}`,
-                {
-                    quantity: itemToAdd.quantity,
-                },
-                {
-                    headers: { 'Authorization': `Bearer ${token}` },
+    //         const response = await axios.put(
+    //             `http://localhost:8080/api/orderproducts/updatetrue/${id}`,
+    //             {
+    //                 quantity: itemToAdd.quantity,
+    //             },
+    //             {
+    //                 headers: { 'Authorization': `Bearer ${token}` },
 
-                }
-            );
+    //             }
+    //         );
 
-            // Remove the item from the wishlist
-            const updatedWishlist = wishlist.filter((item) => item.id !== id);
-            setWishlist(updatedWishlist);
+    //         // Remove the item from the wishlist
+    //         const updatedWishlist = wishlist.filter((item) => item.id !== id);
+    //         setWishlist(updatedWishlist);
 
-            // Add the item to the cart
-            const updatedCartItems = [...cartItems, itemToAdd];
-            setCartItems(updatedCartItems);
-            console.log(cartItems);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    //         // Add the item to the cart
+    //         const updatedCartItems = [...cartItems, itemToAdd];
+    //         setCartItems(updatedCartItems);
+    //         console.log(cartItems);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
 
     const checkOutClick = async () => {
-        //   const updateQuantity = await Promise.all(
-        //     cartItems.map(async (item) => {
-        //       await axios.put(
-        //         `http://localhost:8080/api/orderproducts/update/${item.id}`,
-        //         {
-        //           quantity: item.quantity,
-        //         },
-        //         {
-        //           headers: { 'Authorization': `Bearer ${token}` },
-        //         }
-        //       );
-        //     })
-        //   );
 
         try {
-
-
-
             const aux = [...cartItems]
 
-
             const response = await axios.post(
-                "http://localhost:8080/api/buyorder/create",
+                "http://localhost:8080/api/buyorder/modify",
                 aux,
                 {
                     headers: { 'Authorization': `Bearer ${token}` },
