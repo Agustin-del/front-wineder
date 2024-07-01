@@ -45,7 +45,7 @@ const Login = () => {
         }
         try {
             const response = await axios.post('http://localhost:8080/api/auth/login', requestBody)
-            
+
             dispatch(login(response.data))
 
             const current = await axios.get('http://localhost:8080/api/auth/current', {
@@ -89,16 +89,16 @@ const Login = () => {
                 </div>) : (
 
 
-                <div className="flex items-center justify-center  bg-gray-100">
-                    <div className=' w-[80%] md:w-[50%] lg:w-[30%] my-5'>
-                        <img className='rounded-xl' src="./assets/login.jpg" alt="" />
+                <div className="flex items-center justify-center bg-red-100 relative ">
+                    <div className='relative w-[80%] md:w-[40%] lg:w-[30%]  my-5'>                        
+                        <img className='rounded-xl shadow-md filter blur-[1px] lg:h-[500px] ' src="./assets/login.jpg" alt="" />
                     </div>
-                    <div className="w-full max-w-xs mt-5 absolute">
-                        <h2 className='text-5xl text-center mb-10'>Login</h2>
-                        <form className="bg-white bg-opacity-70 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    <div className="w-full max-w-xs mt-5 absolute z-20 md:w-[30%] lg:w-[20%] lg:mr-[5%]">
+                        <h2 className='text-6xl text-center mb-10 text-white'><strong>Login</strong></h2>
+                        <form className="bg-white bg-opacity-70 shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
                             <div className="mb-4">
                                 <label className="block text-black text-sm font-bold mb-2" htmlFor="username">
-                                   <strong> Username </strong>
+                                    <strong>Username</strong>
                                 </label>
                                 <input
                                     type="text"
@@ -111,7 +111,7 @@ const Login = () => {
                             </div>
                             <div className="mb-6">
                                 <label className="block text-black text-sm font-bold mb-2" htmlFor="password">
-                                    <strong> Password </strong>
+                                    <strong>Password</strong>
                                 </label>
                                 <input
                                     type="password"
@@ -123,18 +123,20 @@ const Login = () => {
                                 />
                                 {alert && <Alert color={alert.type}>{alert.message}</Alert>}
                             </div>
-                            <div className="flex items-center justify-between ">
+                            <div className="flex items-center justify-between">
                                 <button onClick={handleLogin}
                                     type="submit"
                                     className="bg-[#5e2a30] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 >
                                     Login
                                 </button>
-                                {/* <GoogleLogin/>    */}
+                                {/* <GoogleLogin/> */}
                             </div>
                         </form>
                     </div>
-                </div>)}
+                </div>
+
+            )}
         </div>
     );
 };

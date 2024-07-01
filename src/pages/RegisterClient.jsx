@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Alert } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
@@ -28,7 +28,7 @@ const RegisterClient = () => {
             [name]: value
         });
     };
-   
+
 
     const validate = () => {
         let tempErrors = {};
@@ -47,21 +47,21 @@ const RegisterClient = () => {
         e.preventDefault();
         validate()
         const requestBody = {
-            email:form.email,
-            password:form.password,
-            name:form.firstName,
-            lastName:form.lastName,
-            address:form.address
+            email: form.email,
+            password: form.password,
+            name: form.firstName,
+            lastName: form.lastName,
+            address: form.address
         }
         try {
             const response = await axios.post("http://localhost:8080/api/auth/register/client", requestBody)
-            
+
             setAlert({ type: 'success', message: 'Registration successful' })
-            setTimeout (async () => {
+            setTimeout(async () => {
                 try {
                     const loginResponse = await axios.post("http://localhost:8080/api/auth/login", {
-                        email:form.email,
-                        password:form.password
+                        email: form.email,
+                        password: form.password
                     })
                     dispatch(login(loginResponse.data))
                     setTimeout(async () => {
@@ -74,7 +74,7 @@ const RegisterClient = () => {
                         if (currentResponse.data.role === "admin") {
                             navigate('/admin')
                         }
-            
+
                         if (currentResponse.data.role === "client") {
                             navigate('/')
                         }
@@ -85,7 +85,7 @@ const RegisterClient = () => {
             }, 1000)
 
         } catch (e) {
-            setAlert({type:"failure", message: e.response.data})
+            setAlert({ type: "failure", message: e.response.data })
             setTimeout(() => {
                 setAlert(null)
             }, 1500)
@@ -101,113 +101,113 @@ const RegisterClient = () => {
     }, []);
 
     return (
-        <div className="flex items-center justify-center ">
-             {loading ? (
+        <div className="flex items-center justify-center bg-[#FDE8E8] ">
+            {loading ? (
                 <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
                 </div>) : (
-            <div className="w-full max-w-md mx-auto">
-                <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <h2 className="text-2xl font-bold text-center mb-6">Register </h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="lg:flex lg:gap-2">
+                <div className="w-full max-w-md mx-auto mt-5">
+                    <div className="bg-white  rounded px-8 pt-6 pb-8 mb-4 shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
+                        <h2 className="text-2xl font-bold text-center mb-6">Register </h2>
+                        <form onSubmit={handleSubmit}>
+                            <div className="lg:flex lg:gap-2">
 
-                        <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
-                                First Name
-                            </label>
-                            <input
-                                type="text"
-                                id="firstName"
-                                name="firstName"
-                                value={form.firstName}
-                                onChange={handleChange}
-                                className="shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="First Name"
-                            />
-                            {errors.firstName && <p className="text-red-500 text-xs italic">{errors.firstName}</p>}
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
-                                Last Name
-                            </label>
-                            <input
-                                type="text"
-                                id="lastName"
-                                name="lastName"
-                                value={form.lastName}
-                                onChange={handleChange}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Last Name"
-                            />
-                            {errors.lastName && <p className="text-red-500 text-xs italic">{errors.lastName}</p>}
-                        </div>
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={form.email}
-                                onChange={handleChange}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Email"
-                            />
-                            {errors.email && <p className="text-red-500 text-xs italic">{errors.email}</p>}
-                        </div>
-                        <div className="mb-4">
-                            <div className="flex flex-col gap-2">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                                    Password
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
+                                        First Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="firstName"
+                                        name="firstName"
+                                        value={form.firstName}
+                                        onChange={handleChange}
+                                        className="shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder="First Name"
+                                    />
+                                    {errors.firstName && <p className="text-red-500 text-xs italic">{errors.firstName}</p>}
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
+                                        Last Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="lastName"
+                                        name="lastName"
+                                        value={form.lastName}
+                                        onChange={handleChange}
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder="Last Name"
+                                    />
+                                    {errors.lastName && <p className="text-red-500 text-xs italic">{errors.lastName}</p>}
+                                </div>
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                                    Email
                                 </label>
                                 <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    value={form.password}
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={form.email}
                                     onChange={handleChange}
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    placeholder="Password"
+                                    placeholder="Email"
                                 />
-                                {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
+                                {errors.email && <p className="text-red-500 text-xs italic">{errors.email}</p>}
                             </div>
-                            <div>
-                                <p className="text-xs font-bold">The password must have a number, an uppercase letter, a lowercase letter and eight characters.</p>
+                            <div className="mb-4">
+                                <div className="flex flex-col gap-2">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                                        Password
+                                    </label>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        value={form.password}
+                                        onChange={handleChange}
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder="Password"
+                                    />
+                                    {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
+                                </div>
+                                <div>
+                                    <p className="text-xs font-bold">The password must have a number, an uppercase letter, a lowercase letter and eight characters.</p>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
-                                Address
-                            </label>
-                            <input
-                                type="text"
-                                id="address"
-                                name="address"
-                                value={form.address}
-                                onChange={handleChange}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="La paz 1545"
-                            />
-                            {errors.address && <p className="text-red-500 text-xs italic">{errors.address}</p>}
-                            
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <button
-                                type="submit"
-                                className="bg-[#5e2a30] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            >
-                                Register
-                            </button>
-                            {alert && <Alert color={alert.type}>{alert.message}</Alert>}
-                        </div>
-                    </form>
+
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
+                                    Address
+                                </label>
+                                <input
+                                    type="text"
+                                    id="address"
+                                    name="address"
+                                    value={form.address}
+                                    onChange={handleChange}
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    placeholder="La paz 1545"
+                                />
+                                {errors.address && <p className="text-red-500 text-xs italic">{errors.address}</p>}
+
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <button
+                                    type="submit"
+                                    className="bg-[#5e2a30] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                >
+                                    Register
+                                </button>
+                                {alert && <Alert color={alert.type}>{alert.message}</Alert>}
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-                )}
+            )}
         </div>
     );
 };

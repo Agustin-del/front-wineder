@@ -1,70 +1,47 @@
-import React from 'react'
+import React from 'react';
 
-const formatter = new Intl.NumberFormat('en-US', {
+const TablaProductAdmin = ({ name, col1, col2, col3, col4, data,img }) => {
+  const formatField = (field, value) => {
+    if (field.toLowerCase().includes('price') && typeof value === 'number') {
+      return formatter.format(value);
+    }
+    return value;
+  };
+
+  const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD'
-});
+  });
 
-const TablaProductAdmin = ({ name, col1, col2, col3, col4, data }) => {
-    const formatField = (field, value) => {
-        if (field.toLowerCase().includes('price') && typeof value === 'number') {
-            return formatter.format(value);
-        }
-        return value;
-    };
+  return (
+    <div className='p-5'>
+      <table className='w-full text-left p-5 bg-white shadow-md rounded-lg overflow-hidden text-black'>
+        <thead className='bg-gray-200'>
+          <tr>
+          <th className='py-3 px-4 border-b'>{img}</th>
+            <th className='py-3 px-4 border-b'>{name}</th>
+            <th className='py-3 px-4 border-b'>{col1}</th>
+            <th className='py-3 px-4 border-b text-right'>{col2}</th>
+            <th className='py-3 px-4 border-b text-right'>{col3}</th>
+            <th className='py-3 px-4 border-b'>{col4}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr key={index} className='hover:bg-gray-100'>
+                <td className='py-3 px-4 border-b'>
+              <img src={item.image ? item.image : '/assets/vinoGenerico.png'} alt={item.name} className="w-10 h-10" />
+            </td>
+              <td className='py-3 px-4 border-b lg:w-[250px]'>{formatField('name', item.name)}</td>
+              <td className='py-3 px-4 border-b'>{formatField('provider', item.provider)}</td>
+              <td className='py-3 px-4 border-b text-right'>{formatField('price', item.price)}</td>
+              <td className='py-3 px-4 border-b text-right'>{formatField('stock', item.stock)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
-    const getAlignmentClass = (value) => {
-        return typeof value === 'number' ? 'text-right' : 'text-left';
-    };
-
-    return (
-        <div>
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" className="px-6 py-3">
-                                {name}
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                {col1}
-                            </th>
-                            <th scope="col" className="px-1 py-3">
-                                {col2}
-                            </th>
-                            <th scope="col" className="px-1 py-3">
-                                {col3}
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                {col4}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        {data.map((item, index) => (
-                            <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {item.name || item.id}
-                                </th>
-                                <td className={` ${getAlignmentClass(item.provider || item.lastName || item.active)}`}>
-                                    {item.provider || item.lastName || item.active}
-                                </td>
-                                <td className={`w-[72px] px-6  ${getAlignmentClass(item.price || item.address || item.productName)}`}>
-                                    {formatField(col2, item.price) || item.address || item.productName}
-                                </td>
-                                <td className={`w-[72px] ${getAlignmentClass(item.stock || item.quantity)}`}>
-                                    {item.stock || item.quantity}
-                                </td>
-                                <td className={` ${getAlignmentClass(item.provider || '')}`}>
-                                    {item.provider || ''}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    )
-}
-
-export default TablaProductAdmin
+export default TablaProductAdmin;
