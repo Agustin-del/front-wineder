@@ -123,24 +123,23 @@ const Carrito = () => {
 
     const deleteOrderProduct = async (id) => {
         try {
-            const response = await axios.delete(
-                `http://localhost:8080/api/orderproducts/delete/${id}`,
-                {
-                    headers: { 'Authorization': `Bearer ${token}` },
-                }
+            setCartItems(
+                cartItems.map((item) => {
+                    if (item.id === id) {
+                        const newQuantity = 0;
+                        return { ...item, quantity: newQuantity };
+                    } else {
+                        return item;
+                    }
+                })
             );
-            console.log(response.data);
-            if (cartItems.length === 1) {
-                setCartItems([]);
 
-            }
-            const updateCart = cartItems.filter((item) => item.id !== id);
-            setCartItems(updateCart);
 
-            console.log(cartItems);
         } catch (error) {
             console.log(error);
         }
+
+
     };
 
     /**
@@ -222,7 +221,7 @@ const Carrito = () => {
                                 cartItems.map((item) => (
                                     <div
                                         key={item.id}
-                                        className="flex items-center justify-between border-b border-gray-200 py-4"
+                                        className={item.quantity > 0 ? "flex items-center justify-between border-b border-gray-200 py-4" : "hidden"}
                                     >
                                         <div className="flex items-center space-x-8">
                                             <img
@@ -360,8 +359,9 @@ const Carrito = () => {
                         )}
                     </div>
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 };
 
