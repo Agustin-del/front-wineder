@@ -5,10 +5,11 @@ import { useSelector } from 'react-redux'
 import { Modal } from "flowbite-react";
 
 //Componente que tiene la img del vino y el boton de agregar al carrito
-const CardWineDetails = ({ rating, id }) => {
+const CardWineDetails = ({ rating, id, image }) => {
     const [openModal, setOpenModal] = useState (false)
     const token = useSelector(store => store.authReducer.token)
     
+
     const addProductToCart = async () => {
         try {
             const response = await axios.post(`http://localhost:8080/api/orderproducts/create/${id}`, null, {
@@ -30,7 +31,7 @@ const CardWineDetails = ({ rating, id }) => {
     return (
         <div className='flex flex-row items-center justify-around py-5 border-2 lg:w-[60%] rounded-lg w-full bg-[#E5D1D2] md:justify-center md:w-[80%]'>
             <section className='w-[20%] '   >
-                <img src="/assets/vino-tinto.png" alt="Slide 1" />
+                <img src={image ? image : "/assets/vinoGenerico.png"} alt="Slide 1" />
             </section>
             <div className='flex flex-col gap-2'>
 

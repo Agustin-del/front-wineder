@@ -16,6 +16,7 @@ const WinesType = () => {
     try {
       const response = await axios.get('http://localhost:8080/api/products/all');
       const filteredWines = response.data.filter(wine => wine.wineDescription !== null && wine.wineDescription.wineType === type);
+      console.log(filteredWines)
       setWineType(filteredWines);
     } catch (error) {
       console.log(error);
@@ -40,7 +41,7 @@ const WinesType = () => {
       <h2 className='text-2xl text-center lg:text-4xl lg:my-5'>WinesType - {type}</h2>
       <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10  lg:mx-6'>
         {wineType.map(wine => (
-         <CartsWines key={wine.id} id= {wine.id} name = {wine.name} price ={wine.price} winery={wine.provider} image='/assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
+         <CartsWines key={wine.id} id= {wine.id} name = {wine.name} price ={wine.price} winery={wine.provider} image = {wine.image} bgColor={wine.wineDescription.wineType}></CartsWines>
         ))}
       </div>
     </div>)}
