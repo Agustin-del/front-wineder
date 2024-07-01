@@ -18,7 +18,7 @@ const Wines = () => {
     const [selectedRegion, setSelectedRegion] = useState('')
     const [selectedWineType, setSelectedWineType] = useState('')
     const [selectedProvider, setSelectedProvider] = useState('')
-
+    console.log(wines)
     const getWines = async () => {
         try {
             const response = await axios.get("http://localhost:8080/api/products/all")
@@ -107,7 +107,7 @@ const Wines = () => {
                     {filteredWines.map(wine => {
                         if (wine.wineDescription !== null) {
                             return <div className=" w-full flex justify-center mb-2 md:flex-row md:w-[30%]  ">
-                                <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image='./assets/vino-tinto.png' bgColor={wine.wineDescription.wineType}></CartsWines>
+                                <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image={wine.image} bgColor={wine.wineDescription.wineType}></CartsWines>
                             </div> 
                         }
                     })}
