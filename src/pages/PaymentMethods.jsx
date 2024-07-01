@@ -328,6 +328,6 @@ function PaymentMethods() {
       )}
     </body>
   );
-}
+};
 
 export default PaymentMethods;
