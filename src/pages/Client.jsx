@@ -1,6 +1,5 @@
 import React from 'react'
-import TextWineDetails from '../components/TextWineDetails'
-import CartsWines from '../components/CartsWines'
+
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -8,42 +7,35 @@ import { useEffect, useState } from 'react';
 const Client = () => {
   const [client, setClient] = useState([])
   const [buyOrders, setBuyOrders] = useState([])
-  const [buyOrdersProducts, setBuyOrdersProducts] = useState([])
   const token = useSelector(store => store.authReducer.token)
   const role = useSelector(store => store.roleReducer.role)
   const [loading, setLoading] = useState(true);
-
-
+  
+  const calculateTotal = (items) => {
+    return items.reduce((total, item) => total + item.quantity * item.price, 0);
+  };
+  
   const getData = async () => {
     try {
       const response = await axios.get('http://localhost:8080/api/auth/current',
         { headers: { 'Authorization': `Bearer ${token}` } });
-
-      setClient(response.data)
-      console.log(response.data);
+        setClient(response.data)
     }
     catch (error) {
-      console.log(error)
+      console.error(error)
     }
     setLoading(false)
   }
+
   const getBuyOrders = async () => {
     try {
       const response = await axios.get('http://localhost:8080/api/buyorder/client/all', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setBuyOrders(response.data);
-      console.log(response.data);
-
-      const buyOrdersProducts = await axios.get('http://localhost:8080/api/buyorder/client/pending', {
-        headers: { 'Authorization': `Bearer ${token}` }
-
-      })
-      setBuyOrdersProducts(buyOrdersProducts.data)
-      console.log(buyOrdersProducts.data);
-
     } catch (error) {
-      console.error('Error fetching products:', error.response.data);
+      console.log(error)
+      // console.log('Error fetching products:', error.response.data);
     }
     setLoading(false);
   };
@@ -51,7 +43,7 @@ const Client = () => {
   useEffect(() => {
     getData();
     getBuyOrders();
-  }, [token]);
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -59,13 +51,13 @@ const Client = () => {
     }, 2000);
 
   }, []);
-
+  
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD'
   });
-
-
+  
+  
   return (
 
     <div>
@@ -98,22 +90,22 @@ const Client = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {buyOrders.map((buyOrder) => (
-                    <tr key={buyOrder.id} className='hover:bg-gray-100'>
+                  {buyOrders.map((buyOrder) => {
+                    return <tr key={buyOrder.id} className='hover:bg-gray-100'>
                       <td className='px-4 py-2 border-b text-center text-gray-800'>{buyOrder.orderNumber}</td>
-                      <td className='px-4 py-2 border-b text-center text-gray-800'>{formatter.format(buyOrder.totalAmount)}</td>
+                      <td className='px-4 py-2 border-b text-center text-gray-800'>{formatter.format((calculateTotal(buyOrder.orderProducts)))}</td>
                       <td className='px-4 py-2 border-b text-center text-gray-800'>{buyOrder.orderDate}</td>
                     </tr>
-                  ))}
+                  })}
                 </tbody>
               </table>
 
             </section>
-
+{/* 
             <div className='flex flex-col gap-2 ml-5'>
               <h3 className='text-2xl  pt-5 lg:text-3xl italic'>Wish list</h3>
               <p>....</p>
-            </div>
+            </div> */}
 
 
 
