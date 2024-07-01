@@ -88,6 +88,7 @@ const CartsWines = ({ bgColor, ...props }) => {
                         <span className={`font-bold text-xl text-[#73383E]`}>{formatter.format(props.price)}</span>
                         <div className={`flex flex-col`}>
                             <span className={`text-sm font-bold`}>{props.name}</span>
+                            <p>{props.provider}</p>
                         </div>
                     </div>
                     <div className="flex justify-between text-center" >
