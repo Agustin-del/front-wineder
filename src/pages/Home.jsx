@@ -3,6 +3,7 @@ import CardHomeWine from "../components/CardHomeWine";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+
 const Home = () => {
   const [loading, setLoading] = useState(true);
 
@@ -20,6 +21,7 @@ const Home = () => {
         </div>
       ) : (
         <div className="bg-[#F0E9E1] ">
+          
           <div
             className="bg-cover object-cover bg-center pt-16 h-[450px] bg-no-repeat bg-fixed "
             style={{ backgroundImage: `url('./assets/img-home.jpg')` }}
@@ -40,8 +42,8 @@ const Home = () => {
               </h3>
             </div>
           </div>
-                
-                <div className="w-[90%] mx-auto flex justify-center bg-slate-400 h-2 m-10 my-5"></div>
+
+          <div className="w-[90%] mx-auto flex justify-center bg-slate-400 h-2 m-10 my-5"></div>
 
           <div className="flex flex-col  md:flex-row md:justify-around">
             <section className="md:pl-9 justify-center">
