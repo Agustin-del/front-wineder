@@ -21,71 +21,71 @@ const Carrito = () => {
         setLoading(false);
     }, []);
 
-  //   useEffect(() => {
-  //     //fetchWishlist();
-  //     console.log(wishlist);
-  //     console.log(cartItems);
-  //   }, [cartItems]);
+    //   useEffect(() => {
+    //     //fetchWishlist();
+    //     console.log(wishlist);
+    //     console.log(cartItems);
+    //   }, [cartItems]);
 
-//   const checkOutClick = (event) => {
-//     event.preventDefault();
-//     modifyBuyOrder();
-//   };
+    //   const checkOutClick = (event) => {
+    //     event.preventDefault();
+    //     modifyBuyOrder();
+    //   };
 
 
-  const fetchData = async () => {
+    const fetchData = async () => {
 
-    try {
-      const response = await axios.get(
-        "http://localhost:8080/api/buyorder/client/pending",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      const aux = response.data.orderProducts;
-      console.log(aux);
-      setCartItems(aux);
-    } catch (error) {
-      console.error("Error fetching products:", error.response.data);
-    }
-  };
-
-  //   const fetchWishlist = async () => {
-  //     try {
-  //       const responseW = await axios.get(
-  //         "http://localhost:8080/api/orderproducts/client/wishlist",
-  //         {
-  //           headers: { Authorization: `Bearer ${token}` },
-  //         }
-  //       );
-
-  //       const aux = responseW.data;
-  //       setWishlist(aux);
-  //     } catch (error) {
-  //       console.log("There is no wishlist", error);
-  //     }
-  //   };
-
-  const handleQuantityChange = async (id, delta) => {
-    try {
-      setCartItems(
-        cartItems.map((item) => {
-          if (item.id === id) {
-            const newQuantity = Math.max(
-              1,
-              Math.min(item.quantity + delta, item.stock)
+        try {
+            const response = await axios.get(
+                "http://localhost:8080/api/buyorder/client/pending",
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
             );
-            return { ...item, quantity: newQuantity };
-          } else {
-            return item;
-          }
-        })
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+            const aux = response.data.orderProducts;
+            console.log(aux);
+            setCartItems(aux);
+        } catch (error) {
+            console.error("Error fetching products:", error.response.data);
+        }
+    };
+
+    //   const fetchWishlist = async () => {
+    //     try {
+    //       const responseW = await axios.get(
+    //         "http://localhost:8080/api/orderproducts/client/wishlist",
+    //         {
+    //           headers: { Authorization: `Bearer ${token}` },
+    //         }
+    //       );
+
+    //       const aux = responseW.data;
+    //       setWishlist(aux);
+    //     } catch (error) {
+    //       console.log("There is no wishlist", error);
+    //     }
+    //   };
+
+    const handleQuantityChange = async (id, delta) => {
+        try {
+            setCartItems(
+                cartItems.map((item) => {
+                    if (item.id === id) {
+                        const newQuantity = Math.max(
+                            1,
+                            Math.min(item.quantity + delta, item.stock)
+                        );
+                        return { ...item, quantity: newQuantity };
+                    } else {
+                        return item;
+                    }
+                })
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const setOrderProductFalse = async (id) => {
         try {
@@ -101,52 +101,51 @@ const Carrito = () => {
             const updateCart = aux.filter((item) => item.id !== id);
             setCartItems(updateCart);
 
-      console.log(cartItems);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const clearBasket = async () => {
-
-    console.log(cartItems)
-
-    for (const item of [...cartItems]) {
-      // clone the array to avoid concurrent modification errors
-      try {
-        await axios.delete(
-          `http://localhost:8080/api/orderproducts/delete/${item.id}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    setCartItems([]);
-    console.log(cartItems);
-  };
-
-    const deleteOrderProduct = async (id) => {
-        try {
-            const response = await axios.delete(
-                `http://localhost:8080/api/orderproducts/delete/${id}`,
-                {
-                    headers: { 'Authorization': `Bearer ${token}` },
-                }
-            );
-            console.log(response.data);
-            if (cartItems.length === 1) {
-                setCartItems([]);
-
-            }
-            const updateCart = cartItems.filter((item) => item.id !== id);
-            setCartItems(updateCart);
-
             console.log(cartItems);
         } catch (error) {
             console.log(error);
         }
+    };
+    const clearBasket = async () => {
+
+        console.log(cartItems)
+
+        for (const item of [...cartItems]) {
+            // clone the array to avoid concurrent modification errors
+            try {
+                await axios.delete(
+                    `http://localhost:8080/api/orderproducts/delete/${item.id}`,
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                );
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        setCartItems([]);
+        console.log(cartItems);
+    };
+
+    const deleteOrderProduct = async (id) => {
+        try {
+            setCartItems(
+                cartItems.map((item) => {
+                    if (item.id === id) {
+                        const newQuantity = 0;
+                        return { ...item, quantity: newQuantity };
+                    } else {
+                        return item;
+                    }
+                })
+            );
+
+
+        } catch (error) {
+            console.log(error);
+        }
+
+
     };
 
     /**
@@ -173,7 +172,7 @@ const Carrito = () => {
     //         const updatedWishlist = wishlist.filter((item) => item.id !== id);
     //         setWishlist(updatedWishlist);
 
-      // Add the item to the cart
+    // Add the item to the cart
 
 
 
@@ -181,28 +180,31 @@ const Carrito = () => {
     //   setCartItems(updatedCartItems);
     //   console.log(cartItems);
 
-  const checkOutClick = async () => {
-    //ARMAR EL JSON PARA MANDAR:DESARMAR CARD ITEMS
 
-    try {
-      const aux = [...cartItems];
 
-      const response = await axios.post(
-        "http://localhost:8080/api/buyorder/modify",
-        aux,
-        {
-          headers: { Authorization: `Bearer ${token}` },
+
+    const checkOutClick = async () => {
+        //ARMAR EL JSON PARA MANDAR:DESARMAR CARD ITEMS
+
+        try {
+            const aux = [...cartItems];
+
+            const response = await axios.post(
+                "http://localhost:8080/api/buyorder/modify",
+                aux,
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
+
+            if (response && response.status === 200) {
+                navigate("/payment");
+                console.log(response.data);
+            }
+        } catch (error) {
+            console.error(error);
         }
-      );
-
-      if (response && response.status === 200) {
-        navigate("/payment");
-        console.log(response.data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    };
 
 
 
@@ -229,7 +231,7 @@ const Carrito = () => {
                                 cartItems.map((item) => (
                                     <div
                                         key={item.id}
-                                        className="flex items-center justify-between border-b border-gray-200 py-4"
+                                        className={item.quantity > 0 ? "flex items-center justify-between border-b border-gray-200 py-4" : "hidden"}
                                     >
                                         <div className="flex items-center space-x-8">
                                             <img
@@ -367,10 +369,13 @@ const Carrito = () => {
                         )}
                     </div>
                 </div>
-            )}
-        </div>
-        
-        )
-    };
+
+            )
+            }
+        </div >
+    );
+}
+
+
 
 export default Carrito;

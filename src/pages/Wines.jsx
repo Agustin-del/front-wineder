@@ -78,25 +78,33 @@ const Wines = () => {
                             <select value={selectedVarietal} onChange={(e) => setSelectedVarietal(e.target.value)} name="varietal" className="focus:border-none focus:ring-0 border-none mb-2 md:mb-0 md:mr-2">
                                 <option value="">All Varietals</option>
                                 {varietals.map((varietal, index) => (
-                                    <option key={index} value={varietal}>{varietal}</option>
+
+                                    <option key={index} value={varietal}>{varietal.replace(/_/g, " ")}</option>
+
                                 ))}
                             </select>
                             <select value={selectedRegion} onChange={(e) => setSelectedRegion(e.target.value)} name="region" className="focus:border-none focus:ring-0 border-none mb-2 md:mb-0 md:mr-2">
                                 <option value="">All Regions</option>
                                 {regions.map((region, index) => (
-                                    <option key={index} value={region}>{region}</option>
+
+                                    <option key={index} value={region}>{region.replace(/_/g, " ")}</option>
+
                                 ))}
                             </select>
                             <select value={selectedWineType} onChange={(e) => setSelectedWineType(e.target.value)} ame="wineType" className="focus:border-none focus:ring-0 border-none mb-2 md:mb-0 md:mr-2">
                                 <option value="">All Wine Types</option>
                                 {wineTypes.map((wineType, index) => (
-                                    <option key={index} value={wineType}>{wineType}</option>
+
+                                    <option key={index} value={wineType}>{wineType.replace(/_/g, " ")}</option>
+
                                 ))}
                             </select>
                             <select value={selectedProvider} onChange={(e) => setSelectedProvider(e.target.value)} name="provider " className='focus:border-none focus:ring-0 border-none' >
                                 <option value="">All Providers</option>
                                 {providers.map((provider, index) => (
-                                    <option key={index} value={provider}>{provider}</option>
+
+                                    <option key={index} value={provider}>{provider.replace(/_/g, " ")}</option>
+
                                 ))}
                             </select>
                         </div>
@@ -106,8 +114,10 @@ const Wines = () => {
 
                         {filteredWines.map(wine => {
                             if (wine.wineDescription !== null) {
-                                return <div className=" w-full flex justify-center mb-2 md:flex-row md:w-[30%] lg:mb-5 lg:w-[25%] ">
-                                    <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image={wine.image} bgColor={wine.wineDescription.wineType} provider={wine.provider}></CartsWines>
+
+                                return <div className=" w-full flex justify-center mb-2 md:flex-row md:w-[30%]  ">
+                                    <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image={wine.image} bgColor={wine.wineDescription.wineType}></CartsWines>
+
                                 </div>
                             }
                         })}
