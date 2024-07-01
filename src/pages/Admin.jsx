@@ -29,17 +29,13 @@ const Admin = () => {
 
             if (activeTab === 'clients') {
                 response = await axios.get('http://localhost:8080/api/clients/all', { headers })
-                console.log(response.data);
             } else if (activeTab === 'orders') {
                 response = await axios.get('http://localhost:8080/api/orderproducts/admin/all', { headers })
-                console.log(response.data);
             } else if (activeTab === 'products') {
                 response = await axios.get('http://localhost:8080/api/products/all', { headers })
-                console.log(response.data);
             }
             else if (activeTab === 'provider') {
                 response = await axios.get('http://localhost:8080/api/provider/all', { headers })
-                console.log(response.data);
 
             }
             setData(response.data)

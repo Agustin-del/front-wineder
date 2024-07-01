@@ -17,31 +17,55 @@ import Admin from './pages/Admin'
 import Client from './pages/Client';
 import WinesType from './pages/WinesType';
 import PaymentMethods from './pages/PaymentMethods';
-
-
-
+import { useSelector } from 'react-redux';
 
 function App() {
+  const isAuthenticated = useSelector(store => store.authReducer.isAuthenticated)
+  const role = useSelector(store => store.roleReducer.role)
+
   return (
     <>
       <BrowserRouter>
         <Contenedor>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/registerClient" element={<RegisterClient />} />
-            <Route path="/registerProvider" element={<RegisterProvider />} />
-            <Route path="/wines" element={<Wines />} />
-            <Route path="/wines/:id" element={<WineDetails />} />
-            <Route path="/carrito" element={<Carrito />} />
-            <Route path="/wineIncome" element={<WineIncome2 />} />
-            <Route path="/wineDetails/:id" element={<WineDetails />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/client" element={<Client />} />
-            <Route path="/winesType" element={<WinesType />} />
-            <Route path="/winesType/:type" element={<WinesType />} />
-            <Route path="/payment" element={<PaymentMethods/>} />
+            {role === "client" ? 
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/client" element={<Client />} />
+              <Route path="/payment" element={<PaymentMethods/>} />
+              <Route path="/carrito" element={<Carrito />} />
+              <Route path="/wineDetails/:id" element={<WineDetails />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/wines" element={<Wines />} />
+              <Route path="/winesType/:type" element={<WinesType />} />
+
+            </>
+            :   role === "admin" ?
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/registerProvider" element={<RegisterProvider />} />
+              <Route path="/contact" element={<Contact />} />
+
+              <Route path="/wineIncome" element={<WineIncome2 />} />
+              <Route path="/wines" element={<Wines />} />
+              <Route path="/wineDetails/:id" element={<WineDetails />} />
+              <Route path="/winesType/:type" element={<WinesType />} />
+
+            </>
+            :
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/registerClient" element={<RegisterClient />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/wines" element={<Wines />} />
+              {/* <Route path="/wines/:id" element={<WineDetails />} /> */}
+              <Route path="/wineDetails/:id" element={<WineDetails />} />
+              <Route path="/winesType" element={<WinesType />} />
+              <Route path="/winesType/:type" element={<WinesType />} />
+            </>
+          }
           </Routes>
         </Contenedor>
       </BrowserRouter>

@@ -16,6 +16,7 @@ const WinesType = () => {
     try {
       const response = await axios.get('http://localhost:8080/api/products/all');
       const filteredWines = response.data.filter(wine => wine.wineDescription !== null && wine.wineDescription.wineType === type);
+      console.log(filteredWines)
       setWineType(filteredWines);
     } catch (error) {
       console.log(error);
@@ -33,6 +34,7 @@ const WinesType = () => {
   return (
     <div>
       {loading ? (
+
         <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
         <img className='w-[300px]' src="./assets/copa.gif" alt="" />
     </div>) : (
@@ -44,6 +46,7 @@ const WinesType = () => {
             ))}
           </div>
         </div>)}
+
     </div>
   );
 };
