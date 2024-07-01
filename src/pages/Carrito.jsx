@@ -51,21 +51,21 @@ const Carrito = () => {
     }
   };
 
-  //   const fetchWishlist = async () => {
-  //     try {
-  //       const responseW = await axios.get(
-  //         "http://localhost:8080/api/orderproducts/client/wishlist",
-  //         {
-  //           headers: { Authorization: `Bearer ${token}` },
-  //         }
-  //       );
+    // const fetchWishlist = async () => {
+    //   try {
+    //     const responseW = await axios.get(
+    //       "http://localhost:8080/api/orderproducts/client/wishlist",
+    //       {
+    //         headers: { Authorization: `Bearer ${token}` },
+    //       }
+    //     );
 
-  //       const aux = responseW.data;
-  //       setWishlist(aux);
-  //     } catch (error) {
-  //       console.log("There is no wishlist", error);
-  //     }
-  //   };
+    //     const aux = responseW.data;
+    //     setWishlist(aux);
+    //   } catch (error) {
+    //     console.log("There is no wishlist", error);
+    //   }
+    // };
 
   const handleQuantityChange = async (id, delta) => {
     try {
@@ -173,17 +173,13 @@ const Carrito = () => {
     //         const updatedWishlist = wishlist.filter((item) => item.id !== id);
     //         setWishlist(updatedWishlist);
 
-      // Add the item to the cart
-
-
-
+    // Add the item to the cart
     //   const updatedCartItems = [...cartItems, itemToAdd];
     //   setCartItems(updatedCartItems);
     //   console.log(cartItems);
 
   const checkOutClick = async () => {
-    //ARMAR EL JSON PARA MANDAR:DESARMAR CARD ITEMS
-
+    
     try {
       const aux = [...cartItems];
 
@@ -213,15 +209,15 @@ const Carrito = () => {
                     <img className="w-[300px]" src="/assets/copa.gif" alt="" />
                 </div>
             ) : (
-                <div className="bg-gray-100">
+                <div className="bg-gray-100 h-min-screen">
                     <div className="container mx-auto px-4 py-8">
-                        <h1 className="text-4xl font-semibold text-gray-800 mb-6">
+                        <h1 className="text-4xl text-center font-semibold text-gray-800 mb-6 md:w-full lg:w-[70%] lg:ml-[20%]">
                             Shopping Cart
                         </h1>
 
-                        <div className="bg-white shadow-md rounded-lg overflow-hidden md:w-[90%] md:ml-10 lg:w-[70%] lg:ml-[20%]">
+                        <div className="bg-white shadow-md rounded-lg overflow-hidden lg:w-[70%] lg:ml-[20%]">
                             {cartItems.length === 0 ? (
-                                <p className="text-gray-800 font-semibold text-xl text-center w-full py-5">
+                                <p className="text-gray-800 text-center font-semibold text-xl  w-full py-5">
                                     {" "}
                                     Nothing choose yet !!
                                 </p>
@@ -231,11 +227,11 @@ const Carrito = () => {
                                         key={item.id}
                                         className="flex items-center justify-between border-b border-gray-200 py-4"
                                     >
-                                        <div className="flex items-center space-x-8">
+                                        <div className="w-2/4 flex items-center space-x-8">
                                             <img
                                                 src={item.image ? item.image : "/assets/vino-tinto.png"}
                                                 alt={item.productName}
-                                                className="h-16 w-16 object-cover rounded"
+                                                className="h-32 w-16 object-cover rounded"
                                             />
                                             <div>
                                                 <p className="text-gray-800 font-semibold">
@@ -244,7 +240,7 @@ const Carrito = () => {
                                                 {/* <p className="text-gray-600">{item.description}</p> */}
                                             </div>
                                         </div>
-                                        <div className="flex flex-col md:flex-row  ">
+                                        <div className="w-1/5 flex flex-col md:flex-row  ">
                                             <div className="flex items-center mr-5">
                                                 <button
                                                     onClick={() => handleQuantityChange(item.id, -1)}
@@ -266,7 +262,7 @@ const Carrito = () => {
                                                 <p className="text-gray-800 font-semibold">{item.stock}</p>
                                             </div> */}
                                         </div>
-                                        <div className="flex items-center flex-col mt-7">
+                                        <div className="w-1/5 flex items-center flex-col mt-7">
                                             <p className="text-gray-800 font-semibold">
                                                 $
                                                 {(item.quantity * item.price)
@@ -277,7 +273,7 @@ const Carrito = () => {
                                                 className="w-20 hover:text-green-500"
                                                 onClick={() => setOrderProductFalse(item.id)}
                                             >
-                                                <strong>Buy later</strong>
+                                                <strong className="text-blu">Buy later</strong>
                                             </button>
                                         </div>
                                         <button
@@ -294,10 +290,10 @@ const Carrito = () => {
                                 ))
                             )}
                             <div className="flex justify-end items-center bg-gray-100 px-6 py-4">
-                                <div className="text-gray-800 font-semibold mr-4">
+                                <div className="text-xl text-[#5e2a30] font-bold mr-4">
                                     Subtotal:
                                 </div>
-                                <div className="text-xl text-gray-800">
+                                <div className="text-xl text-[#5e2a30] font-bold">
                                     $
                                     {cartItems
                                         .reduce((acc, item) => acc + item.price * item.quantity, 0)
@@ -323,12 +319,12 @@ const Carrito = () => {
                             </button>
                         </div>
                     </div>
-                    <div className="bg-violet-300  p-5 w-full flex flex-col">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-6">
+                    {/* <div className="bg-[#E5D1D2]  p-5 w-full flex flex-col">
+                        <h3 className="text-xl font-semibold text-gray-800 mb-6 italic">
                             Your Wishlist
                         </h3>
                         {wishlist.length === 0 ? (
-                            <div> Nothing in your wishlist yet !! </div>
+                            <div className=""> Nothing has been added !! </div>
                         ) : (
                             <div className="flex flex-col gap-3 items-center">
                                 {wishlist.map((product) => (
@@ -365,7 +361,7 @@ const Carrito = () => {
                                 ))}
                             </div>
                         )}
-                    </div>
+                    </div> */}
                 </div>
             )}
         </div>
