@@ -44,7 +44,7 @@ const WineIncome = () => {
     }
 
     const getProviders = async () => {
-        const response = await axios.get('http://localhost:8080/api/provider/all', {
+        const response = await axios.get('https://wineder-app.onrender.com/api/provider/all', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -82,7 +82,7 @@ const WineIncome = () => {
 
 
         try {
-            const response = await axios.post('http://localhost:8080/api/products/create', formatData,  {
+            const response = await axios.post('https://wineder-app.onrender.com/api/products/create', formatData,  {
                 headers: {
                     Authorization: `bearer ${token}`
                 }

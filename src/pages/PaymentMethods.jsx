@@ -41,7 +41,7 @@ function PaymentMethods() {
   const getAmountToPay = async (e) => {
     try {
       const resp = await axios.get(
-        "http://localhost:8080/api/buyorder/client/pending",
+        "https://wineder-app.onrender.com/api/buyorder/client/pending",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -65,8 +65,6 @@ function PaymentMethods() {
     setTotalQuantity(aux);
     
 
-
-
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +72,6 @@ function PaymentMethods() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(response);
 
     const array = [...response];
 
@@ -103,7 +100,7 @@ function PaymentMethods() {
       const balance = { balance: `${totalAmount}` };
 
       const transaction = await axios.post(
-        "http://localhost:8080/api/buyorder/closeorder",
+        "https://wineder-app.onrender.com/api/buyorder/closeorder",
         balance,
         {
           headers: {

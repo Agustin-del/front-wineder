@@ -44,18 +44,17 @@ const Login = () => {
             password: password
         }
         try {
-            const response = await axios.post('http://localhost:8080/api/auth/login', requestBody)
+            const response = await axios.post('https://wineder-app.onrender.com/api/auth/login', requestBody)
 
             dispatch(login(response.data))
 
-            const current = await axios.get('http://localhost:8080/api/auth/current', {
+            const current = await axios.get('https://wineder-app.onrender.com/api/auth/current', {
                 headers: {
                     'Authorization': `Bearer ${response.data}`
                 }
             })
 
             dispatch(getRole(current.data.role))
-            console.log(current.data.role);
 
             if (current.data.role === "admin") {
                 navigate('/admin')
