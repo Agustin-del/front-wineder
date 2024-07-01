@@ -18,12 +18,11 @@ const UploadImage = () => {
 
         formData.append('file', selectedFile);
         try {
-            const response = await axios.post('http://localhost:8080/api/products/create', {formData, selectedFile }, {
+            const response = await axios.post('https://wineder-app.onrender.com/api/products/create', {formData, selectedFile }, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.log('Image uploaded successfully:', response.data);
             fetchImages();
         } catch (error) {
             console.error('Error uploading image:', error);
@@ -32,7 +31,7 @@ const UploadImage = () => {
 
     const fetchImages = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/images/all');
+            const response = await axios.get('https://wineder-app.onrender.com/api/images/all');
             setImages(response.data);
         } catch (error) {
             console.error('Error fetching images:', error);

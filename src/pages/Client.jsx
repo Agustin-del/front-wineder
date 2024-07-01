@@ -20,7 +20,7 @@ const Client = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/auth/current',
+      const response = await axios.get('https://wineder-app.onrender.com/api/auth/current',
         { headers: { 'Authorization': `Bearer ${token}` } });
       setClient(response.data)
     }
@@ -31,7 +31,7 @@ const Client = () => {
   }
   const getNewOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/buyorder/client/pending', {
+      const response = await axios.get('https://wineder-app.onrender.com/api/buyorder/client/pending', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setNewOrders(response.data);
@@ -46,14 +46,12 @@ const Client = () => {
 
   const getBuyOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/buyorder/client/all', {
+      const response = await axios.get('https://wineder-app.onrender.com/api/buyorder/client/all', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setBuyOrders(response.data);
 
       setOrderProducts(response.data[0].orderProducts)
-      console.log(orderProducts)
-      console.log(buyOrders)
 
     } catch (error) {
       console.log(error)

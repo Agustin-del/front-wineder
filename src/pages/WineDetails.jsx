@@ -45,7 +45,7 @@ const WineDetails = () => {
             idProd:id
         }
         try {
-            const response = await axios.post("http://localhost:8080/api/reviews/create", requestBody, {
+            const response = await axios.post("https://wineder-app.onrender.com/api/reviews/create", requestBody, {
                 headers:{
                     Authorization: `Bearer ${token}`
                 }
@@ -60,7 +60,7 @@ const WineDetails = () => {
 
     const getReviews = async() => {
         try {
-            const response = await axios.get("http://localhost:8080/api/reviews/product/" + id)
+            const response = await axios.get("https://wineder-app.onrender.com/api/reviews/product/" + id)
             const reviewsWithData = response.data.map(review => ({
                 ...review,
                 reviewDate: new Date (review.reviewDate)
@@ -74,7 +74,7 @@ const WineDetails = () => {
 
     const getWine = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/products/" + id) 
+            const response = await axios.get("https://wineder-app.onrender.com/api/products/" + id) 
             setWine(response.data)
         }
           catch (error) {
@@ -96,6 +96,7 @@ const WineDetails = () => {
     const loadMoreReviews = () => {
         setVisibleReviews(prevVisibleReviews => prevVisibleReviews + 5)
     }
+    
     return (
         <div className='flex flex-col items-center gap-4 my-5 md:justify-center' >
             <h2 className='text-4xl text-center lg:text-5xl'><strong>Wine Details</strong></h2>
