@@ -1,38 +1,44 @@
 import axios from "axios";
+import { CiCircleCheck } from "react-icons/ci";
 import { Alert } from "flowbite-react";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "flowbite-react";
 
 function PaymentMethods() {
   const [loading, setLoading] = useState(true);
   const [totalAmount, setTotalAmount] = useState();
+  const [response, setResponse] = useState();
 
   const [address, setAddress] = useState("");
   const [number, setNumber] = useState();
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState(0);
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState();
 
   const [cardholderName, setCardholderName] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [cvv, setCvv] = useState(0);
   const [cardType, setCardType] = useState("");
+  const [description, setDescription] = useState("");
+
 
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
 
   const token = useSelector((store) => store.authReducer.token);
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false);
-      getAmount();
-    }, 2000);
+      getAmountToPay();
+    }, 3000);
+    setLoading(false);
   }, []);
 
-  const getAmount = async (e) => {
+  const getAmountToPay = async (e) => {
     try {
       const resp = await axios.get(
         "http://localhost:8080/api/buyorder/client/pending",
@@ -42,9 +48,8 @@ function PaymentMethods() {
           },
         }
       );
-      
-      console.log(resp);
 
+      setResponse(resp.data.orderProducts);
     } catch (error) {
       console.log(error);
     }
@@ -52,24 +57,53 @@ function PaymentMethods() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(response);
+
+    const array = [...response];
+
+    const total = array
+      .map((product) => product.price * product.quantity) // Multiplicar price y quantity
+      .reduce((acc, curr) => acc + curr, 0);
+
+    setTotalAmount(total);
+    setDescription("Winder purchase")
 
     try {
       const data = {
-        totalAmount: `${totalAmount}`,
         cardNumber: `${cardNumber}`,
+        totalAmount: `${totalAmount}`,
         cvv: `${cvv}`,
         cardType: `${cardType}`,
-        description: "Wineder purchase order",
+        description: `${description}`,
       };
 
-      const response = await axios.post(
-        "https://argentumhomebanking-1.onrender.com/api/clients",
-        data
-      );
+      const balance = { balance: `${totalAmount}` };
 
-      navigate("/home");
+      const transaction = await axios.post(
+        "http://localhost:8080/api/buyorder/closeorder",
+        balance,
+        {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+    //     const debit = await axios.post(
+    //       "https://argentumhomebanking-1.onrender.com/api/clients/debitWinder",
+    //       data
+    //     );
+
+    //     console.log(debit.data);
+
+      setOpenModal(true);
+      setTimeout(() => {
+        setOpenModal(false);
+
+        navigate("/");
+      }, 3000);
     } catch (error) {
-      console.log("jhgxdh");
+      console.log("Forbidden");
     }
   };
 
@@ -276,8 +310,24 @@ function PaymentMethods() {
           </form>
         </div>
       )}
+
+      {openModal && (
+        <Modal
+          show={openModal}
+          size="md"
+          onClose={() => setOpenModal(false)}
+          popup
+        >
+          <div className="text-center flex flex-col p-2 justify-center">
+            <CiCircleCheck className="mx-auto mb-4 h-12 w-12 text-green-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Bottles on their way! Transaction Successful
+            </h3>
+          </div>
+        </Modal>
+      )}
     </body>
   );
-}
+};
 
 export default PaymentMethods;
