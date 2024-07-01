@@ -14,7 +14,7 @@ const WinesType = () => {
 
   const getWineType = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/products/all');
+      const response = await axios.get('https://wineder-app.onrender.com/api/products/all');
       const filteredWines = response.data.filter(wine => wine.wineDescription !== null && wine.wineDescription.wineType === type);
       console.log(filteredWines)
       setWineType(filteredWines);
