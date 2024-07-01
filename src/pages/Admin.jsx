@@ -62,13 +62,13 @@ const Admin = () => {
     }, []);
 
     return (
-        <div>
+        <div >
             {loading ? (
                 <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
                 </div>) : (
                     <>
-                    <h2 className='text-3xl text-center py-5'><strong>Admin panel</strong></h2>
+                    <h2 className='text-3xl text-center  py-5'><strong>Admin panel</strong></h2>
                     <div className="flex items-center text-center flex-col md:mx-5 md:my-2 lg:flex-row">
                         <div className="w-full flex justify-center md:w-1/2 lg:w-[20%] lg:absolute lg:top-0 lg:left-0 lg:h-full lg:ml-10">
                             <ul className="flex-column lg:top-[45%] w-[60%] space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0 lg:relative lg:w-full lg:mt-5">
@@ -98,7 +98,7 @@ const Admin = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full lg:w-[70%] lg:mt-5 lg:ml-auto">
+                        <div className="p-6 lg:mb-[10%] bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full lg:w-[70%] lg:mt-5 lg:ml-auto">
                             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                                 {activeTab === 'clients' && <TablaClientAdmin name="Client" col1="Last Name" col2="Adrress" data={data} />}
                                 {activeTab === 'orders' && <TablaOrderAdmin img="Imagen" name="Product Name" id="Order" col2="Price" col3="Stock" col4="Quantity" active={"Active"} data={data} />}

@@ -25,26 +25,28 @@ const WinesType = () => {
   };
   useEffect(() => {
     setTimeout(() => {
-        setLoading(false);
-    }, 2000);
+      setLoading(false);
+    }, 3000);
 
-}, []);
+  }, []);
 
 
   return (
     <div>
       {loading ? (
-                <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
-                    <img className='w-[300px]' src="./assets/copa.gif" alt="" />
-                </div>) : (
-                <div>
-      <h2 className='text-2xl text-center lg:text-4xl lg:my-5'>WinesType - {type}</h2>
-      <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10  lg:mx-6'>
-        {wineType.map(wine => (
-         <CartsWines key={wine.id} id= {wine.id} name = {wine.name} price ={wine.price} winery={wine.provider} image = {wine.image} bgColor={wine.wineDescription.wineType}></CartsWines>
-        ))}
-      </div>
-    </div>)}
+
+        <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
+        <img className='w-[300px]' src="./assets/copa.gif" alt="" />
+    </div>) : (
+        <div className=' min-h-[80vh]'>
+          <h2 className='text-2xl text-center lg:text-4xl lg:my-5'>WinesType - {type}</h2>
+          <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10  lg:mx-6'>
+            {wineType.map(wine => (
+              <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image={wine.image} bgColor={wine.wineDescription.wineType}></CartsWines>
+            ))}
+          </div>
+        </div>)}
+
     </div>
   );
 };

@@ -24,8 +24,8 @@ const Wines = () => {
             const response = await axios.get("http://localhost:8080/api/products/all")
             setWines(response.data)
             const uniqueVarietals = [...new Set(response.data.map(wine => wine.wineDescription?.varietal).filter(Boolean))]
-            const uniqueRegions = [... new Set(response.data.map(wine => wine.wineDescription?.region).filter( Boolean))]
-            const  uniqueWineTypes = [... new Set(response.data.map(wine => wine.wineDescription?.wineType).filter(Boolean))]
+            const uniqueRegions = [... new Set(response.data.map(wine => wine.wineDescription?.region).filter(Boolean))]
+            const uniqueWineTypes = [... new Set(response.data.map(wine => wine.wineDescription?.wineType).filter(Boolean))]
             const uniqueProviders = [...new Set(response.data.map(wine => wine.provider))]
             setVarietals(uniqueVarietals)
             setRegions(uniqueRegions)
@@ -50,10 +50,10 @@ const Wines = () => {
 
     const filteredWines = wines.filter(wine => {
         return (
-            (selectedVarietal === '' || wine.wineDescription?.varietal=== selectedVarietal)&&
-            (selectedRegion === '' || wine.wineDescription?.region === selectedRegion)&&
-            (selectedWineType === '' || wine.wineDescription?.wineType === selectedWineType)&&
-            (selectedProvider === '' || wine.provider === selectedProvider)&&
+            (selectedVarietal === '' || wine.wineDescription?.varietal === selectedVarietal) &&
+            (selectedRegion === '' || wine.wineDescription?.region === selectedRegion) &&
+            (selectedWineType === '' || wine.wineDescription?.wineType === selectedWineType) &&
+            (selectedProvider === '' || wine.provider === selectedProvider) &&
             (searchText === "" || wine.name.toLowerCase().includes(searchText.toLocaleLowerCase()))
         )
     })
@@ -74,49 +74,44 @@ const Wines = () => {
                                 onChange={(e) => setSearchText(e.target.value)}
                             />
                         </div>
-                        <div className="flex md:flex justify-center flex-col lg:flex-row"> 
+                        <div className="flex md:flex justify-center flex-col lg:flex-row">
                             <select value={selectedVarietal} onChange={(e) => setSelectedVarietal(e.target.value)} name="varietal" className="focus:border-none focus:ring-0 border-none mb-2 md:mb-0 md:mr-2">
                                 <option value="">All Varietals</option>
                                 {varietals.map((varietal, index) => (
                                     <option key={index} value={varietal}>{varietal}</option>
-                                ))} 
+                                ))}
                             </select>
-                            <select value={selectedRegion} onChange={(e) => setSelectedRegion(e.target.value)} name="region"  className="focus:border-none focus:ring-0 border-none mb-2 md:mb-0 md:mr-2">
+                            <select value={selectedRegion} onChange={(e) => setSelectedRegion(e.target.value)} name="region" className="focus:border-none focus:ring-0 border-none mb-2 md:mb-0 md:mr-2">
                                 <option value="">All Regions</option>
                                 {regions.map((region, index) => (
-                                <option key={index} value={region}>{region}</option>
+                                    <option key={index} value={region}>{region}</option>
                                 ))}
                             </select>
-                            <select value = {selectedWineType} onChange={(e) => setSelectedWineType(e.target.value)} ame="wineType" className="focus:border-none focus:ring-0 border-none mb-2 md:mb-0 md:mr-2">
+                            <select value={selectedWineType} onChange={(e) => setSelectedWineType(e.target.value)} ame="wineType" className="focus:border-none focus:ring-0 border-none mb-2 md:mb-0 md:mr-2">
                                 <option value="">All Wine Types</option>
                                 {wineTypes.map((wineType, index) => (
-                                <option key={index} value={wineType}>{wineType}</option>
+                                    <option key={index} value={wineType}>{wineType}</option>
                                 ))}
                             </select>
-                            <select value ={selectedProvider} onChange={(e) => setSelectedProvider(e.target.value)}name="provider " className='focus:border-none focus:ring-0 border-none' >
+                            <select value={selectedProvider} onChange={(e) => setSelectedProvider(e.target.value)} name="provider " className='focus:border-none focus:ring-0 border-none' >
                                 <option value="">All Providers</option>
                                 {providers.map((provider, index) => (
-                                <option key={index} value={provider}>{provider}</option>
+                                    <option key={index} value={provider}>{provider}</option>
                                 ))}
                             </select>
                         </div>
                     </div>
                     {/* COMPONETE DE LAS CARD DE WINE, ESTA EN COMPONENTS-CartsWines.jsx  */}
-                    <div className='flex flex-col md:flex-row md:flex-wrap md:gap-5 md:mx-6' >
+                    <div className='flex flex-col md:flex-row md:flex-wrap md:gap-5 md:mx-6 lg:mx-0 lg:gap-0' >
 
-                    {filteredWines.map(wine => {
-                        if (wine.wineDescription !== null) {
-                            return <div className=" w-full flex justify-center mb-2 md:flex-row md:w-[30%]  ">
-                                <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image={wine.image} bgColor={wine.wineDescription.wineType}></CartsWines>
-                            </div> 
-                        }
-                    })}
+                        {filteredWines.map(wine => {
+                            if (wine.wineDescription !== null) {
+                                return <div className=" w-full flex justify-center mb-2 md:flex-row md:w-[30%] lg:mb-5 lg:w-[25%] ">
+                                    <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image={wine.image} bgColor={wine.wineDescription.wineType} provider={wine.provider}></CartsWines>
+                                </div>
+                            }
+                        })}
                     </div>
-                    {/* <CartsWines name= 'Red Wines' winery='winery name' price='price' image='./assets/vino-tinto.png' bgColor='bg-[#5e2a30]'/>
-           <CartsWines name= 'White Wines' winery='winery name' price='price' image='./assets/vino-blanco.png' bgColor='bg-[#D4B891]'/>
-           <CartsWines name= 'Red Wines' winery='winery name' price='price' image='./assets/vino-rosado.png' bgColor='bg-[#DCC8C9]'/>
-           <CartsWines name= 'Red Wines' winery='winery name' price='price' image='./assets/vino-espumante.png' bgColor='bg-[#D0C9BD]'/> */}
-
 
                     <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 w-[80%] mx-auto ">
 
@@ -139,7 +134,7 @@ const Wines = () => {
                         </Carousel>
                     </div>
                 </div>
-                
+
             )}
         </main>
     );
