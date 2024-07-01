@@ -120,6 +120,8 @@ const Carrito = () => {
             console.log(error);
         }
     };
+
+    
     const clearBasket = async () => {
 
         console.log(cartItems)
@@ -195,10 +197,6 @@ const Carrito = () => {
     //   setCartItems(updatedCartItems);
     //   console.log(cartItems);
 
-  const checkOutClick = async () => {
-    
-    try {
-      const aux = [...cartItems];
 
 
 
@@ -228,6 +226,7 @@ const Carrito = () => {
 
 
     return (
+        
         <div>
             {loading ? (
                 <div className="flex items-center justify-center w-full h-screen bg-[#232323]">
@@ -391,17 +390,8 @@ const Carrito = () => {
             )}
         </div>
         
-        )
-    };
-                    </div>
-                </div>
-
-            )
-            }
-        </div >
-    );
-}
-
+   
+)}
 
 
 export default Carrito;
