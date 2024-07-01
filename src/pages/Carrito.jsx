@@ -174,13 +174,15 @@ const Carrito = () => {
     //         setWishlist(updatedWishlist);
 
       // Add the item to the cart
+
+
+
       const updatedCartItems = [...cartItems, itemToAdd];
       setCartItems(updatedCartItems);
       console.log(cartItems);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
+  
+  
 
 
 
@@ -373,6 +375,6 @@ const Carrito = () => {
             )}
         </div>
     );
-};
+
 
 export default Carrito;
