@@ -7,19 +7,20 @@ import { useEffect, useState } from 'react';
 const Client = () => {
   const [client, setClient] = useState([])
   const [buyOrders, setBuyOrders] = useState([])
+  const [orderProducts, setOrderProducts] = useState([])
   const token = useSelector(store => store.authReducer.token)
   const role = useSelector(store => store.roleReducer.role)
   const [loading, setLoading] = useState(true);
-  
+
   const calculateTotal = (items) => {
     return items.reduce((total, item) => total + item.quantity * item.price, 0);
   };
-  
+
   const getData = async () => {
     try {
       const response = await axios.get('http://localhost:8080/api/auth/current',
         { headers: { 'Authorization': `Bearer ${token}` } });
-        setClient(response.data)
+      setClient(response.data)
     }
     catch (error) {
       console.error(error)
@@ -33,6 +34,9 @@ const Client = () => {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setBuyOrders(response.data);
+      setOrderProducts(response.data[0].orderProducts)
+      console.log(orderProducts)
+      console.log(buyOrders)
     } catch (error) {
       console.log(error)
       // console.log('Error fetching products:', error.response.data);
@@ -51,13 +55,13 @@ const Client = () => {
     }, 2000);
 
   }, []);
-  
+
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD'
   });
-  
-  
+
+
   return (
 
     <div>
@@ -79,7 +83,7 @@ const Client = () => {
           </div>
 
           <div>
-            <h3 className='text-2xl ml-5 pt-5 lg:text-3xl italic'>Recent Purchases</h3>
+            <h3 className='text-2xl ml-5 pt-5 lg:text-3xl italic'>Still in your Cart !!</h3>
             <section className='flex flex-wrap justify-center gap-5 my-5 relative z-10'>
               <table className='table-auto border-2 border-black w-[80%] md:w-[60%] shadow-lg'>
                 <thead className='bg-[#E5D1D2]'>
@@ -101,12 +105,22 @@ const Client = () => {
               </table>
 
             </section>
-{/* 
-            <div className='flex flex-col gap-2 ml-5'>
-              <h3 className='text-2xl  pt-5 lg:text-3xl italic'>Wish list</h3>
-              <p>....</p>
-            </div> */}
+            <section>
+              <div className='flex flex-col gap-2 ml-5'>
+                <h3 className='text-2xl  pt-5 lg:text-3xl italic'>Your choises</h3>
+                {orderProducts.map(item => (
+                  <div key={item.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <div className="h-48 bg-cover bg-center">
+                      <img src={item.image != null ? (item.image) : ("/assets/vinoGenerico.png")} alt={item.productName} className="w-[1/3] h-full object-cover opacity-0" />
+                    </div>
+                    <div className="p-4">
+                      <p className="text-lg font-semibold text-gray-900">{item.productName}</p>
+                    </div>
+                  </div>
 
+                ))}
+              </div>
+            </section>
 
 
           </div>
