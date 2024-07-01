@@ -17,7 +17,7 @@ const Contact = () => {
         <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
           <img className='w-[300px]' src="./assets/copa.gif" alt="" />
         </div>) : (
-        <div className="container mx-auto my-10 p-6 bg-white rounded-lg shadow-md lg:w-[40%] md:w-[60%] border-2 ">
+        <div className="container mx-auto my-10 p-6 bg-white rounded-lg  lg:w-[40%] md:w-[60%] border-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
 
           <h2 className="text-3xl  text-center lg:w-[85%] font-semibold mb-6">Contact</h2>
           <p className="mb-6 text-sm md:text-base lg:w-[90%]">If you have any questions or need more information, do not hesitate to contact us through the following form:</p>

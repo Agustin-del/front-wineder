@@ -3,6 +3,7 @@ import React from 'react'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { list } from 'postcss';
 
 const Client = () => {
   const [client, setClient] = useState([])
@@ -49,9 +50,11 @@ const Client = () => {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setBuyOrders(response.data);
+
       setOrderProducts(response.data[0].orderProducts)
       console.log(orderProducts)
       console.log(buyOrders)
+
     } catch (error) {
       console.log(error)
       // console.log('Error fetching products:', error.response.data);
@@ -99,6 +102,7 @@ const Client = () => {
                 </div>
               </div>
             </div>
+
 
             <div className='flex flex-col '>
 
@@ -168,20 +172,8 @@ const Client = () => {
             </section> */}
 
             </div>
+
           </div>
-
-
-
-          {/* 
-      <section className="my-5">
-        <div className="flex justify-center">
-          <video className="w-[90%] max-w-xl" autoPlay loop muted>
-            <source src="./assets/videoClientPromo.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </section> */}
-
 
           <img className=' w-[90%] flex items-center mx-auto mb-5 lg:w-[70%]  shadow-[0_3px_10px_rgb(0,0,0,0.2)] ' src="./assets/imgClient.jpg" alt="" />
 

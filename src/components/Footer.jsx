@@ -6,7 +6,7 @@ const Footer = () => {
     <div className="bg-[#8f5459] h-[400px] p-5 flex flex-col justify-between ">
       <div className="flex flex-col gap-3 justify-between items-center  md:flex-row lg:flex-row">
         <h2 className="text-3xl text-white">Wineder &copy;</h2>
-        <img src="./assets/uvasBlanco.png" alt="" className='] w-[50px] md:w-[60px]' />
+      <a href="#top" className='animate-bounce'><img src="./assets/uvasBlanco.png" alt="" className='] w-[50px] md:w-[60px]' /></a>  
         <div className="flex flex-row gap-4 ">
           <AnchorSocialFooter href="https://github.com/Agustin-del/front-wineder.git" src="/assets/githubBlanco.png" alt="github" />
           <AnchorSocialFooter href="https://discord.com" src="/assets/discordBlanco.png" alt="discord" />
@@ -15,13 +15,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* <div className="flex flex-col gap-3">
-        <p className="text-white">Join our community and be part of the Wineder family!</p>
-        <form className="flex flex-col gap-2" action="">
-          <input type="email" placeholder="Enter your email" className="p-2 border border-white rounded-lg" />
-          <button className="bg-[#73383E] px-4 py-2 rounded-lg text-white">Subscribe</button>
-        </form>
-      </div> */}
+      
     </div>
   )
 }

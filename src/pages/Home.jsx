@@ -103,7 +103,7 @@ const Home = () => {
           <section className="flex flex-col md:flex-row md:flex-wrap justify-around items-center pb-8 pt-8 gap-4 pl-8 pr-8">
             <Link to={"/winesType/RED"}>
               <CardHomeWine
-                bgColor="bg-[#70383F]"
+                bgColor="bg-[#8f585d]"
                 name="Red Wine"
                 image="./assets/tinto.png"
               />
