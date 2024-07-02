@@ -37,7 +37,7 @@ const Carrito = () => {
 
         try {
             const response = await axios.get(
-                "http://localhost:8080/api/buyorder/client/pending",
+                "https://wineder-app.onrender.com/api/buyorder/client/pending",
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }
@@ -54,7 +54,7 @@ const Carrito = () => {
     // const fetchWishlist = async () => {
     //   try {
     //     const responseW = await axios.get(
-    //       "http://localhost:8080/api/orderproducts/client/wishlist",
+    //       "https://wineder-app.onrender.com/api/orderproducts/client/wishlist",
     //       {
     //         headers: { Authorization: `Bearer ${token}` },
     //       }
@@ -62,7 +62,7 @@ const Carrito = () => {
     //   const fetchWishlist = async () => {
     //     try {
     //       const responseW = await axios.get(
-    //         "http://localhost:8080/api/orderproducts/client/wishlist",
+    //         "https://wineder-app.onrender.com/api/orderproducts/client/wishlist",
     //         {
     //           headers: { Authorization: `Bearer ${token}` },
     //         }
@@ -104,7 +104,7 @@ const Carrito = () => {
     const setOrderProductFalse = async (id) => {
         try {
             await axios.put(
-                `http://localhost:8080/api/orderproducts/update/${id}`,
+                `https://wineder-app.onrender.com/api/orderproducts/update/${id}`,
                 null,
                 {
                     headers: { 'Authorization': `Bearer ${token}` },
@@ -130,7 +130,7 @@ const Carrito = () => {
             // clone the array to avoid concurrent modification errors
             try {
                 await axios.delete(
-                    `http://localhost:8080/api/orderproducts/delete/${item.id}`,
+                    `https://wineder-app.onrender.com/api/orderproducts/delete/${item.id}`,
                     {
                         headers: { Authorization: `Bearer ${token}` },
                     }
@@ -174,7 +174,7 @@ const Carrito = () => {
     //         const itemToAdd = wishlist.find((item) => item.id === id);
 
     //         const response = await axios.put(
-    //             `http://localhost:8080/api/orderproducts/updatetrue/${id}`,
+    //             `https://wineder-app.onrender.com/api/orderproducts/updatetrue/${id}`,
     //             {
     //                 quantity: itemToAdd.quantity,
     //             },
@@ -207,7 +207,7 @@ const Carrito = () => {
             const aux = [...cartItems];
 
             const response = await axios.post(
-                "http://localhost:8080/api/buyorder/modify",
+                "https://wineder-app.onrender.com/api/buyorder/modify",
                 aux,
                 {
                     headers: { Authorization: `Bearer ${token}` },
