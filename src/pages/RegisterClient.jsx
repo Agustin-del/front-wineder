@@ -54,22 +54,31 @@ const RegisterClient = () => {
             address: form.address
         }
         try {
-            const response = await axios.post("https://wineder-app.onrender.com/api/auth/register/client", requestBody)
+            const response = await axios.post(
+                // "https://wineder-app.onrender.com/api/auth/register/client",
+                "http://localhost:8080/api/auth/register/client",
+                requestBody)
 
             setAlert({ type: 'success', message: 'Registration successful' })
             setTimeout(async () => {
                 try {
-                    const loginResponse = await axios.post("https://wineder-app.onrender.com/api/auth/login", {
-                        email: form.email,
-                        password: form.password
-                    })
+                    const loginResponse = await axios.post(
+                        // "https://wineder-app.onrender.com/api/auth/login",
+                        "http://localhost:8080/api/auth/login",
+                        {
+                            email: form.email,
+                            password: form.password
+                        })
                     dispatch(login(loginResponse.data))
                     setTimeout(async () => {
-                        const currentResponse = await axios.get('https://wineder-app.onrender.com/api/auth/current', {
-                            headers: {
-                                Authorization: `Bearer ${loginResponse.data}`
-                            }
-                        })
+                        const currentResponse = await axios.get(
+                            // 'https://wineder-app.onrender.com/api/auth/current',
+                            'http://localhost:8080/api/auth/current',
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${loginResponse.data}`
+                                }
+                            })
                         dispatch(getRole(currentResponse.data.role))
                         if (currentResponse.data.role === "admin") {
                             navigate('/admin')
@@ -108,9 +117,9 @@ const RegisterClient = () => {
                 </div>) : (
                 <div className="w-full max-w-md mx-auto mt-5 text-white " >
                     <div style={{ backgroundImage: `url('/assets/fondoRegister.jpg')` }} className="shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] mx-2 bg-cover object-cover bg-center lg:h-[550px]  rounded-lg px-8 pt-6 pb-8 mb-4 ">
-                       
+
                         <form onSubmit={handleSubmit} className='bg-black  bg-opacity-85 p-5 rounded-lg' >
-                        <h2 className="text-2xl lg:text-4xl font-bold text-center mb-6">Register </h2>
+                            <h2 className="text-2xl lg:text-4xl font-bold text-center mb-6">Register </h2>
                             <div className="lg:flex lg:gap-2  " >
 
                                 <div className="mb-4 ">
