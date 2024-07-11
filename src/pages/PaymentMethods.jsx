@@ -7,7 +7,47 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "flowbite-react";
 
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+
 function PaymentMethods() {
+  //MERCADO PAGO, INTEGRACION
+
+  initMercadoPago("YOUR_PUBLIC_KEY", {
+    locale: "es-AR",
+  });
+
+  const [preferenceId, setPreferenceId] = useState(null);
+
+  const createPreference = async () => {
+    try {
+
+      
+
+
+
+      const response = await axios.post(
+        "https://wineder-app.onrender.com/api/create_preference",
+        {
+          totalAmount: 500,
+          description: "Pago de prueba",
+          totalQuantity: 2,
+        }
+      );
+      const { id } = response.data;
+      return id;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleBuy = async () => {
+    const id = await createPreference();
+    if (id) {
+      setPreferenceId(id);
+    }
+  };
+
+  //---------------------------------------------------------
   const [loading, setLoading] = useState(true);
   const [totalQuantity, setTotalQuantity] = useState();
   const [totalAmount, setTotalAmount] = useState();
@@ -38,6 +78,7 @@ function PaymentMethods() {
     setLoading(false);
   }, []);
 
+  //SOLICITUD AL BACK PARA SABER EL MONTO A PAGAR
   const getAmountToPay = async (e) => {
     try {
       const resp = await axios.get(
@@ -50,21 +91,18 @@ function PaymentMethods() {
       );
 
       setResponse(resp.data.orderProducts);
-      
+
       const total = array
-      .map((product) => product.price * product.quantity) // Multiplicar price y quantity
-      .reduce((acc, curr) => acc + curr, 0);
+        .map((product) => product.price * product.quantity) // Multiplicar price y quantity
+        .reduce((acc, curr) => acc + curr, 0);
 
-    setTotalAmount(total);
-    setDescription("Winder purchase");
+      setTotalAmount(total);
+      setDescription("Winder purchase");
 
-
-    const aux = total
-      .map((product) => product.quantity) // Multiplicar price y quantity
-      .reduce((acc, curr) => acc + curr, 0);
-    setTotalQuantity(aux);
-    
-
+      const aux = total
+        .map((product) => product.quantity) // Multiplicar price y quantity
+        .reduce((acc, curr) => acc + curr, 0);
+      setTotalQuantity(aux);
     } catch (error) {
       console.log(error);
     }
@@ -141,7 +179,7 @@ function PaymentMethods() {
             </h1>
 
             <form
-              onSubmit={handleSubmit}
+              //onSubmit={handleSubmit}
               class="bg-white shadow-md rounded-lg overflow-hidden "
             >
               <div className="lg:flex lg:flex-wrap">
@@ -325,17 +363,25 @@ function PaymentMethods() {
 
               <div className="flex flex-wrap justify-center">
                 <button
-                  type="submit"
+                  //type="submit"
+                  onClick={handleBuy}
                   className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4"
                 >
                   Send Payment
                 </button>
+                
+                { preferenceId &&
+                  <Wallet
+                  initialization={{ preferenceId: preferenceId }}
+                  />
+                }
+
               </div>
             </form>
           </div>
         )}
       </body>
-
+      //DEBERIA ESTAR
       {/* <div className="w-2/3 container mx-auto px-4 py-8 flex flex-col">
 
         <h1 className="text-2xl text-left font-semibold text-gray-800 lg:w-[70%] lg:ml-[20%]">
@@ -364,8 +410,6 @@ function PaymentMethods() {
           </div>
         </div>
       </div> */}
-      
-
       {openModal && (
         <Modal
           show={openModal}
