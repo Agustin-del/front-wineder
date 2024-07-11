@@ -21,7 +21,7 @@ const Wines = () => {
 
     const getWines = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/products/all")
+            const response = await axios.get("https://wineder-app.onrender.com/api/products/all")
             setWines(response.data)
             const uniqueVarietals = [...new Set(response.data.map(wine => wine.wineDescription?.varietal).filter(Boolean))]
             const uniqueRegions = [... new Set(response.data.map(wine => wine.wineDescription?.region).filter(Boolean))]

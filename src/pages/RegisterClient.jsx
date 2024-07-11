@@ -54,18 +54,18 @@ const RegisterClient = () => {
             address: form.address
         }
         try {
-            const response = await axios.post("http://localhost:8080/api/auth/register/client", requestBody)
+            const response = await axios.post("https://wineder-app.onrender.com/api/auth/register/client", requestBody)
 
             setAlert({ type: 'success', message: 'Registration successful' })
             setTimeout(async () => {
                 try {
-                    const loginResponse = await axios.post("http://localhost:8080/api/auth/login", {
+                    const loginResponse = await axios.post("https://wineder-app.onrender.com/api/auth/login", {
                         email: form.email,
                         password: form.password
                     })
                     dispatch(login(loginResponse.data))
                     setTimeout(async () => {
-                        const currentResponse = await axios.get('http://localhost:8080/api/auth/current', {
+                        const currentResponse = await axios.get('https://wineder-app.onrender.com/api/auth/current', {
                             headers: {
                                 Authorization: `Bearer ${loginResponse.data}`
                             }
