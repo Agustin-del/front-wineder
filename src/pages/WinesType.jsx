@@ -14,7 +14,10 @@ const WinesType = () => {
 
   const getWineType = async () => {
     try {
-      const response = await axios.get('https://wineder-app.onrender.com/api/products/all');
+      const response = await axios.get(
+        // 'https://wineder-app.onrender.com/api/products/all'
+        "http://localhost:8080/api/products/all"
+      );
       const filteredWines = response.data.filter(wine => wine.wineDescription !== null && wine.wineDescription.wineType === type);
       console.log(filteredWines)
       setWineType(filteredWines);
@@ -36,8 +39,8 @@ const WinesType = () => {
       {loading ? (
 
         <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
-        <img className='w-[300px]' src="./assets/copa.gif" alt="" />
-    </div>) : (
+          <img className='w-[300px]' src="./assets/copa.gif" alt="" />
+        </div>) : (
         <div className=' min-h-[80vh]'>
           <h2 className='text-2xl text-center lg:text-4xl lg:my-5'>WinesType - {type}</h2>
           <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10  lg:mx-6'>

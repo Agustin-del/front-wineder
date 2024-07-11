@@ -26,7 +26,7 @@ function PaymentMethods() {
 
 
       const response = await axios.post(
-        "https://wineder-app.onrender.com/api/create_preference",
+        "http://localhost:8080/api/create_preference",
         {
           totalAmount: 500,
           description: "Pago de prueba",
@@ -82,7 +82,8 @@ function PaymentMethods() {
   const getAmountToPay = async (e) => {
     try {
       const resp = await axios.get(
-        "https://wineder-app.onrender.com/api/buyorder/client/pending",
+        // "https://wineder-app.onrender.com/api/buyorder/client/pending",
+        "http://localhost:8080/api/buyorder/client/pending",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -99,6 +100,7 @@ function PaymentMethods() {
       setTotalAmount(total);
       setDescription("Winder purchase");
 
+      
       const aux = total
         .map((product) => product.quantity) // Multiplicar price y quantity
         .reduce((acc, curr) => acc + curr, 0);
@@ -138,7 +140,8 @@ function PaymentMethods() {
       const balance = { balance: `${totalAmount}` };
 
       const transaction = await axios.post(
-        "https://wineder-app.onrender.com/api/buyorder/closeorder",
+        // "https://wineder-app.onrender.com/api/buyorder/closeorder",
+        "http://localhost:8080/api/buyorder/closeorder",
         balance,
         {
           headers: {
@@ -410,6 +413,8 @@ function PaymentMethods() {
           </div>
         </div>
       </div> */}
+
+
       {openModal && (
         <Modal
           show={openModal}

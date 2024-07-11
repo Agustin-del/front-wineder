@@ -36,8 +36,11 @@ const Carrito = () => {
     const fetchData = async () => {
 
         try {
+            // const response = await axios.get(
+            //     "https://wineder-app.onrender.com/api/buyorder/client/pending",
             const response = await axios.get(
-                "https://wineder-app.onrender.com/api/buyorder/client/pending",
+                "https://http://localhost:8080/api/buyorder/client/pending",
+
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }
@@ -103,8 +106,11 @@ const Carrito = () => {
 
     const setOrderProductFalse = async (id) => {
         try {
+            // await axios.put(
+            //     `https://wineder-app.onrender.com/api/orderproducts/update/${id}`,
+            //     null,
             await axios.put(
-                `https://wineder-app.onrender.com/api/orderproducts/update/${id}`,
+                `https://http://localhost:8080/api/orderproducts/update/${id}`,
                 null,
                 {
                     headers: { 'Authorization': `Bearer ${token}` },
@@ -121,7 +127,7 @@ const Carrito = () => {
         }
     };
 
-    
+
     const clearBasket = async () => {
 
         console.log(cartItems)
@@ -130,7 +136,8 @@ const Carrito = () => {
             // clone the array to avoid concurrent modification errors
             try {
                 await axios.delete(
-                    `https://wineder-app.onrender.com/api/orderproducts/delete/${item.id}`,
+                    // `https://wineder-app.onrender.com/api/orderproducts/delete/${item.id}`,
+                    `http://localhost:8080/api/orderproducts/delete/${item.id}`,
                     {
                         headers: { Authorization: `Bearer ${token}` },
                     }
@@ -207,7 +214,8 @@ const Carrito = () => {
             const aux = [...cartItems];
 
             const response = await axios.post(
-                "https://wineder-app.onrender.com/api/buyorder/modify",
+                // "https://wineder-app.onrender.com/api/buyorder/modify",
+                "http://localhost:8080/api/buyorder/modify",
                 aux,
                 {
                     headers: { Authorization: `Bearer ${token}` },
@@ -226,7 +234,7 @@ const Carrito = () => {
 
 
     return (
-        
+
         <div>
             {loading ? (
                 <div className="flex items-center justify-center w-full h-screen bg-[#232323]">
@@ -389,9 +397,10 @@ const Carrito = () => {
                 </div>
             )}
         </div>
-        
-   
-)}
+
+
+    )
+}
 
 
 export default Carrito;
