@@ -23,10 +23,13 @@ function PaymentMethods() {
 
       
 
-
+//ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO
 
       const response = await axios.post(
         "http://localhost:8080/api/create_preference",
+
+//MANDAR ID DE BUYoRDER?--> BACK LO GESTIONE CON LOS PRODUCTOS      
+
         {
           totalAmount: 500,
           description: "Pago de prueba",
@@ -92,81 +95,87 @@ function PaymentMethods() {
       );
 
       setResponse(resp.data.orderProducts);
+      console.log(resp);
+      console.log(response);
 
-      const total = array
-        .map((product) => product.price * product.quantity) // Multiplicar price y quantity
+      // Multiplicar price y quantity
+      const total = response.map((product) => product.price * product.quantity) 
         .reduce((acc, curr) => acc + curr, 0);
+    
+
 
       setTotalAmount(total);
       setDescription("Winder purchase");
 
-      
-      const aux = total
-        .map((product) => product.quantity) // Multiplicar price y quantity
+      console.log(totalAmount);
+    
+      const aux = response.map((product) => product.quantity) 
         .reduce((acc, curr) => acc + curr, 0);
       setTotalQuantity(aux);
+      console.log(totalQuantity);
+
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    const array = [...response];
+  //   const array = [...response];
 
-    const total = array
-      .map((product) => product.price * product.quantity) // Multiplicar price y quantity
-      .reduce((acc, curr) => acc + curr, 0);
+  //   const total = array
+  //     .map((product) => product.price * product.quantity) // Multiplicar price y quantity
+  //     .reduce((acc, curr) => acc + curr, 0);
 
-    setTotalAmount(total);
-    setDescription("Winder purchase");
+  //   setTotalAmount(total);
+  //   setDescription("Winder purchase");
 
-    const aux = array
-      .map((product) => product.quantity) // Multiplicar price y quantity
-      .reduce((acc, curr) => acc + curr, 0);
+  //   const aux = array
+  //     .map((product) => product.quantity) // Multiplicar price y quantity
+  //     .reduce((acc, curr) => acc + curr, 0);
 
-    setTotalQuantity(aux);
+  //   setTotalQuantity(aux);
 
-    try {
-      const data = {
-        cardNumber: `${cardNumber}`,
-        totalAmount: `${totalAmount}`,
-        cvv: `${cvv}`,
-        cardType: `${cardType}`,
-        description: `${description}`,
-      };
+  //   try {
+  //     const data = {
+  //       cardNumber: `${cardNumber}`,
+  //       totalAmount: `${totalAmount}`,
+  //       cvv: `${cvv}`,
+  //       cardType: `${cardType}`,
+  //       description: `${description}`,
+  //     };
 
-      const balance = { balance: `${totalAmount}` };
+  //     const balance = { balance: `${totalAmount}` };
 
-      const transaction = await axios.post(
-        // "https://wineder-app.onrender.com/api/buyorder/closeorder",
-        "http://localhost:8080/api/buyorder/closeorder",
-        balance,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+  //     const transaction = await axios.post(
+  //       // "https://wineder-app.onrender.com/api/buyorder/closeorder",
+  //       "http://localhost:8080/api/buyorder/closeorder",
+  //       balance,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
 
-      //     const debit = await axios.post(
-      //       "https://argentumhomebanking-1.onrender.com/api/clients/debitWinder",
-      //       data
-      //     );
+  //     //     const debit = await axios.post(
+  //     //       "https://argentumhomebanking-1.onrender.com/api/clients/debitWinder",
+  //     //       data
+  //     //     );
 
-      //     console.log(debit.data);
+  //     //     console.log(debit.data);
 
-      setOpenModal(true);
-      setTimeout(() => {
-        setOpenModal(false);
+  //     setOpenModal(true);
+  //     setTimeout(() => {
+  //       setOpenModal(false);
 
-        navigate("/");
-      }, 3000);
-    } catch (error) {
-      console.log("Forbidden");
-    }
-  };
+  //       navigate("/");
+  //     }, 3000);
+  //   } catch (error) {
+  //     console.log("Forbidden");
+  //   }
+  // };
 
   return (
     <div>

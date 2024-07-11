@@ -34,7 +34,7 @@ const Login = () => {
     // }, [user])
 
     // const errorMessage = (error) => {
-    //     setAlert({type:"failure", message:error})
+    //     setAlert({type:"failure", message:error})  
     // }
 
     const handleLogin = async (e) => {

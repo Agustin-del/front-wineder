@@ -12,7 +12,7 @@ const CardWineDetails = ({ rating, id, image }) => {
 
     const addProductToCart = async () => {
         try {
-            const response = await axios.post(`https://wineder-app.onrender.com/api/orderproducts/create/${id}`, null, {
+            const response = await axios.post(`http://localhost:8080/api/orderproducts/create/${id}`, null, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
