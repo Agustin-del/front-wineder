@@ -7,11 +7,50 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "flowbite-react";
 
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-initMercadoPago('YOUR_PUBLIC_KEY');
-
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
 function PaymentMethods() {
+  //MERCADO PAGO, INTEGRACION
+
+  initMercadoPago("YOUR_PUBLIC_KEY", {
+    locale: "es-AR",
+  });
+
+  const [preferenceId, setPreferenceId] = useState(null);
+
+  const createPreference = async () => {
+    try {
+
+
+
+      //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO
+
+      const response = await axios.post(
+        "http://localhost:8080/api/create_preference",
+
+        //MANDAR ID DE BUYoRDER?--> BACK LO GESTIONE CON LOS PRODUCTOS      
+
+        {
+          totalAmount: 500,
+          description: "Pago de prueba",
+          totalQuantity: 2,
+        }
+      );
+      const { id } = response.data;
+      return id;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleBuy = async () => {
+    const id = await createPreference();
+    if (id) {
+      setPreferenceId(id);
+    }
+  };
+
+  //---------------------------------------------------------
   const [loading, setLoading] = useState(true);
   const [totalQuantity, setTotalQuantity] = useState();
   const [totalAmount, setTotalAmount] = useState();
@@ -42,6 +81,7 @@ function PaymentMethods() {
     setLoading(false);
   }, []);
 
+  //SOLICITUD AL BACK PARA SABER EL MONTO A PAGAR
   const getAmountToPay = async (e) => {
     try {
       const resp = await axios.get(
@@ -55,83 +95,87 @@ function PaymentMethods() {
       );
 
       setResponse(resp.data.orderProducts);
+      console.log(resp);
+      console.log(response);
 
-      const total = array
-        .map((product) => product.price * product.quantity) // Multiplicar price y quantity
+      // Multiplicar price y quantity
+      const total = response.map((product) => product.price * product.quantity)
         .reduce((acc, curr) => acc + curr, 0);
+
+
 
       setTotalAmount(total);
       setDescription("Winder purchase");
 
+      console.log(totalAmount);
 
-      const aux = total
-        .map((product) => product.quantity) // Multiplicar price y quantity
+      const aux = response.map((product) => product.quantity)
         .reduce((acc, curr) => acc + curr, 0);
       setTotalQuantity(aux);
-
+      console.log(totalQuantity);
 
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    const array = [...response];
+  //   const array = [...response];
 
-    const total = array
-      .map((product) => product.price * product.quantity) // Multiplicar price y quantity
-      .reduce((acc, curr) => acc + curr, 0);
+  //   const total = array
+  //     .map((product) => product.price * product.quantity) // Multiplicar price y quantity
+  //     .reduce((acc, curr) => acc + curr, 0);
 
-    setTotalAmount(total);
-    setDescription("Winder purchase");
+  //   setTotalAmount(total);
+  //   setDescription("Winder purchase");
 
-    const aux = array
-      .map((product) => product.quantity) // Multiplicar price y quantity
-      .reduce((acc, curr) => acc + curr, 0);
+  //   const aux = array
+  //     .map((product) => product.quantity) // Multiplicar price y quantity
+  //     .reduce((acc, curr) => acc + curr, 0);
 
-    setTotalQuantity(aux);
+  //   setTotalQuantity(aux);
 
-    try {
-      const data = {
-        cardNumber: `${cardNumber}`,
-        totalAmount: `${totalAmount}`,
-        cvv: `${cvv}`,
-        cardType: `${cardType}`,
-        description: `${description}`,
-      };
+  //   try {
+  //     const data = {
+  //       cardNumber: `${cardNumber}`,
+  //       totalAmount: `${totalAmount}`,
+  //       cvv: `${cvv}`,
+  //       cardType: `${cardType}`,
+  //       description: `${description}`,
+  //     };
 
-      const balance = { balance: `${totalAmount}` };
+  //     const balance = { balance: `${totalAmount}` };
 
-      const transaction = await axios.post(
-        // "https://wineder-app.onrender.com/api/buyorder/closeorder",
-        "http://localhost:8080/api/buyorder/closeorder",
-        balance,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+  //     const transaction = await axios.post(
+  //       // "https://wineder-app.onrender.com/api/buyorder/closeorder",
+  //       "http://localhost:8080/api/buyorder/closeorder",
+  //       balance,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
 
-      //     const debit = await axios.post(
-      //       "https://argentumhomebanking-1.onrender.com/api/clients/debitWinder",
-      //       data
-      //     );
+  //     //     const debit = await axios.post(
+  //     //       "https://argentumhomebanking-1.onrender.com/api/clients/debitWinder",
+  //     //       data
+  //     //     );
 
-      //     console.log(debit.data);
+  //     //     console.log(debit.data);
 
-      setOpenModal(true);
-      setTimeout(() => {
-        setOpenModal(false);
+  //     setOpenModal(true);
+  //     setTimeout(() => {
+  //       setOpenModal(false);
 
-        navigate("/");
-      }, 3000);
-    } catch (error) {
-      console.log("Forbidden");
-    }
-  };
+  //       navigate("/");
+  //     }, 3000);
+  //   } catch (error) {
+  //     console.log("Forbidden");
+  //   }
+  // };
 
   return (
     <div>
@@ -147,7 +191,7 @@ function PaymentMethods() {
             </h1>
 
             <form
-              onSubmit={handleSubmit}
+              //onSubmit={handleSubmit}
               class="bg-white shadow-md rounded-lg overflow-hidden "
             >
               <div className="lg:flex lg:flex-wrap">
@@ -331,18 +375,26 @@ function PaymentMethods() {
 
               <div className="flex flex-wrap justify-center">
                 <button
-                  type="submit"
+                  //type="submit"
+                  onClick={handleBuy}
                   className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4"
                 >
                   Send Payment
                 </button>
+
+                {preferenceId &&
+                  <Wallet
+                    initialization={{ preferenceId: preferenceId }}
+                  />
+                }
+
               </div>
             </form>
             <div id="wallet_container"></div>
           </div>
         )}
       </body>
-
+      //DEBERIA ESTAR
       {/* <div className="w-2/3 container mx-auto px-4 py-8 flex flex-col">
 
         <h1 className="text-2xl text-left font-semibold text-gray-800 lg:w-[70%] lg:ml-[20%]">
