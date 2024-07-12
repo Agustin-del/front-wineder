@@ -32,12 +32,15 @@ const WineIncome2 = () => {
   }, []);
 
   const getProviders = async () => {
-    
-    const response = await axios.get("https://wineder-app.onrender.com/api/provider/all", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+
+    const response = await axios.get(
+      // "https://wineder-app.onrender.com/api/provider/all", 
+      "http://localhost:8080/api/provider/all",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     let providerNames = [];
     providerNames = response.data.map((provider) => [
       provider.companyName,
@@ -73,18 +76,19 @@ const WineIncome2 = () => {
 
 
 
-      
+
       const formData = new FormData();
       formData.append("product", JSON.stringify(product));
       formData.append("file", selectedFile);
 
       const response = await axios.post(
-        "https://wineder-app.onrender.com/api/products/create",
+        // "https://wineder-app.onrender.com/api/products/create",
+        "http://localhost:8080/api/products/create",
         formData,
         {
           headers: {
             'Authorization': `Bearer ${token}`,
-           'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data'
           },
         }
       );
@@ -97,7 +101,7 @@ const WineIncome2 = () => {
     } catch (e) {
       setAlert({ type: "failure", message: e.response.data });
     }
-    
+
   };
 
   return (

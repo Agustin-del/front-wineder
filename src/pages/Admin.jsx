@@ -27,23 +27,35 @@ const Admin = () => {
             let response;
 
             if (activeTab === 'clients') {
-                response = await axios.get('https://wineder-app.onrender.com/api/clients/all', { headers })
+                response = await axios.get(
+                    // 'https://wineder-app.onrender.com/api/clients/all',
+                    "http://localhost:8080/api/clients/all",
+                    { headers })
 
                 console.log(response.data);
 
             } else if (activeTab === 'orders') {
-                response = await axios.get('https://wineder-app.onrender.com/api/orderproducts/admin/all', { headers })
+                response = await axios.get(
+                    // 'https://wineder-app.onrender.com/api/orderproducts/admin/all',
+                    "http://localhost:8080/api/orderproducts/admin/all",
+                    { headers })
                 console.log(response.data);
 
             } else if (activeTab === 'products') {
-                response = await axios.get('https://wineder-app.onrender.com/api/products/all', { headers })
+                response = await axios.get(
+                    // 'https://wineder-app.onrender.com/api/products/all', 
+                    "http://localhost:8080/api/products/all",
+                    { headers })
                 console.log(response.data);
 
 
 
             }
             else if (activeTab === 'provider') {
-                response = await axios.get('https://wineder-app.onrender.com/api/provider/all', { headers })
+                response = await axios.get(
+                    // 'https://wineder-app.onrender.com/api/provider/all',
+                    "http://localhost:8080/api/provider/all",
+                    { headers })
 
 
             }

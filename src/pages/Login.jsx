@@ -34,7 +34,7 @@ const Login = () => {
     // }, [user])
 
     // const errorMessage = (error) => {
-    //     setAlert({type:"failure", message:error})
+    //     setAlert({type:"failure", message:error})  
     // }
 
     const handleLogin = async (e) => {
@@ -44,15 +44,21 @@ const Login = () => {
             password: password
         }
         try {
-            const response = await axios.post('https://wineder-app.onrender.com/api/auth/login', requestBody)
+            const response = await axios.post(
+                // 'https://wineder-app.onrender.com/api/auth/login',
+                "http://localhost:8080/api/auth/login",
+                requestBody)
 
             dispatch(login(response.data))
 
-            const current = await axios.get('https://wineder-app.onrender.com/api/auth/current', {
-                headers: {
-                    'Authorization': `Bearer ${response.data}`
-                }
-            })
+            const current = await axios.get(
+                // 'https://wineder-app.onrender.com/api/auth/current',
+                "http://localhost:8080/api/auth/current",
+                {
+                    headers: {
+                        'Authorization': `Bearer ${response.data}`
+                    }
+                })
 
             dispatch(getRole(current.data.role))
 
@@ -89,12 +95,12 @@ const Login = () => {
 
 
                 <div className="flex items-center justify-center bg-red-100 relative ">
-                    <div className='relative w-[80%] md:w-[40%] lg:w-[30%]  my-5'>                        
+                    <div className='relative w-[80%] md:w-[40%] lg:w-[30%]  my-5'>
                         <img className='rounded-xl shadow-md filter blur-[1px] lg:h-[500px] ' src="./assets/login.jpg" alt="" />
                     </div>
-                    <div className="w-full max-w-xs mt-5 absolute z-20 md:w-[30%] lg:w-[20%] lg:mr-[7.5%]">
+                    <div className="w-full max-w-xs mt-5 absolute z-20 md:w-[30%] lg:w-[20%] lg:mr-[5.5%]">
                         <form className="bg-white bg-opacity-70 shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
-                        <h2 className='text-6xl text-center mb-10 text-black'><strong>Login</strong></h2>
+                            <h2 className='text-6xl text-center mb-10 text-black'><strong>Login</strong></h2>
                             <div className="mb-4">
                                 <label className="block text-black text-sm font-bold mb-2" htmlFor="username">
                                     <strong>Username</strong>
