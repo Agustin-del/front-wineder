@@ -39,7 +39,7 @@ const Carrito = () => {
             // const response = await axios.get(
             //     "https://wineder-app.onrender.com/api/buyorder/client/pending",
             const response = await axios.get(
-                "https://http://localhost:8080/api/buyorder/client/pending",
+                "http://localhost:8080/api/buyorder/client/pending",
 
                 {
                     headers: { Authorization: `Bearer ${token}` },

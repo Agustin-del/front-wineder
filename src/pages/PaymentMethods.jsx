@@ -7,6 +7,10 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "flowbite-react";
 
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+initMercadoPago('YOUR_PUBLIC_KEY');
+
+
 function PaymentMethods() {
   const [loading, setLoading] = useState(true);
   const [totalQuantity, setTotalQuantity] = useState();
@@ -334,6 +338,7 @@ function PaymentMethods() {
                 </button>
               </div>
             </form>
+            <div id="wallet_container"></div>
           </div>
         )}
       </body>
