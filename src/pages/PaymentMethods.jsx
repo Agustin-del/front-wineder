@@ -11,29 +11,24 @@ import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
 function PaymentMethods() {
   //MERCADO PAGO, INTEGRACION
-
   initMercadoPago("YOUR_PUBLIC_KEY", {
     locale: "es-AR",
   });
 
   const [preferenceId, setPreferenceId] = useState(null);
+  const [idBuyOrder, setIdBuyOrder]= useState("");
 
   const createPreference = async () => {
     try {
-
-      
-
-//ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO
+      //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO
 
       const response = await axios.post(
         "http://localhost:8080/api/create_preference",
 
-//MANDAR ID DE BUYoRDER?--> BACK LO GESTIONE CON LOS PRODUCTOS      
+        //MANDAR ID DE BUYoRDER?--> BACK LO GESTIONE CON LOS PRODUCTOS
 
         {
-          totalAmount: 500,
-          description: "Pago de prueba",
-          totalQuantity: 2,
+          idBuyOrder
         }
       );
       const { id } = response.data;
@@ -52,8 +47,8 @@ function PaymentMethods() {
 
   //---------------------------------------------------------
   const [loading, setLoading] = useState(true);
-  const [totalQuantity, setTotalQuantity] = useState();
-  const [totalAmount, setTotalAmount] = useState();
+  // const [totalQuantity, setTotalQuantity] = useState();
+  // const [totalAmount, setTotalAmount] = useState();
   const [response, setResponse] = useState();
 
   const [address, setAddress] = useState("");
@@ -77,12 +72,15 @@ function PaymentMethods() {
   useEffect(() => {
     setTimeout(() => {
       getAmountToPay();
-    }, 3000);
+      
+    }, 1000);
+
     setLoading(false);
+
   }, []);
 
   //SOLICITUD AL BACK PARA SABER EL MONTO A PAGAR
-  const getAmountToPay = async (e) => {
+  const getAmountToPay = async () => {
     try {
       const resp = await axios.get(
         // "https://wineder-app.onrender.com/api/buyorder/client/pending",
@@ -94,26 +92,29 @@ function PaymentMethods() {
         }
       );
 
-      setResponse(resp.data.orderProducts);
-      console.log(resp);
+      setResponse(resp.data);
+      //console.log(resp);
       console.log(response);
+      setIdBuyOrder(response.id)
+      console.log(idBuyOrder);
 
-      // Multiplicar price y quantity
-      const total = response.map((product) => product.price * product.quantity) 
-        .reduce((acc, curr) => acc + curr, 0);
-    
+      // if (response != null) {
+      //   // Multiplicar price y quantity
+      //   const total = response
+      //     .map((product) => product.price * product.quantity)
+      //     .reduce((acc, curr) => acc + curr, 0);
+      //   console.log(totalAmount);
 
+      //   setTotalAmount(total);
+      //   setDescription("Winder purchase");
 
-      setTotalAmount(total);
-      setDescription("Winder purchase");
+      //   const aux = response
+      //     .map((product) => product.quantity)
+      //     .reduce((acc, curr) => acc + curr, 0);
+      //   setTotalQuantity(aux);
 
-      console.log(totalAmount);
-    
-      const aux = response.map((product) => product.quantity) 
-        .reduce((acc, curr) => acc + curr, 0);
-      setTotalQuantity(aux);
-      console.log(totalQuantity);
-
+      //   console.log(totalQuantity);
+      //}
     } catch (error) {
       console.log(error);
     }
@@ -381,20 +382,20 @@ function PaymentMethods() {
                 >
                   Send Payment
                 </button>
-                
-                { preferenceId &&
-                  <Wallet
-                  initialization={{ preferenceId: preferenceId }}
-                  />
-                }
 
+                {preferenceId && (
+                  <Wallet initialization={{ preferenceId: preferenceId }} />
+                )}
               </div>
             </form>
           </div>
         )}
       </body>
-      //DEBERIA ESTAR
-      {/* <div className="w-2/3 container mx-auto px-4 py-8 flex flex-col">
+       
+      {/* 
+      
+      
+      <div className="w-2/3 container mx-auto px-4 py-8 flex flex-col">
 
         <h1 className="text-2xl text-left font-semibold text-gray-800 lg:w-[70%] lg:ml-[20%]">
           Current Purchase
@@ -422,8 +423,6 @@ function PaymentMethods() {
           </div>
         </div>
       </div> */}
-
-
       {openModal && (
         <Modal
           show={openModal}
