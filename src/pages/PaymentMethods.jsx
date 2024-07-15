@@ -99,30 +99,30 @@ function PaymentMethods() {
       //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO
       console.log(buyorder.id);
       const response = await axios.post(
-        `http://localhost:8080/api/mp/createPreference/${buyorder.id}`,
+        `http://localhost:8080/api/mp/createPreference/${buyorder.id}`, [],
         {
           headers: {
             Authorization: `Bearer ${token}`,
           }
-        }
+        },
         //MANDAR ID DE BUYoRDER?--> BACK LO GESTIONE CON LOS PRODUCTOS         
       );
-      const { id } = response.data;
+      console.log(response);
+      const id = response.data;
       console.log(response.data);
-      setPreferenceId(id);
       return id;
     } catch (error) {
       console.log(error);
     }
   };
 
-  // const handleBuy = async () => {
-  //   const id = await createPreference();
-  //   if (id) {
-  //     setPreferenceId(id);
-  //     console.log(preferenceId)
-  //   }
-  // };
+  const handleBuy = async () => {
+    const id = await createPreference();
+    if (id) {
+      setPreferenceId(id);
+      console.log(preferenceId)
+    }
+  };
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -396,13 +396,13 @@ function PaymentMethods() {
               </div>
             </form> */}
             <div className="flex flex-wrap justify-center">
-              {/* <button
+              <button
                 //type="submit"
                 onClick={handleBuy}
                 className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4"
               >
-                Send Payment
-              </button> */}
+                Continue
+              </button>
 
               {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId }} />)}
 
