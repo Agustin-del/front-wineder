@@ -45,10 +45,14 @@ function PaymentMethods() {
 
   useEffect(() => {
     setTimeout(() => {
+      console.log(preferenceId);
       getAmountToPay();
+      createPreference();
     }, 3000);
     setLoading(false);
-    handleBuy();
+    // handleBuy();
+
+    console.log(preferenceId);
   }, []);
 
   //SOLICITUD AL BACK PARA SABER EL MONTO A PAGAR
@@ -60,7 +64,7 @@ function PaymentMethods() {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-          },
+          }
         }
       );
 
@@ -93,26 +97,32 @@ function PaymentMethods() {
   const createPreference = async () => {
     try {
       //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO
-
+      console.log(buyorder.id);
       const response = await axios.post(
         `http://localhost:8080/api/mp/createPreference/${buyorder.id}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        }
         //MANDAR ID DE BUYoRDER?--> BACK LO GESTIONE CON LOS PRODUCTOS         
       );
       const { id } = response.data;
       console.log(response.data);
+      setPreferenceId(id);
       return id;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleBuy = async () => {
-    const id = await createPreference();
-    if (id) {
-      setPreferenceId(id);
-    }
-  };
+  // const handleBuy = async () => {
+  //   const id = await createPreference();
+  //   if (id) {
+  //     setPreferenceId(id);
+  //     console.log(preferenceId)
+  //   }
+  // };
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -394,9 +404,9 @@ function PaymentMethods() {
                 Send Payment
               </button> */}
 
-              {preferenceId && (
-                <Wallet initialization={{ preferenceId: preferenceId }} />
-              )}
+              {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId }} />)}
+
+
 
 
 
