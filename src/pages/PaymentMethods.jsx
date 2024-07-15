@@ -10,51 +10,20 @@ import { Modal } from "flowbite-react";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
 function PaymentMethods() {
-  //MERCADO PAGO, INTEGRACION
 
-  initMercadoPago("YOUR_PUBLIC_KEY", {
+
+  initMercadoPago("APP_USR-78fc479f-615e-4d74-bdad-96178fa58bf5", {
     locale: "es-AR",
   });
 
-  const [preferenceId, setPreferenceId] = useState(null);
-
-  const createPreference = async () => {
-    try {
 
 
-
-      //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO
-
-      const response = await axios.post(
-        "http://localhost:8080/api/create_preference",
-
-        //MANDAR ID DE BUYoRDER?--> BACK LO GESTIONE CON LOS PRODUCTOS      
-
-        {
-          totalAmount: 500,
-          description: "Pago de prueba",
-          totalQuantity: 2,
-        }
-      );
-      const { id } = response.data;
-      return id;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleBuy = async () => {
-    const id = await createPreference();
-    if (id) {
-      setPreferenceId(id);
-    }
-  };
-
-  //---------------------------------------------------------
+  // ---------------------------------------------------------
   const [loading, setLoading] = useState(true);
   const [totalQuantity, setTotalQuantity] = useState();
   const [totalAmount, setTotalAmount] = useState();
   const [response, setResponse] = useState();
+  const [buyorder, setBuyorder] = useState();
 
   const [address, setAddress] = useState("");
   const [number, setNumber] = useState();
@@ -71,7 +40,7 @@ function PaymentMethods() {
 
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
-
+  const [preferenceId, setPreferenceId] = useState(null);
   const token = useSelector((store) => store.authReducer.token);
 
   useEffect(() => {
@@ -79,6 +48,7 @@ function PaymentMethods() {
       getAmountToPay();
     }, 3000);
     setLoading(false);
+    handleBuy();
   }, []);
 
   //SOLICITUD AL BACK PARA SABER EL MONTO A PAGAR
@@ -94,28 +64,53 @@ function PaymentMethods() {
         }
       );
 
+      setBuyorder(resp.data);
       setResponse(resp.data.orderProducts);
       console.log(resp);
-      console.log(response);
+
 
       // Multiplicar price y quantity
-      const total = response.map((product) => product.price * product.quantity)
-        .reduce((acc, curr) => acc + curr, 0);
+      // const total = response.map((product) => product.price * product.quantity)
+      //   .reduce((acc, curr) => acc + curr, 0);
 
 
 
-      setTotalAmount(total);
-      setDescription("Winder purchase");
+      // setTotalAmount(total);
+      // setDescription("Winder purchase");
 
-      console.log(totalAmount);
+      // console.log(totalAmount);
 
-      const aux = response.map((product) => product.quantity)
-        .reduce((acc, curr) => acc + curr, 0);
-      setTotalQuantity(aux);
-      console.log(totalQuantity);
+      // const aux = response.map((product) => product.quantity)
+      //   .reduce((acc, curr) => acc + curr, 0);
+      // setTotalQuantity(aux);
+      // console.log(totalQuantity);
 
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const createPreference = async () => {
+    try {
+      //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO
+
+      const response = await axios.post(
+        `http://localhost:8080/api/mp/createPreference/${buyorder.id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+        //MANDAR ID DE BUYoRDER?--> BACK LO GESTIONE CON LOS PRODUCTOS         
+      );
+      const { id } = response.data;
+      console.log(response.data);
+      return id;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleBuy = async () => {
+    const id = await createPreference();
+    if (id) {
+      setPreferenceId(id);
     }
   };
 
@@ -190,7 +185,7 @@ function PaymentMethods() {
               Finish Your Purchase
             </h1>
 
-            <form
+            {/* <form
               //onSubmit={handleSubmit}
               class="bg-white shadow-md rounded-lg overflow-hidden "
             >
@@ -382,19 +377,34 @@ function PaymentMethods() {
                   Send Payment
                 </button>
 
-                {preferenceId &&
-                  <Wallet
-                    initialization={{ preferenceId: preferenceId }}
-                  />
-                }
+                {preferenceId && (
+                  <Wallet initialization={{ preferenceId: preferenceId }} />
+                )}
+
+
 
               </div>
-            </form>
-            <div id="wallet_container"></div>
+            </form> */}
+            <div className="flex flex-wrap justify-center">
+              {/* <button
+                //type="submit"
+                onClick={handleBuy}
+                className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4"
+              >
+                Send Payment
+              </button> */}
+
+              {preferenceId && (
+                <Wallet initialization={{ preferenceId: preferenceId }} />
+              )}
+
+
+
+            </div>
+
           </div>
         )}
       </body>
-      //DEBERIA ESTAR
       {/* <div className="w-2/3 container mx-auto px-4 py-8 flex flex-col">
 
         <h1 className="text-2xl text-left font-semibold text-gray-800 lg:w-[70%] lg:ml-[20%]">
