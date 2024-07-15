@@ -10,44 +10,6 @@ import { Modal } from "flowbite-react";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
 function PaymentMethods() {
-<<<<<<< HEAD
-  //MERCADO PAGO, INTEGRACION
-  initMercadoPago("YOUR_PUBLIC_KEY", {
-    locale: "es-AR",
-  });
-
-  const [preferenceId, setPreferenceId] = useState(null);
-  const [idBuyOrder, setIdBuyOrder]= useState("");
-
-  const createPreference = async () => {
-    try {
-      //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO
-
-      const response = await axios.post(
-        "http://localhost:8080/api/create_preference",
-
-        //MANDAR ID DE BUYoRDER?--> BACK LO GESTIONE CON LOS PRODUCTOS
-
-        {
-          idBuyOrder
-        }
-      );
-      const { id } = response.data;
-      return id;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleBuy = async () => {
-    const id = await createPreference();
-    if (id) {
-      setPreferenceId(id);
-    }
-  };
-
-  //---------------------------------------------------------
-=======
 
 
   initMercadoPago("APP_USR-78fc479f-615e-4d74-bdad-96178fa58bf5", {
@@ -57,10 +19,9 @@ function PaymentMethods() {
 
 
   // ---------------------------------------------------------
->>>>>>> da09cb04cd14751d126c3a3f8eb8682db4066b49
   const [loading, setLoading] = useState(true);
-  // const [totalQuantity, setTotalQuantity] = useState();
-  // const [totalAmount, setTotalAmount] = useState();
+  const [totalQuantity, setTotalQuantity] = useState();
+  const [totalAmount, setTotalAmount] = useState();
   const [response, setResponse] = useState();
   const [buyorder, setBuyorder] = useState();
 
@@ -86,24 +47,16 @@ function PaymentMethods() {
     setTimeout(() => {
       console.log(preferenceId);
       getAmountToPay();
-<<<<<<< HEAD
-      
-    }, 1000);
-
-    setLoading(false);
-
-=======
       createPreference();
     }, 3000);
     setLoading(false);
     // handleBuy();
 
     console.log(preferenceId);
->>>>>>> da09cb04cd14751d126c3a3f8eb8682db4066b49
   }, []);
 
   //SOLICITUD AL BACK PARA SABER EL MONTO A PAGAR
-  const getAmountToPay = async () => {
+  const getAmountToPay = async (e) => {
     try {
       const resp = await axios.get(
         // "https://wineder-app.onrender.com/api/buyorder/client/pending",
@@ -115,20 +68,6 @@ function PaymentMethods() {
         }
       );
 
-<<<<<<< HEAD
-      setResponse(resp.data);
-      //console.log(resp);
-      console.log(response);
-      setIdBuyOrder(response.id)
-      console.log(idBuyOrder);
-
-      // if (response != null) {
-      //   // Multiplicar price y quantity
-      //   const total = response
-      //     .map((product) => product.price * product.quantity)
-      //     .reduce((acc, curr) => acc + curr, 0);
-      //   console.log(totalAmount);
-=======
       setBuyorder(resp.data);
       setResponse(resp.data.orderProducts);
       console.log(resp);
@@ -137,17 +76,8 @@ function PaymentMethods() {
       // Multiplicar price y quantity
       // const total = response.map((product) => product.price * product.quantity)
       //   .reduce((acc, curr) => acc + curr, 0);
->>>>>>> da09cb04cd14751d126c3a3f8eb8682db4066b49
 
-      //   setTotalAmount(total);
-      //   setDescription("Winder purchase");
 
-<<<<<<< HEAD
-      //   const aux = response
-      //     .map((product) => product.quantity)
-      //     .reduce((acc, curr) => acc + curr, 0);
-      //   setTotalQuantity(aux);
-=======
 
       // setTotalAmount(total);
       // setDescription("Winder purchase");
@@ -158,10 +88,7 @@ function PaymentMethods() {
       //   .reduce((acc, curr) => acc + curr, 0);
       // setTotalQuantity(aux);
       // console.log(totalQuantity);
->>>>>>> da09cb04cd14751d126c3a3f8eb8682db4066b49
 
-      //   console.log(totalQuantity);
-      //}
     } catch (error) {
       console.log(error);
     }
@@ -459,19 +386,13 @@ function PaymentMethods() {
                 >
                   Send Payment
                 </button>
-<<<<<<< HEAD
-=======
 
                 {preferenceId && (
                   <Wallet initialization={{ preferenceId: preferenceId }} />
                 )}
 
 
->>>>>>> da09cb04cd14751d126c3a3f8eb8682db4066b49
 
-                {preferenceId && (
-                  <Wallet initialization={{ preferenceId: preferenceId }} />
-                )}
               </div>
             </form> */}
             <div className="flex flex-wrap justify-center">
@@ -494,15 +415,7 @@ function PaymentMethods() {
           </div>
         )}
       </body>
-<<<<<<< HEAD
-       
-      {/* 
-      
-      
-      <div className="w-2/3 container mx-auto px-4 py-8 flex flex-col">
-=======
       {/* <div className="w-2/3 container mx-auto px-4 py-8 flex flex-col">
->>>>>>> da09cb04cd14751d126c3a3f8eb8682db4066b49
 
         <h1 className="text-2xl text-left font-semibold text-gray-800 lg:w-[70%] lg:ml-[20%]">
           Current Purchase
@@ -530,6 +443,8 @@ function PaymentMethods() {
           </div>
         </div>
       </div> */}
+
+
       {openModal && (
         <Modal
           show={openModal}
