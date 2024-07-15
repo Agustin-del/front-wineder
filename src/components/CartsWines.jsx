@@ -41,14 +41,17 @@ const CartsWines = ({ bgColor, ...props }) => {
         handleCart();
 
         try {
-            const response = await axios.post(`http://localhost:8080/api/orderproducts/create/${props.id}`, null, {
+            const response = await axios.post(
+                // `https://wineder-app.onrender.com/api/orderproducts/create/${props.id}`
+                `http://localhost:8080/api/orderproducts/create/${props.id}`
+                , null, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
             if (response.status === 200) {
 
-                
+
                 setOpenModal(true);
                 setIsAddedToCart(true);
                 setTimeout(() => {
@@ -88,10 +91,10 @@ const CartsWines = ({ bgColor, ...props }) => {
                 <div className={`flex flex-col gap-4 h-full`}>
                     <div className={`flex flex-col justify-between `}>
                         <span className={`font-bold text-xl text-[#73383E]`}>{formatter.format(props.price)}</span>
-                        
+
                         <div className={`flex flex-col`}>
                             <span className={`text-sm font-bold`}>{props.name}</span>
-                            <p>{props.provider }</p>
+                            <p>{props.provider}</p>
                         </div>
                     </div>
                     <div className="flex justify-between text-center" >
