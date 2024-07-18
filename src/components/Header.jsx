@@ -29,8 +29,13 @@ const Header = () => {
     };
 
     const handleLogout = () => {
+        
         dispatch(eraseRole());
         dispatch(logout());
+        
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        
         setOpenModal(false);
         navigate("/");
     };
