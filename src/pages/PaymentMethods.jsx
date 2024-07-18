@@ -45,14 +45,12 @@ function PaymentMethods() {
 
   useEffect(() => {
     setTimeout(() => {
-      console.log(preferenceId);
+     
       getAmountToPay();
-      createPreference();
+   
     }, 3000);
     setLoading(false);
-    // handleBuy();
-
-    console.log(preferenceId);
+    
   }, []);
 
   //SOLICITUD AL BACK PARA SABER EL MONTO A PAGAR
