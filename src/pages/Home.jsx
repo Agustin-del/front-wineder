@@ -37,8 +37,8 @@ const Home = () => {
         color: "#5E2A30",
         background: "#fff ",
         backdrop: `
-          rgba(94, 42, 48, 0.4)
-          url("/images/nyan-cat.gif")
+          rgba(64, 30, 36, 0.4) 
+
           left top
           no-repeat
         `
