@@ -49,6 +49,7 @@ function PaymentMethods() {
       getAmountToPay();
       createPreference();
     }, 3000);
+
     setLoading(false);
     // handleBuy();
 
@@ -404,12 +405,7 @@ function PaymentMethods() {
                 Continue
               </button>
 
-              {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId, redirectMode: "modal" }} customization={{ texts: { valueProp: 'smart_option' } }} />)}
-
-
-
-
-
+              {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId, redirectMode: "modal" }} />)}
             </div>
 
           </div>
