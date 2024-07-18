@@ -20,16 +20,13 @@ function PaymentMethods() {
 
   // ---------------------------------------------------------
   const [loading, setLoading] = useState(true);
-  const [totalQuantity, setTotalQuantity] = useState();
-  const [totalAmount, setTotalAmount] = useState();
-  const [response, setResponse] = useState();
   const [buyorder, setBuyorder] = useState();
 
-  const [address, setAddress] = useState("");
+  const [street, setStreet] = useState("");
   const [number, setNumber] = useState();
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [zip, setZip] = useState(0);
+  const [zipCode, setZipCode] = useState(0);
   const [country, setCountry] = useState();
 
   const [cardholderName, setCardholderName] = useState("");
@@ -94,7 +91,7 @@ function PaymentMethods() {
 
   const createPreference = async () => {
     try {
-      //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO
+      //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO y creacion de preferencias de MP
       console.log(buyorder.id);
       const response = await axios.post(
         `http://localhost:8080/api/mp/createPreference/${buyorder.id}`, [],
@@ -402,7 +399,7 @@ function PaymentMethods() {
                 Continue
               </button>
 
-              {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId, redirectMode: "modal" }} customization={{ texts: { valueProp: 'smart_option' } }} />)}
+              {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId}} />)}
 
 
 
