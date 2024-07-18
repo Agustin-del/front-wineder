@@ -58,7 +58,7 @@ function PaymentMethods() {
     try {
       const resp = await axios.get(
         // "https://wineder-app.onrender.com/api/buyorder/client/pending",
-        "http://localhost:8080/api/buyorder/client/pending",
+        `${API_BASE_URL}/api/buyorder/client/pending`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
