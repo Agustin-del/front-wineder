@@ -17,28 +17,30 @@ const Contact = () => {
         <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
           <img className='w-[300px]' src="./assets/copa.gif" alt="" />
         </div>) : (
-        <div className="container mx-auto my-10 p-6 bg-white rounded-lg  lg:w-[40%] md:w-[60%] border-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+        <div className="container mx-auto my-10 p-6  bg-red-100 rounded-lg  lg:w-[40%] md:w-[60%] border-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
 
-          <h2 className="text-3xl  text-center lg:w-[85%] font-semibold mb-6">Contact</h2>
-          <p className="mb-6 text-sm md:text-base lg:w-[90%]">If you have any questions or need more information, do not hesitate to contact us through the following form:</p>
+          <div className="flex items-center justify-center ">
+            <div className="lg:w-[90%]">
+              <h2 className="text-3xl text-center font-semibold mb-6 lg:text-5xl">Contact</h2>
+              <p className="mb-6 text-sm md:text-base">If you have any questions or need more information, do not hesitate to contact us through the following form:</p>
 
-          <form action="/send-message" method="POST" className="lg:w-[90%]  space-y-4 ">
-            <div className=" flex flex-col gap-2">
-            <div className="lg:flex lg:flex-wrap lg:gap-2 ">
-              <Form  name="Name" type="text" placeholder="Enter your name" />
-              <Form name="Email" type="email" placeholder="Enter your email" />
-              <Form name="Phone" type="tel" placeholder="Enter your phone number" />
-              <Form name="Subject" type="text" placeholder="Enter subject" />
+              <form action="/send-message" method="POST" className="flex flex-col gap-2">
+                <div className="lg:flex lg:flex-wrap lg:gap-2 ">
+                  <Form  name="Name" type="text" placeholder="Enter your name" />
+                  <Form name="Email" type="email" placeholder="Enter your email" />
+                  <Form name="Phone" type="tel" placeholder="Enter your phone number" />
+                  <Form name="Subject" type="text" placeholder="Enter subject" />
+                </div>
+                <div className="p-2">
+                  <label htmlFor="message" className="text-sm font-medium text-gray-700">Your Message</label>
+                  <textarea id="message" className="w-full border-gray-300" placeholder='Enter your message'></textarea>
+                </div>
+                <div className="">
+                  <button type="submit" className="w-full bg-[#5E2A30] text-white py-2 px-4 rounded-md shadow-sm hover:bg-[#a0767b] hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">Send</button>
+                </div>
+              </form>
             </div>
-            <div className="p-2">
-              <label htmlFor="message" className="text-sm font-medium text-gray-700">Your Message</label>
-              <textarea id="message" className="w-[350px] md:w-[420px] lg:w-[400px] border-gray-300" placeholder='Enter your message'></textarea>
-            </div>
-            </div>
-            <div>
-              <button type="submit" className="w-full bg-[#5E2A30] text-white py-2 px-4 rounded-md shadow-sm hover:bg-[#a0767b] hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 lg:w-[50%] lg:ml-[25%]">Send</button>
-            </div>
-          </form>
+          </div>
 
           <div className="mt-10 lg:flex lg:items-center lg:gap-2 ">
             <div className="md:flex md:flex-col md:items-center lg:items-start">
