@@ -34,16 +34,14 @@ function App() {
   );
   const role = useSelector((store) => store.roleReducer.role);
 
-  
   useEffect(() => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role")
-    dispatch(login(token));
-    dispatch(getRole(role))
-    
+    if (token) {
+      dispatch(login(token));
+      dispatch(getRole(role))    
+    }
   }, []);
-
-  
 
   return (
     <>
