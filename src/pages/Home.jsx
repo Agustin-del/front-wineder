@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import Swal from 'sweetalert2'
 
 
+
+
 const Home = () => {
   const [loading, setLoading] = useState(true);
 
@@ -15,6 +17,7 @@ const Home = () => {
       
     }, 2000);
   }, []);
+
 
  
 

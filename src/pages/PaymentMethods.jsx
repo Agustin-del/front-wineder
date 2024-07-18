@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "flowbite-react";
+import { API_BASE_URL } from '../utils/config'
+
 
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
@@ -20,16 +22,13 @@ function PaymentMethods() {
 
   // ---------------------------------------------------------
   const [loading, setLoading] = useState(true);
-  const [totalQuantity, setTotalQuantity] = useState();
-  const [totalAmount, setTotalAmount] = useState();
-  const [response, setResponse] = useState();
   const [buyorder, setBuyorder] = useState();
 
-  const [address, setAddress] = useState("");
+  const [street, setStreet] = useState("");
   const [number, setNumber] = useState();
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [zip, setZip] = useState(0);
+  const [zipCode, setZipCode] = useState(0);
   const [country, setCountry] = useState();
 
   const [cardholderName, setCardholderName] = useState("");
@@ -45,15 +44,13 @@ function PaymentMethods() {
 
   useEffect(() => {
     setTimeout(() => {
-      console.log(preferenceId);
+     
       getAmountToPay();
-      createPreference();
+   
     }, 3000);
 
     setLoading(false);
-    // handleBuy();
-
-    console.log(preferenceId);
+    
   }, []);
 
   //SOLICITUD AL BACK PARA SABER EL MONTO A PAGAR
@@ -97,10 +94,10 @@ function PaymentMethods() {
 
   const createPreference = async () => {
     try {
-      //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO
+      //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO y creacion de preferencias de MP
       console.log(buyorder.id);
       const response = await axios.post(
-        `http://localhost:8080/api/mp/createPreference/${buyorder.id}`, [],
+        ` ${API_BASE_URL}/api/mp/createPreference/${buyorder.id}`, [],
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -155,8 +152,8 @@ function PaymentMethods() {
   //     const balance = { balance: `${totalAmount}` };
 
   //     const transaction = await axios.post(
-  //       // "https://wineder-app.onrender.com/api/buyorder/closeorder",
-  //       "http://localhost:8080/api/buyorder/closeorder",
+  //       //  `${API_BASE_URL}/api/buyorder/closeorder`,
+  //       //
   //       balance,
   //       {
   //         headers: {
@@ -166,7 +163,7 @@ function PaymentMethods() {
   //     );
 
   //     //     const debit = await axios.post(
-  //     //       "https://argentumhomebanking-1.onrender.com/api/clients/debitWinder",
+  //     //        `${API_BASE_URL}/api/debitWinder`,
   //     //       data
   //     //     );
 
@@ -405,7 +402,16 @@ function PaymentMethods() {
                 Continue
               </button>
 
+<<<<<<< HEAD
               {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId, redirectMode: "modal" }} />)}
+=======
+              {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId}} />)}
+
+
+
+
+
+>>>>>>> f434ffd71ec5944a81a41e6f0c22a641240676a3
             </div>
 
           </div>

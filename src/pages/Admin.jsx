@@ -7,6 +7,7 @@ import { Button } from 'flowbite-react'
 import TablaClientAdmin from '../components/TablaClientAdmin'
 import TablaOrderAdmin from '../components/TablaOrderAdmin'
 import TablaProviderAdmin from '../components/TablaProviderAdmin'
+import { API_BASE_URL } from '../utils/config'
 
 const Admin = () => {
     const [data, setData] = useState([])
@@ -28,23 +29,22 @@ const Admin = () => {
 
             if (activeTab === 'clients') {
                 response = await axios.get(
-                    // 'https://wineder-app.onrender.com/api/clients/all',
-                    "http://localhost:8080/api/clients/all",
+                
+                    `${API_BASE_URL}/api/clients/all`,
                     { headers })
 
                 console.log(response.data);
 
             } else if (activeTab === 'orders') {
                 response = await axios.get(
-                    // 'https://wineder-app.onrender.com/api/orderproducts/admin/all',
-                    "http://localhost:8080/api/orderproducts/admin/all",
+                    
+                    `${API_BASE_URL}/api/orderproducts/admin/all`,
                     { headers })
                 console.log(response.data);
 
             } else if (activeTab === 'products') {
                 response = await axios.get(
-                    // 'https://wineder-app.onrender.com/api/products/all', 
-                    "http://localhost:8080/api/products/all",
+                    `${API_BASE_URL}/api/products/all`,
                     { headers })
                 console.log(response.data);
 
@@ -53,8 +53,7 @@ const Admin = () => {
             }
             else if (activeTab === 'provider') {
                 response = await axios.get(
-                    // 'https://wineder-app.onrender.com/api/provider/all',
-                    "http://localhost:8080/api/provider/all",
+                    `${API_BASE_URL}/api/provider/all`,
                     { headers })
 
 

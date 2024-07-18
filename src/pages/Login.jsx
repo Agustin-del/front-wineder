@@ -6,6 +6,9 @@ import { login } from '../redux/actions/authActions';
 import { Alert } from 'flowbite-react';
 import { getRole } from '../redux/actions/roleActions';
 // import { GoogleLogin } from '@react-oauth/google';
+import { API_BASE_URL } from '../utils/config'
+
+
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -46,21 +49,24 @@ const Login = () => {
         try {
             const response = await axios.post(
                 // 'https://wineder-app.onrender.com/api/auth/login',
-                "http://localhost:8080/api/auth/login",
+                `${API_BASE_URL}/api/auth/login`,
                 requestBody)
 
             dispatch(login(response.data))
 
+            localStorage.setItem("token",response.data)
+            
             const current = await axios.get(
                 // 'https://wineder-app.onrender.com/api/auth/current',
-                "http://localhost:8080/api/auth/current",
+                `${API_BASE_URL}/api/auth/current`,
                 {
                     headers: {
                         'Authorization': `Bearer ${response.data}`
                     }
                 })
-
-            dispatch(getRole(current.data.role))
+                
+                dispatch(getRole(current.data.role))
+                localStorage.setItem("role",current.data.role)
 
             if (current.data.role === "admin") {
                 navigate('/admin')

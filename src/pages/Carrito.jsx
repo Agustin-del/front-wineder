@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import { API_BASE_URL } from '../utils/config'
+
 
 const Carrito = () => {
 
@@ -36,10 +38,9 @@ const Carrito = () => {
     const fetchData = async () => {
 
         try {
-            // const response = await axios.get(
-            //     "https://wineder-app.onrender.com/api/buyorder/client/pending",
+           
             const response = await axios.get(
-                "http://localhost:8080/api/buyorder/client/pending",
+                `${API_BASE_URL}/api/buyorder/client/pending`,
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }
@@ -56,19 +57,11 @@ const Carrito = () => {
     // const fetchWishlist = async () => {
     //   try {
     //     const responseW = await axios.get(
-    //       "https://wineder-app.onrender.com/api/orderproducts/client/wishlist",
+    //      `${API_BASE_URL}/api/orderproducts/client/wishlist`,
     //       {
     //         headers: { Authorization: `Bearer ${token}` },
     //       }
     //     );
-    //   const fetchWishlist = async () => {
-    //     try {
-    //       const responseW = await axios.get(
-    //         "https://wineder-app.onrender.com/api/orderproducts/client/wishlist",
-    //         {
-    //           headers: { Authorization: `Bearer ${token}` },
-    //         }
-    //       );
 
     //     const aux = responseW.data;
     //     setWishlist(aux);
@@ -105,11 +98,9 @@ const Carrito = () => {
 
     const setOrderProductFalse = async (id) => {
         try {
-            // await axios.put(
-            //     `https://wineder-app.onrender.com/api/orderproducts/update/${id}`,
-            //     null,
+           
             await axios.put(
-                `https://http://localhost:8080/api/orderproducts/update/${id}`,
+                `${API_BASE_URL}/api/orderproducts/update/${id}`,
                 null,
                 {
                     headers: { 'Authorization': `Bearer ${token}` },
@@ -136,7 +127,7 @@ const Carrito = () => {
             try {
                 await axios.delete(
                     // `https://wineder-app.onrender.com/api/orderproducts/delete/${item.id}`,
-                    `http://localhost:8080/api/orderproducts/delete/${item.id}`,
+                    `${API_BASE_URL}/api/orderproducts/delete/${item.id}`,
                     {
                         headers: { Authorization: `Bearer ${token}` },
                     }
@@ -151,6 +142,8 @@ const Carrito = () => {
 
     const deleteOrderProduct = async (id) => {
         try {
+
+            //hacer la peticion al back
             setCartItems(
                 cartItems.map((item) => {
                     if (item.id === id) {
@@ -213,7 +206,7 @@ const Carrito = () => {
             const aux = [...cartItems];
 
             const response = await axios.post(
-                "http://localhost:8080/api/buyorder/modify",
+                `${API_BASE_URL}/api/buyorder/modify`,
                 aux,
                 {
                     headers: { Authorization: `Bearer ${token}` },
