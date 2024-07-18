@@ -3,7 +3,7 @@ import React from 'react'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { list } from 'postcss';
+import { API_BASE_URL } from '../utils/config'
 
 const Client = () => {
   const [client, setClient] = useState([])
@@ -22,7 +22,7 @@ const Client = () => {
     try {
       const response = await axios.get(
         // 'https://wineder-app.onrender.com/api/auth/current',
-        'http://localhost:8080/api/auth/current',
+        `${API_BASE_URL}/api/auth/current`,
         { headers: { 'Authorization': `Bearer ${token}` } });
       setClient(response.data)
     }
@@ -35,7 +35,7 @@ const Client = () => {
     try {
       const response = await axios.get(
         // 'https://wineder-app.onrender.com/api/buyorder/client/pending', 
-        "http://localhost:8080/api/buyorder/client/pending",
+        `${API_BASE_URL}/api/buyorder/client/pending`,
         {
           headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -53,7 +53,7 @@ const Client = () => {
     try {
       const response = await axios.get(
         // 'https://wineder-app.onrender.com/api/buyorder/client/all', 
-        "http://localhost:8080/api/buyorder/client/all",
+        `${API_BASE_URL}/api/buyorder/client/all`,
         {
           headers: { 'Authorization': `Bearer ${token}` }
         });

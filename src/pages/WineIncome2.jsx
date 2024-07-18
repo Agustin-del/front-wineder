@@ -4,6 +4,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import UploadImage from "../components/UploadImage";
+import { API_BASE_URL } from '../utils/config'
+ 
 
 const WineIncome2 = () => {
   const [loading, setLoading] = useState(true);
@@ -35,7 +37,7 @@ const WineIncome2 = () => {
 
     const response = await axios.get(
       // "https://wineder-app.onrender.com/api/provider/all", 
-      "http://localhost:8080/api/provider/all",
+      `${API_BASE_URL}/api/provider/all`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -83,7 +85,7 @@ const WineIncome2 = () => {
 
       const response = await axios.post(
         // "https://wineder-app.onrender.com/api/products/create",
-        "http://localhost:8080/api/products/create",
+        `${API_BASE_URL}/api/products/create`,
         formData,
         {
           headers: {

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { CiCircleCheck } from "react-icons/ci";
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/config'
 
 const CartsWines = ({ bgColor, ...props }) => {
     const [isGreen, setIsGreen] = useState(false);
@@ -42,8 +43,7 @@ const CartsWines = ({ bgColor, ...props }) => {
 
         try {
             const response = await axios.post(
-                // `https://wineder-app.onrender.com/api/orderproducts/create/${props.id}`
-                `http://localhost:8080/api/orderproducts/create/${props.id}`
+                `${API_BASE_URL}/api/orderproducts/create/${props.id}`
                 , null, {
                 headers: {
                     Authorization: `Bearer ${token}`

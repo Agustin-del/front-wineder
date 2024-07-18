@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import CartsWines from '../components/CartsWines';
-
+import { API_BASE_URL } from '../utils/config'
+ 
 const WinesType = () => {
   const { type } = useParams();
   const [wineType, setWineType] = useState([]);
@@ -16,7 +17,7 @@ const WinesType = () => {
     try {
       const response = await axios.get(
         // 'https://wineder-app.onrender.com/api/products/all'
-        "http://localhost:8080/api/products/all"
+        `${API_BASE_URL}/api/products/all`
       );
       const filteredWines = response.data.filter(wine => wine.wineDescription !== null && wine.wineDescription.wineType === type);
       console.log(filteredWines)

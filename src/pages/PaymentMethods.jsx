@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "flowbite-react";
+import { API_BASE_URL } from '../utils/config'
+
 
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
@@ -94,7 +96,7 @@ function PaymentMethods() {
       //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO y creacion de preferencias de MP
       console.log(buyorder.id);
       const response = await axios.post(
-        `http://localhost:8080/api/mp/createPreference/${buyorder.id}`, [],
+        ` ${API_BASE_URL}/api/mp/createPreference/${buyorder.id}`, [],
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -149,8 +151,8 @@ function PaymentMethods() {
   //     const balance = { balance: `${totalAmount}` };
 
   //     const transaction = await axios.post(
-  //       // "https://wineder-app.onrender.com/api/buyorder/closeorder",
-  //       "http://localhost:8080/api/buyorder/closeorder",
+  //       //  `${API_BASE_URL}/api/buyorder/closeorder`,
+  //       //
   //       balance,
   //       {
   //         headers: {
@@ -160,7 +162,7 @@ function PaymentMethods() {
   //     );
 
   //     //     const debit = await axios.post(
-  //     //       "https://argentumhomebanking-1.onrender.com/api/clients/debitWinder",
+  //     //        `${API_BASE_URL}/api/debitWinder`,
   //     //       data
   //     //     );
 
