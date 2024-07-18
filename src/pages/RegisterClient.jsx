@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getRole } from '../redux/actions/roleActions';
 import { login } from '../redux/actions/authActions';
+import { API_BASE_URL } from '../utils/config'
+
 
 const RegisterClient = () => {
     const [loading, setLoading] = useState(true);
@@ -56,7 +58,7 @@ const RegisterClient = () => {
         try {
             const response = await axios.post(
                 // "https://wineder-app.onrender.com/api/auth/register/client",
-                "http://localhost:8080/api/auth/register/client",
+                 `${API_BASE_URL}/api/auth/register/client`,
                 requestBody)
 
             setAlert({ type: 'success', message: 'Registration successful' })
@@ -64,7 +66,7 @@ const RegisterClient = () => {
                 try {
                     const loginResponse = await axios.post(
                         // "https://wineder-app.onrender.com/api/auth/login",
-                        "http://localhost:8080/api/auth/login",
+                        `${API_BASE_URL}/api/auth/login`,
                         {
                             email: form.email,
                             password: form.password
@@ -73,7 +75,7 @@ const RegisterClient = () => {
                     setTimeout(async () => {
                         const currentResponse = await axios.get(
                             // 'https://wineder-app.onrender.com/api/auth/current',
-                            'http://localhost:8080/api/auth/current',
+                             `${API_BASE_URL}/api/auth/current`,
                             {
                                 headers: {
                                     Authorization: `Bearer ${loginResponse.data}`

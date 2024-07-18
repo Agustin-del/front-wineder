@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Anchor from "../components/Anchor";
 import axios from "axios";
+import { API_BASE_URL } from '../utils/config'
 
 const Success = () => {
   const query = new URLSearchParams(useLocation().search);
@@ -31,7 +32,7 @@ const Success = () => {
   const closeBuyOrder = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:8080//api/buyorder/closeorder/${paymentId}`
+         `${API_BASE_URL}/api/buyorder/closeorder/${paymentId}`
       );
       console.log(response);
  

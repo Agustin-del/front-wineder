@@ -20,7 +20,6 @@ import Success from "./pages/Success";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "./redux/actions/authActions";
 import { useEffect } from "react";
-import axios from "axios";
 import { getRole } from "./redux/actions/roleActions";
 
 function App() {
