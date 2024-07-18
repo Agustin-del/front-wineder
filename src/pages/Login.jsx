@@ -54,8 +54,8 @@ const Login = () => {
 
             dispatch(login(response.data))
 
-            localStorage.setItem("token",response.data)
-            
+            localStorage.setItem("token", response.data)
+
             const current = await axios.get(
                 // 'https://wineder-app.onrender.com/api/auth/current',
                 `${API_BASE_URL}/api/auth/current`,
@@ -64,9 +64,9 @@ const Login = () => {
                         'Authorization': `Bearer ${response.data}`
                     }
                 })
-                
-                dispatch(getRole(current.data.role))
-                localStorage.setItem("role",current.data.role)
+
+            dispatch(getRole(current.data.role))
+            localStorage.setItem("role", current.data.role)
 
             if (current.data.role === "admin") {
                 navigate('/admin')
