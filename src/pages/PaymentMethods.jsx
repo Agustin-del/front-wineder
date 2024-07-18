@@ -44,13 +44,13 @@ function PaymentMethods() {
 
   useEffect(() => {
     setTimeout(() => {
-     
+
       getAmountToPay();
-   
+
     }, 3000);
 
     setLoading(false);
-    
+
   }, []);
 
   //SOLICITUD AL BACK PARA SABER EL MONTO A PAGAR
@@ -402,16 +402,12 @@ function PaymentMethods() {
                 Continue
               </button>
 
-<<<<<<< HEAD
-              {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId, redirectMode: "modal" }} />)}
-=======
-              {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId}} />)}
+              {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId }} />)}
 
 
 
 
 
->>>>>>> f434ffd71ec5944a81a41e6f0c22a641240676a3
             </div>
 
           </div>
