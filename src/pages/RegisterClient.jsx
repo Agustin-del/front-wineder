@@ -115,7 +115,7 @@ const RegisterClient = () => {
                 <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
                 </div>) : (
-                <div className=" lg:h-[70vh]  w-full max-w-md mx-auto mt-5 text-white " >
+                <div className="  w-full max-w-md mx-auto mt-5 text-white " >
                     <div style={{ backgroundImage: `url('/assets/fondoRegister.jpg')` }} className="shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] mx-2 bg-cover object-cover bg-center lg:h-[550px]  rounded-lg px-8 pt-6 pb-8 mb-4 ">
 
                         <form onSubmit={handleSubmit} className='bg-black  bg-opacity-85 p-5 rounded-lg' >
