@@ -2,6 +2,9 @@ import React from "react";
 import CardHomeWine from "../components/CardHomeWine";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Swal from 'sweetalert2'
+
+
 
 
 const Home = () => {
@@ -10,8 +13,39 @@ const Home = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
+    
+      
     }, 2000);
   }, []);
+
+
+ 
+
+  useEffect(() => {
+    if (!loading) {
+      
+      Swal.fire({
+        title: "Important Notice",
+        html: `
+          <p style="font-style: italic; font-size: 20px">This page is a simulation of an e-commerce wine sales platform.
+          Transactions and orders made here are not real and will not result in the purchase or shipment of products.
+          This platform is for demonstration and educational purposes only.</p>
+          <p><strong>Thank you for your understanding. Enjoy the experience.</strong></p>
+        `,
+        width: 700,
+        padding: "3em",
+        color: "#5E2A30",
+        background: "#fff ",
+        backdrop: `
+          rgba(94, 42, 48, 0.4)
+          url("/images/nyan-cat.gif")
+          left top
+          no-repeat
+        `
+      });
+    }
+  }, [loading]);
+
 
   return (
     <main className="">
@@ -21,6 +55,7 @@ const Home = () => {
         </div>
       ) : (
         <div className="bg-[#F0E9E1] ">
+
           
           <div
             className="bg-cover object-cover bg-center pt-16 h-[450px] bg-no-repeat bg-fixed "

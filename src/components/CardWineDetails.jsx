@@ -3,6 +3,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Modal } from "flowbite-react";
+import { API_BASE_URL } from '../utils/config'
+
 
 //Componente que tiene la img del vino y el boton de agregar al carrito
 const CardWineDetails = ({ rating, id, image }) => {
@@ -12,7 +14,7 @@ const CardWineDetails = ({ rating, id, image }) => {
 
     const addProductToCart = async () => {
         try {
-            const response = await axios.post(`https://wineder-app.onrender.com/api/orderproducts/create/${id}`, null, {
+            const response = await axios.post(`${API_BASE_URL}/api/orderproducts/create/${id}`, null, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

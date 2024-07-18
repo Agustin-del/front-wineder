@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import CartsWines from '../components/CartsWines';
 import axios from 'axios';
 import { Carousel } from "flowbite-react";
-
+import { API_BASE_URL } from '../utils/config'
+ 
 
 
 const Wines = () => {
@@ -21,7 +22,8 @@ const Wines = () => {
 
     const getWines = async () => {
         try {
-            const response = await axios.get("https://wineder-app.onrender.com/api/products/all")
+            // const response = await axios.get("https://wineder-app.onrender.com/api/products/all")
+            const response = await axios.get(`${API_BASE_URL}/api/products/all`)
             setWines(response.data)
             const uniqueVarietals = [...new Set(response.data.map(wine => wine.wineDescription?.varietal).filter(Boolean))]
             const uniqueRegions = [... new Set(response.data.map(wine => wine.wineDescription?.region).filter(Boolean))]

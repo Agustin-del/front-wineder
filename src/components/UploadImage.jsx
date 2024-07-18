@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/config'
 
 const UploadImage = () => {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -18,7 +19,7 @@ const UploadImage = () => {
 
         formData.append('file', selectedFile);
         try {
-            const response = await axios.post('https://wineder-app.onrender.com/api/products/create', {formData, selectedFile }, {
+            const response = await axios.post(`${API_BASE_URL}/api/products/create`, {formData, selectedFile }, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -31,7 +32,7 @@ const UploadImage = () => {
 
     const fetchImages = async () => {
         try {
-            const response = await axios.get('https://wineder-app.onrender.com/api/images/all');
+            const response = await axios.get(`${API_BASE_URL}/api/images/all`);
             setImages(response.data);
         } catch (error) {
             console.error('Error fetching images:', error);

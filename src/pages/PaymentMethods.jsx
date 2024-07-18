@@ -6,18 +6,29 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "flowbite-react";
+import { API_BASE_URL } from '../utils/config'
+
+
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
 function PaymentMethods() {
-  const [loading, setLoading] = useState(true);
-  const [totalQuantity, setTotalQuantity] = useState();
-  const [totalAmount, setTotalAmount] = useState();
-  const [response, setResponse] = useState();
 
-  const [address, setAddress] = useState("");
+
+  initMercadoPago("APP_USR-78fc479f-615e-4d74-bdad-96178fa58bf5", {
+    locale: "es-AR",
+  });
+
+
+
+  // ---------------------------------------------------------
+  const [loading, setLoading] = useState(true);
+  const [buyorder, setBuyorder] = useState();
+
+  const [street, setStreet] = useState("");
   const [number, setNumber] = useState();
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [zip, setZip] = useState(0);
+  const [zipCode, setZipCode] = useState(0);
   const [country, setCountry] = useState();
 
   const [cardholderName, setCardholderName] = useState("");
@@ -28,104 +39,145 @@ function PaymentMethods() {
 
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
-
+  const [preferenceId, setPreferenceId] = useState(null);
   const token = useSelector((store) => store.authReducer.token);
 
   useEffect(() => {
     setTimeout(() => {
+     
       getAmountToPay();
+   
     }, 3000);
     setLoading(false);
+    
   }, []);
 
+  //SOLICITUD AL BACK PARA SABER EL MONTO A PAGAR
   const getAmountToPay = async (e) => {
     try {
       const resp = await axios.get(
-        "https://wineder-app.onrender.com/api/buyorder/client/pending",
+        // "https://wineder-app.onrender.com/api/buyorder/client/pending",
+        "http://localhost:8080/api/buyorder/client/pending",
         {
           headers: {
             Authorization: `Bearer ${token}`,
-          },
+          }
         }
       );
 
+      setBuyorder(resp.data);
       setResponse(resp.data.orderProducts);
-      
-      const total = array
-      .map((product) => product.price * product.quantity) // Multiplicar price y quantity
-      .reduce((acc, curr) => acc + curr, 0);
-
-    setTotalAmount(total);
-    setDescription("Winder purchase");
+      console.log(resp);
 
 
-    const aux = total
-      .map((product) => product.quantity) // Multiplicar price y quantity
-      .reduce((acc, curr) => acc + curr, 0);
-    setTotalQuantity(aux);
-    
+      // Multiplicar price y quantity
+      // const total = response.map((product) => product.price * product.quantity)
+      //   .reduce((acc, curr) => acc + curr, 0);
+
+
+
+      // setTotalAmount(total);
+      // setDescription("Winder purchase");
+
+      // console.log(totalAmount);
+
+      // const aux = response.map((product) => product.quantity)
+      //   .reduce((acc, curr) => acc + curr, 0);
+      // setTotalQuantity(aux);
+      // console.log(totalQuantity);
 
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const array = [...response];
-
-    const total = array
-      .map((product) => product.price * product.quantity) // Multiplicar price y quantity
-      .reduce((acc, curr) => acc + curr, 0);
-
-    setTotalAmount(total);
-    setDescription("Winder purchase");
-
-    const aux = array
-      .map((product) => product.quantity) // Multiplicar price y quantity
-      .reduce((acc, curr) => acc + curr, 0);
-
-    setTotalQuantity(aux);
-
+  const createPreference = async () => {
     try {
-      const data = {
-        cardNumber: `${cardNumber}`,
-        totalAmount: `${totalAmount}`,
-        cvv: `${cvv}`,
-        cardType: `${cardType}`,
-        description: `${description}`,
-      };
-
-      const balance = { balance: `${totalAmount}` };
-
-      const transaction = await axios.post(
-        "https://wineder-app.onrender.com/api/buyorder/closeorder",
-        balance,
+      //ARMADO DE LOS PRODUCTOS QUE NOS PIDE MERCADO PAGO y creacion de preferencias de MP
+      console.log(buyorder.id);
+      const response = await axios.post(
+        ` ${API_BASE_URL}/api/mp/createPreference/${buyorder.id}`, [],
         {
           headers: {
             Authorization: `Bearer ${token}`,
-          },
-        }
+          }
+        },
+        //MANDAR ID DE BUYoRDER?--> BACK LO GESTIONE CON LOS PRODUCTOS         
       );
-
-      //     const debit = await axios.post(
-      //       "https://argentumhomebanking-1.onrender.com/api/clients/debitWinder",
-      //       data
-      //     );
-
-      //     console.log(debit.data);
-
-      setOpenModal(true);
-      setTimeout(() => {
-        setOpenModal(false);
-
-        navigate("/");
-      }, 3000);
+      console.log(response);
+      const id = response.data;
+      console.log(response.data);
+      return id;
     } catch (error) {
-      console.log("Forbidden");
+      console.log(error);
     }
   };
+
+  const handleBuy = async () => {
+    const id = await createPreference();
+    if (id) {
+      setPreferenceId(id);
+      console.log(preferenceId)
+    }
+  };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const array = [...response];
+
+  //   const total = array
+  //     .map((product) => product.price * product.quantity) // Multiplicar price y quantity
+  //     .reduce((acc, curr) => acc + curr, 0);
+
+  //   setTotalAmount(total);
+  //   setDescription("Winder purchase");
+
+  //   const aux = array
+  //     .map((product) => product.quantity) // Multiplicar price y quantity
+  //     .reduce((acc, curr) => acc + curr, 0);
+
+  //   setTotalQuantity(aux);
+
+  //   try {
+  //     const data = {
+  //       cardNumber: `${cardNumber}`,
+  //       totalAmount: `${totalAmount}`,
+  //       cvv: `${cvv}`,
+  //       cardType: `${cardType}`,
+  //       description: `${description}`,
+  //     };
+
+  //     const balance = { balance: `${totalAmount}` };
+
+  //     const transaction = await axios.post(
+  //       //  `${API_BASE_URL}/api/buyorder/closeorder`,
+  //       //
+  //       balance,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     //     const debit = await axios.post(
+  //     //        `${API_BASE_URL}/api/debitWinder`,
+  //     //       data
+  //     //     );
+
+  //     //     console.log(debit.data);
+
+  //     setOpenModal(true);
+  //     setTimeout(() => {
+  //       setOpenModal(false);
+
+  //       navigate("/");
+  //     }, 3000);
+  //   } catch (error) {
+  //     console.log("Forbidden");
+  //   }
+  // };
 
   return (
     <div>
@@ -140,8 +192,8 @@ function PaymentMethods() {
               Finish Your Purchase
             </h1>
 
-            <form
-              onSubmit={handleSubmit}
+            {/* <form
+              //onSubmit={handleSubmit}
               class="bg-white shadow-md rounded-lg overflow-hidden "
             >
               <div className="lg:flex lg:flex-wrap">
@@ -325,17 +377,41 @@ function PaymentMethods() {
 
               <div className="flex flex-wrap justify-center">
                 <button
-                  type="submit"
+                  //type="submit"
+                  onClick={handleBuy}
                   className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4"
                 >
                   Send Payment
                 </button>
+
+                {preferenceId && (
+                  <Wallet initialization={{ preferenceId: preferenceId }} />
+                )}
+
+
+
               </div>
-            </form>
+            </form> */}
+            <div className="flex flex-wrap justify-center">
+              <button
+                //type="submit"
+                onClick={handleBuy}
+                className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4"
+              >
+                Continue
+              </button>
+
+              {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId}} />)}
+
+
+
+
+
+            </div>
+
           </div>
         )}
       </body>
-
       {/* <div className="w-2/3 container mx-auto px-4 py-8 flex flex-col">
 
         <h1 className="text-2xl text-left font-semibold text-gray-800 lg:w-[70%] lg:ml-[20%]">
@@ -364,7 +440,7 @@ function PaymentMethods() {
           </div>
         </div>
       </div> */}
-      
+
 
       {openModal && (
         <Modal

@@ -3,7 +3,7 @@ import React from 'react'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { list } from 'postcss';
+import { API_BASE_URL } from '../utils/config'
 
 const Client = () => {
   const [client, setClient] = useState([])
@@ -20,7 +20,9 @@ const Client = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get('https://wineder-app.onrender.com/api/auth/current',
+      const response = await axios.get(
+        // 'https://wineder-app.onrender.com/api/auth/current',
+        `${API_BASE_URL}/api/auth/current`,
         { headers: { 'Authorization': `Bearer ${token}` } });
       setClient(response.data)
     }
@@ -31,9 +33,12 @@ const Client = () => {
   }
   const getNewOrders = async () => {
     try {
-      const response = await axios.get('https://wineder-app.onrender.com/api/buyorder/client/pending', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const response = await axios.get(
+        // 'https://wineder-app.onrender.com/api/buyorder/client/pending', 
+        `${API_BASE_URL}/api/buyorder/client/pending`,
+        {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
       setNewOrders(response.data);
       console.log(newOrders)
 
@@ -46,9 +51,12 @@ const Client = () => {
 
   const getBuyOrders = async () => {
     try {
-      const response = await axios.get('https://wineder-app.onrender.com/api/buyorder/client/all', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const response = await axios.get(
+        // 'https://wineder-app.onrender.com/api/buyorder/client/all', 
+        `${API_BASE_URL}/api/buyorder/client/all`,
+        {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
       setBuyOrders(response.data);
 
       setOrderProducts(response.data[0].orderProducts)
