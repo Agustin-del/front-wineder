@@ -287,19 +287,19 @@ const Carrito = () => {
                                                 <p className="text-gray-800 font-semibold">{item.stock}</p>
                                             </div> */}
                                         </div>
-                                        <div className="w-1/5 flex items-center flex-col mt-7">
+                                        <div className="w-1/5 flex items-center flex-col">
                                             <p className="text-gray-800 font-semibold">
                                                 $
                                                 {(item.quantity * item.price)
                                                     .toString()
                                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                             </p>
-                                            <button
+                                            {/* <button
                                                 className="w-20 hover:text-green-500"
                                                 onClick={() => setOrderProductFalse(item.id)}
                                             >
                                                 <strong className="text-blu">Buy later</strong>
-                                            </button>
+                                            </button> */}
                                         </div>
                                         <button
                                             onClick={() => deleteOrderProduct(item.id)}
