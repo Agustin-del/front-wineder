@@ -234,8 +234,8 @@ const Carrito = () => {
                     <img className="w-[300px]" src="/assets/copa.gif" alt="" />
                 </div>
             ) : (
-                <div className="bg-gray-100 h-min-screen">
-                    <div className="container mx-auto px-4 py-8">
+                <div className="bg-gray-100 ">
+                    <div className="container mx-auto px-4 py-8 min-h-screen">
                         <h1 className="text-4xl text-center font-semibold text-gray-800 mb-6 md:w-full lg:w-[70%] lg:ml-[20%]">
                             Shopping Cart
                         </h1>
@@ -261,6 +261,11 @@ const Carrito = () => {
                                             <div>
                                                 <p className="text-gray-800 font-semibold">
                                                     {item.productName}
+                                                    
+                                                </p>
+                                                <p className="text-gray-800 font-semibold">
+                                                    {item.provider}
+                                                    
                                                 </p>
                                                 {/* <p className="text-gray-600">{item.description}</p> */}
                                             </div>
