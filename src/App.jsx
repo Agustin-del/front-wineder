@@ -35,13 +35,14 @@ function App() {
   const role = useSelector((store) => store.roleReducer.role);
 
   
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role")
-    dispatch(login(token));
-    dispatch(getRole(role))
-    
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //   const token = localStorage.getItem("token");
+  //   const role = localStorage.getItem("role")
+  //   dispatch(login(token));
+  //   dispatch(getRole(role))
+  //   }
+  // }, []);
 
   
 

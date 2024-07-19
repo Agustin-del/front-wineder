@@ -47,6 +47,7 @@ const Login = () => {
             password: password
         }
         try {
+            
             const response = await axios.post(
                 // 'https://wineder-app.onrender.com/api/auth/login',
                 `${API_BASE_URL}/api/auth/login`,
@@ -54,7 +55,6 @@ const Login = () => {
 
             dispatch(login(response.data))
 
-            localStorage.setItem("token",response.data)
             
             const current = await axios.get(
                 // 'https://wineder-app.onrender.com/api/auth/current',
@@ -66,15 +66,23 @@ const Login = () => {
                 })
                 
                 dispatch(getRole(current.data.role))
-                localStorage.setItem("role",current.data.role)
 
-            if (current.data.role === "admin") {
+                
+                if (current.data.role === "admin") {
+                localStorage.setItem("token",response.data)
+                localStorage.setItem("role",current.data.role)
                 navigate('/admin')
             }
 
             if (current.data.role === "client") {
+                localStorage.setItem("token",response.data)
+                localStorage.setItem("role",current.data.role)
                 navigate('/client')
             }
+
+
+
+
         } catch (e) {
             setAlert({ type: "failure", message: e.response.data })
             setTimeout(() => {
