@@ -13,9 +13,23 @@ const Client = () => {
   const token = useSelector(store => store.authReducer.token)
   const role = useSelector(store => store.roleReducer.role)
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
+  const itemsPerPage = 5;
+  const sortedOrders = buyOrders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
 
+  // Calculate the orders to display on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentOrders = sortedOrders.slice(indexOfFirstItem, indexOfLastItem);
 
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(sortedOrders.length / itemsPerPage);
+
+  // Function to handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
   const calculateTotal = (items) => {
     return items.reduce((total, item) => total + item.quantity * item.price, 0);
   };
@@ -129,15 +143,26 @@ const Client = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {buyOrders.map((buyOrder) => {
-                        return <tr key={buyOrder.id} className='hover:bg-gray-100'>
-                          <td className='px-4 py-2 border-b text-center text-gray-800'>{buyOrder.orderNumber}</td>
-                          <td className='px-4 py-2 border-b text-center text-gray-800'>{formatter.format((calculateTotal(buyOrder.orderProducts)))}</td>
-                          <td className='px-4 py-2 border-b text-center text-gray-800'>{buyOrder.orderDate}</td>
+                      {currentOrders.map((buyOrder) => (
+                        <tr key={buyOrder.id} className="hover:bg-gray-100">
+                          <td className="px-4 py-2 border-b text-center text-gray-800">{buyOrder.orderNumber}</td>
+                          <td className="px-4 py-2 border-b text-center text-gray-800">{formatter.format(calculateTotal(buyOrder.orderProducts))}</td>
+                          <td className="px-4 py-2 border-b text-center text-gray-800">{buyOrder.orderDate}</td>
                         </tr>
-                      })}
+                      ))}
                     </tbody>
                   </table>
+                  <div className="pagination">
+                    {Array.from({ length: totalPages }, (_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handlePageChange(index + 1)}
+                        className={`px-2 py-1 mx-1 ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
               </section>
