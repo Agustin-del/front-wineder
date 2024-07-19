@@ -22,7 +22,7 @@ const Carrito = () => {
 
         setLoading(false);
     }, []);
-    
+
 
     //   useEffect(() => {
     //     //fetchWishlist();
@@ -39,7 +39,7 @@ const Carrito = () => {
     const fetchData = async () => {
 
         try {
-           
+
             const response = await axios.get(
                 `${API_BASE_URL}/api/buyorder/client/pending`,
                 {
@@ -99,7 +99,7 @@ const Carrito = () => {
 
     const setOrderProductFalse = async (id) => {
         try {
-           
+
             await axios.put(
                 `${API_BASE_URL}/api/orderproducts/update/${id}`,
                 null,
@@ -126,9 +126,7 @@ const Carrito = () => {
         for (const item of [...cartItems]) {
             // clone the array to avoid concurrent modification errors
             try {
-                await axios.delete(
-                    // `https://wineder-app.onrender.com/api/orderproducts/delete/${item.id}`,
-                    `${API_BASE_URL}/api/orderproducts/delete/${item.id}`,
+                await axios.delete(`${API_BASE_URL}/api/orderproducts/delete/${item.id}`,
                     {
                         headers: { Authorization: `Bearer ${token}` },
                     }
@@ -149,6 +147,7 @@ const Carrito = () => {
                 cartItems.map((item) => {
                     if (item.id === id) {
                         const newQuantity = 0;
+
                         return { ...item, quantity: newQuantity };
                     } else {
                         return item;
@@ -156,6 +155,7 @@ const Carrito = () => {
                 })
             );
 
+            checkOutClick();
 
         } catch (error) {
             console.log(error);
@@ -331,7 +331,7 @@ const Carrito = () => {
                         <div className="flex justify-end mt-6 gap-4">
                             <button
                                 className="bg-white border-2 border-[#73383E] hover:bg-red-600 hover:text-white text-[#73383E] px-4 py-2 rounded-lg"
-                                onAbort={clearBasket}
+                                onClick={clearBasket}
                             >
                                 Clear basket
                             </button>
