@@ -5,7 +5,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "flowbite-react";
+
 import { API_BASE_URL } from '../utils/config'
 
 
@@ -28,7 +28,7 @@ function PaymentMethods() {
 
 
   const navigate = useNavigate();
-  const [openModal, setOpenModal] = useState(false);
+  
   const [preferenceId, setPreferenceId] = useState(null);
   const token = useSelector((store) => store.authReducer.token);
 
@@ -266,21 +266,6 @@ function PaymentMethods() {
       </div> */}
 
 
-      {openModal && (
-        <Modal
-          show={openModal}
-          size="md"
-          onClose={() => setOpenModal(false)}
-          popup
-        >
-          <div className="text-center flex flex-col p-2 justify-center">
-            <CiCircleCheck className="mx-auto mb-4 h-12 w-12 text-green-400 dark:text-gray-200" />
-            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Bottles on their way! Transaction Successful
-            </h3>
-          </div>
-        </Modal>
-      )}
     </div>
   );
 }

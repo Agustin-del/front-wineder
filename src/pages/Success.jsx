@@ -5,11 +5,15 @@ import axios from "axios";
 import { API_BASE_URL } from "../utils/config";
 import FormAddress from "../components/FormAddress";
 
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
+
 
 const Success = () => {
   const query = new URLSearchParams(location.search);
   const [paymentId, setPaymentId] = useState();
   const [status, setStatus] = useState("");
+
 
   const navigate = useNavigate();
  
@@ -44,7 +48,7 @@ const Success = () => {
           }
         }
       );
-      console.log(response);
+
     } catch (error) {
       console.error("Error capturando el pago:", error);
     }
@@ -54,6 +58,11 @@ const Success = () => {
 
   closeBuyOrder();
 
+  toast("Purchase correctly done!")
+          setTimeout(() => {
+            navigate("/");
+          }, 3000);
+
 }
 
 
@@ -61,18 +70,29 @@ const Success = () => {
 
 
   return (
-    <div>
-      <div className="w-full">
-        <h1>Pago Exitoso</h1>
-        {/* <p>Status: {status}</p>
-        <p>ID de Pago: {paymentId}</p> */}
-      </div>
+    <div className="flex flex-col ">
+      <ToastContainer
+position="top-center"
+autoClose={6000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
+
 
       <FormAddress/>
 
-      <button onClick={handlePurchase}  className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4">
+
+      <button onClick={handlePurchase}  className="items-center  bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4">
        FINISH PURCHASE
       </button>
+
+          
     </div>
   );
 };

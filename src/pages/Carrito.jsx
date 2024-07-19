@@ -287,7 +287,10 @@ const Carrito = () => {
                                                 <p className="text-gray-800 font-semibold">{item.stock}</p>
                                             </div> */}
                                         </div>
-                                        <div className="w-1/5 flex items-center flex-col ">
+
+
+                                        <div className="w-1/5 flex items-center flex-col">
+
                                             <p className="text-gray-800 font-semibold">
                                                 $
                                                 {(item.quantity * item.price)
