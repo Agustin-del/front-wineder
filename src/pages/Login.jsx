@@ -47,6 +47,7 @@ const Login = () => {
             password: password
         }
         try {
+            
             const response = await axios.post(
                 // 'https://wineder-app.onrender.com/api/auth/login',
                 `${API_BASE_URL}/api/auth/login`,
@@ -73,8 +74,14 @@ const Login = () => {
             }
 
             if (current.data.role === "client") {
+                localStorage.setItem("token",response.data)
+                localStorage.setItem("role",current.data.role)
                 navigate('/client')
             }
+
+
+
+
         } catch (e) {
             setAlert({ type: "failure", message: e.response.data })
             setTimeout(() => {
