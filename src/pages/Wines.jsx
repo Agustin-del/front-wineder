@@ -33,6 +33,7 @@ const Wines = () => {
             setRegions(uniqueRegions)
             setWineTypes(uniqueWineTypes)
             setProviders(uniqueProviders)
+           
         } catch (error) {
             console.error(error)
         }
@@ -118,7 +119,7 @@ const Wines = () => {
                             if (wine.wineDescription !== null) {
 
                                 return <div className=" w-full flex justify-center mb-2 md:flex-row md:w-[30%] lg:w-[25%]  ">
-                                    <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image={wine.image} bgColor={wine.wineDescription.wineType}></CartsWines>
+                                    <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} provider={wine.provider} image={wine.image} bgColor={wine.wineDescription.wineType}></CartsWines>
 
                                 </div>
                             }
