@@ -202,10 +202,10 @@ function PaymentMethods() {
                         <p className="mb-4"><strong>Password: </strong>6Xz31czKT1</p>
                       </article> */}
                 <section className="flex flex-row mx-5 lg:justify-between  ">
-                  <article className=" border-[#522025]">
+                  <article className="border-b-2 border-[#522025]">
                     <h3 className="text-2xl font-medium text-wine-700 mt-4">Test Buyer</h3>
                     <p><strong>Username: </strong>TESTUSER659438814</p>
-                    <p className="mb-4"><strong>Password: </strong>cuuklEzGTq</p>
+                    <p ><strong>Password: </strong>cuuklEzGTq</p>
                   </article>
 
                   <figure className="flex items-center justify-center lg:my-5 lg:w-[100px]">
@@ -216,7 +216,7 @@ function PaymentMethods() {
                     <h3 className="text-2xl font-medium text-wine-700 mt-4">Test Card</h3>
                     <p><strong>Number: </strong>5031 7557 3453 0604</p>
                     <p><strong>Expiration Date: </strong>11/25</p>
-                    <p className="mb-4"><strong>CVV: </strong>123</p>
+                    <p ><strong>CVV: </strong>123</p>
                   </article>
                 </section>
               </section>
@@ -241,206 +241,7 @@ function PaymentMethods() {
             </div>
 
 
-            {/* <form
-              //onSubmit={handleSubmit}
-              class="bg-white shadow-md rounded-lg overflow-hidden "
-            >
-              <div className="lg:flex lg:flex-wrap">
-                <h3 className="w-full pt-2 text-center text-2xl font-semibold text-red-900 mb-6 ">
-                  Address Information
-                </h3>
-
-                <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
-                  <label for="name" class="text-gray-800 font-semibold w-32">
-                    Address:
-                  </label>
-                  <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    placeholder="Enter your St."
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  />
-                </div>
-                <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
-                  <label for="number" class="text-gray-800 font-semibold w-32">
-                    Number:
-                  </label>
-                  <input
-                    type="number"
-                    id="number"
-                    name="number"
-                    value={number}
-                    onChange={(e) => setNumber(e.target.value)}
-                    placeholder="Enter number"
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  />
-                </div>
-                <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
-                  <label for="name" class="text-gray-800 font-semibold w-32">
-                    City:
-                  </label>
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    placeholder="Enter your city"
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  />
-                </div>
-                <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
-                  <label for="name" class="text-gray-800 font-semibold w-32">
-                    State:
-                  </label>
-                  <input
-                    type="text"
-                    id="state"
-                    name="state"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    placeholder="Enter your city"
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  />
-                </div>
-                <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
-                  <label for="name" class="text-gray-800 font-semibold w-32">
-                    Country:
-                  </label>
-                  <input
-                    type="text"
-                    id="country"
-                    name="country"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    placeholder="Enter your city"
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  />
-                </div>
-                <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
-                  <label for="name" class="text-gray-800 font-semibold w-32">
-                    Zip:
-                  </label>
-                  <input
-                    type="number"
-                    id="zip"
-                    name="zip"
-                    value={zip}
-                    onChange={(e) => setZip(e.target.value)}
-                    placeholder="Enter your city"
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  />
-                </div>
-              </div>
-
-              <div className="lg:flex lg:flex-wrap">
-                <h3 className="w-full pt-2 text-center text-2xl font-semibold text-red-900 mb-6 ">
-                  Payment Information
-                </h3>
-                <div className="lg:w-[30%] flex items-center border-b border-gray-200 px-6 py-4">
-                  <label
-                    for="methodPayment"
-                    class="text-gray-800 font-semibold w-32"
-                  >
-                    Payments Methods:
-                  </label>
-                  <select
-                    id="methodPayment"
-                    name="methodPayment"
-                    value={cardType}
-                    onChange={(e) => setCardType(e.target.value)}
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  >
-                    <option disabled>--select--</option>
-                    <option value="debit">DEBIT</option>
-                    <option value="credit">CREDIT</option>
-                    <option value="mercadoPago">MERCADO PAGO</option>
-                    <option value="mercadoPago">PAYPAL</option>
-                  </select>
-                </div>
-
-                <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
-                  <label
-                    for="cardholderName"
-                    class="text-gray-800 font-semibold w-32"
-                  >
-                    Cardholder Name:
-                  </label>
-                  <input
-                    type="text"
-                    id="cardholderName"
-                    name="cardholderName"
-                    value={cardholderName}
-                    onChange={(e) => setCardholderName(e.target.value)}
-                    placeholder="Enter your St."
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  />
-                </div>
-                <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
-                  <label
-                    for="cardNumber"
-                    class="text-gray-800 font-semibold w-32"
-                  >
-                    Card Number:
-                  </label>
-                  <input
-                    type="text"
-                    id="cardNumber"
-                    name="cardNumber"
-                    value={cardNumber}
-                    onChange={(e) => setCardNumber(e.target.value)}
-                    placeholder="Enter card number with this format 0000-0000-0000-0000"
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  />
-                </div>
-                <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
-                  <label for="cvv" class="text-gray-800 font-semibold w-32">
-                    CVV:
-                  </label>
-                  <input
-                    type="number"
-                    id="cvv"
-                    name="cvv"
-                    value={cvv}
-                    onChange={(e) => setCvv(e.target.value)}
-                    placeholder="Enter CVV"
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  />
-                </div>
-                <div className="lg:w-[50%] flex items-center border-b border-gray-200 px-6 py-4">
-                  <label for="name" class="text-gray-800 font-semibold w-32">
-                    Expiration Date:
-                  </label>
-                  <input
-                    type="text"
-                    id="expDate"
-                    name="expDate"
-                    placeholder="Enter expitation date MM/YYYY"
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-wrap justify-center">
-                <button
-                  //type="submit"
-                  onClick={handleBuy}
-                  className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4"
-                >
-                  Send Payment
-                </button>
-
-                {preferenceId && (
-                  <Wallet initialization={{ preferenceId: preferenceId }} />
-                )}
-
-
-
-              </div>
-            </form> */}
+           
             <div className="flex flex-wrap justify-center">
               <button
                 //type="submit"

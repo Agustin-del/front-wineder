@@ -14,6 +14,8 @@ const Client = () => {
   const role = useSelector(store => store.roleReducer.role)
   const [loading, setLoading] = useState(true);
 
+
+
   const calculateTotal = (items) => {
     return items.reduce((total, item) => total + item.quantity * item.price, 0);
   };
@@ -96,9 +98,9 @@ const Client = () => {
         </div>) : (<>
 
           <h2 className='text-3xl text-center lg:text-5xl my-8 lg:mt-10'><strong>Welcome {client.name} {client.lastName}!</strong></h2>
-          <div className='flex flex-col  my-5 '>
+          <div className='flex flex-col  my-5 lg:flex-row lg:mr-[20%]'>
             <div className='w-full flex justify-center'>
-              <div className='flex flex-col justify-center items-center gap-5 ml-5 px-5 py-8 rounded-lg w-[40%] md:w-[500px] border-2 border-gray-300 shadow-lg'>
+              <div className='flex flex-col justify-center items-center gap-5 ml-5 px-5 py-8 rounded-lg w-[80%] md:w-[400px] border-2 border-gray-300 shadow-lg'>
                 <h3 className='text-2xl lg:text-3xl italic'>Personal information </h3>
                 <h4><strong>Email:</strong> {client.email}</h4>
                 <div className='flex gap-5 justify-center items-center flex-col md:flex-row'>
