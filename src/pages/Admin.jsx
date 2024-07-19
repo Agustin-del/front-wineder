@@ -8,6 +8,8 @@ import TablaClientAdmin from '../components/TablaClientAdmin'
 import TablaOrderAdmin from '../components/TablaOrderAdmin'
 import TablaProviderAdmin from '../components/TablaProviderAdmin'
 import { API_BASE_URL } from '../utils/config'
+import TablaReviewsAdmin from '../components/TablaReviewsAdmin'
+
 
 const Admin = () => {
     const [data, setData] = useState([])
@@ -19,6 +21,7 @@ const Admin = () => {
     useEffect(() => {
         getData()
     }, [activeTab])
+    
     const getData = async () => {
         try {
             const headers = {
@@ -33,33 +36,27 @@ const Admin = () => {
                     `${API_BASE_URL}/api/clients/all`,
                     { headers })
 
-                console.log(response.data);
 
             } else if (activeTab === 'orders') {
                 response = await axios.get(
                     
                     `${API_BASE_URL}/api/orderproducts/admin/all`,
                     { headers })
-                console.log(response.data);
 
             } else if (activeTab === 'products') {
                 response = await axios.get(
                     `${API_BASE_URL}/api/products/all`,
                     { headers })
-                console.log(response.data);
-
-
-
             }
             else if (activeTab === 'provider') {
                 response = await axios.get(
                     `${API_BASE_URL}/api/provider/all`,
                     { headers })
 
-
+            } else if (activeTab ==="reviews") {
+                response = await axios.get(`${API_BASE_URL}/api/reviews/admin/all`,{headers})
             }
             setData(response.data)
-
         }
         catch (error) {
             console.log(error);
@@ -103,6 +100,12 @@ const Admin = () => {
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="#" className={activeTab === 'reviews' ? ('inline-flex items-center px-4 py-3  rounded-lg active w-full bg-[#0e0d0d] text-white') : ("inline-flex items-center px-4 py-3 text-white bg-[#5e2a30] rounded-lg active w-full")} onClick={() => handleTabClick('reviews')}>
+                                        <img src="./assets/iconClients.png" alt="" className="w-6 h-6 me-2" />
+                                        reviews
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="#" className={activeTab === 'orders' ? ('inline-flex items-center px-4 py-3  rounded-lg active w-full bg-[#0e0d0d] text-white') : ("inline-flex items-center px-4 py-3 text-white bg-[#5e2a30] rounded-lg active w-full")} onClick={() => handleTabClick('orders')}>
                                         <img src="./assets/iconOrders.png" alt="" className="w-6 h-6 me-2" />
                                         Orders
@@ -124,7 +127,8 @@ const Admin = () => {
                         </div>
                         <div className="p-6 lg:mb-[10%] bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full lg:w-[70%] lg:mt-5 lg:ml-auto">
                             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                                {activeTab === 'clients' && <TablaClientAdmin name="Client" col1="Last Name" col2="Adrress" data={data} />}
+                                {activeTab === 'clients' && <TablaClientAdmin name="Client" col1="Last Name" col2="Address" data={data} />}
+                                {activeTab === 'reviews' && <TablaReviewsAdmin data={data}/>}
                                 {activeTab === 'orders' && <TablaOrderAdmin img="Imagen" name="Product Name" id="Order" col2="Price" col3="Stock" col4="Quantity" active={"Active"} data={data} />}
                                 {activeTab === 'products' && <TablaProductAdmin img="Imagen" name="Product" col1="Provider" col2="Price" col3="Stock" data={data} />}
 
