@@ -331,7 +331,7 @@ const Carrito = () => {
                         <div className="flex justify-end mt-6 gap-4">
                             <button
                                 className="bg-white border-2 border-[#73383E] hover:bg-red-600 hover:text-white text-[#73383E] px-4 py-2 rounded-lg"
-                                onAbort={clearBasket}
+                                onClick={clearBasket}
                             >
                                 Clear basket
                             </button>
