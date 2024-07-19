@@ -16,7 +16,7 @@ const Success = () => {
 
 
   const navigate = useNavigate();
- 
+
 
   //RESPONSE DE LA PAGINA DE REDIRECCIONAMIENTO
 
@@ -36,8 +36,8 @@ const Success = () => {
     }
   }, [query]);
 
-  const closeBuyOrder = async () => { 
-    const token = localStorage.getItem("token");   
+  const closeBuyOrder = async () => {
+    const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
         `${API_BASE_URL}/api/buyorder/closeorder`,
@@ -54,16 +54,16 @@ const Success = () => {
     }
   };
 
- function handlePurchase() {
+  function handlePurchase() {
 
-  closeBuyOrder();
+    closeBuyOrder();
 
-  toast("Purchase correctly done!")
-          setTimeout(() => {
-            navigate("/");
-          }, 3000);
+    toast("Purchase correctly done!")
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
 
-}
+  }
 
 
 
@@ -71,28 +71,32 @@ const Success = () => {
 
   return (
     <div className="flex flex-col ">
+      <div className="min-h-[80vh] flex flex-col justify-center items-center">
+
+   
       <ToastContainer
-position="top-center"
-autoClose={6000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-/>
+        position="top-center"
+        autoClose={6000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
 
 
-      <FormAddress/>
+      <FormAddress />
 
 
-      <button onClick={handlePurchase}  className="items-center  bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4">
-       FINISH PURCHASE
+      <button onClick={handlePurchase} className="items-center  bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4 lg:mt-10">
+        FINISH PURCHASE
       </button>
 
-          
+
+      </div>
     </div>
   );
 };
