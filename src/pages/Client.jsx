@@ -129,7 +129,7 @@ const Client = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {buyOrders.map((buyOrder) => {
+                      {buyOrders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate)).map((buyOrder) => {
                         return <tr key={buyOrder.id} className='hover:bg-gray-100'>
                           <td className='px-4 py-2 border-b text-center text-gray-800'>{buyOrder.orderNumber}</td>
                           <td className='px-4 py-2 border-b text-center text-gray-800'>{formatter.format((calculateTotal(buyOrder.orderProducts)))}</td>
