@@ -11,7 +11,7 @@ function FormAddress() {
 
   return (
 
-    <form class="  rounded-lg overflow-hidden lg:w-[80%] shadow-[0px_13px_34px_10px_#5E2A30]" >
+    <form class="  rounded-lg overflow-hidden lg:w-[80%] shadow-[0px_13px_52px_10px_#5E2A30]" >
       <div className="lg:flex lg:flex-wrap">
         <h3 className="w-full pt-2 text-center text-2xl font-semibold text-red-900 mb-6 lg:text-3xl">
           Address Information
