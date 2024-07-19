@@ -96,7 +96,7 @@ const Client = () => {
         </div>) : (<>
 
           <h2 className='text-3xl text-center lg:text-5xl my-8 lg:mt-10'><strong>Welcome {client.name} {client.lastName}!</strong></h2>
-          <div className='flex flex-col  my-5 '>
+          <div className='flex flex-col  my-5 lg:flex-row lg:mr-[20%]'>
             <div className='w-full flex justify-center'>
               <div className='flex flex-col justify-center items-center gap-5 ml-5 px-5 py-8 rounded-lg w-[80%] md:w-[400px] border-2 border-gray-300 shadow-lg'>
                 <h3 className='text-2xl lg:text-3xl italic'>Personal information </h3>
