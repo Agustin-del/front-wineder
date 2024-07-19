@@ -48,8 +48,7 @@ const Success = () => {
           }
         }
       );
-     
-      
+
     } catch (error) {
       console.error("Error capturando el pago:", error);
     }
@@ -58,10 +57,12 @@ const Success = () => {
  function handlePurchase() {
 
   closeBuyOrder();
+
   toast("Purchase correctly done!")
           setTimeout(() => {
             navigate("/");
           }, 3000);
+
 }
 
 
@@ -85,6 +86,7 @@ theme="light"
 
 
       <FormAddress/>
+
 
       <button onClick={handlePurchase}  className="items-center  bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4">
        FINISH PURCHASE
