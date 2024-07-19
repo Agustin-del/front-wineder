@@ -176,10 +176,10 @@ function PaymentMethods() {
                         <p className="mb-4"><strong>Password: </strong>6Xz31czKT1</p>
                       </article> */}
                 <section className="flex flex-row mx-5 lg:justify-between  ">
-                  <article className=" border-[#522025]">
+                  <article className="border-b-2 border-[#522025]">
                     <h3 className="text-2xl font-medium text-wine-700 mt-4">Test Buyer</h3>
                     <p><strong>Username: </strong>TESTUSER659438814</p>
-                    <p className="mb-4"><strong>Password: </strong>cuuklEzGTq</p>
+                    <p ><strong>Password: </strong>cuuklEzGTq</p>
                   </article>
 
                   <figure className="flex items-center justify-center lg:my-5 lg:w-[100px]">
@@ -190,7 +190,7 @@ function PaymentMethods() {
                     <h3 className="text-2xl font-medium text-wine-700 mt-4">Test Card</h3>
                     <p><strong>Number: </strong>5031 7557 3453 0604</p>
                     <p><strong>Expiration Date: </strong>11/25</p>
-                    <p className="mb-4"><strong>CVV: </strong>123</p>
+                    <p ><strong>CVV: </strong>123</p>
                   </article>
                 </section>
               </section>
