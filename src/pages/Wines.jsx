@@ -33,6 +33,7 @@ const Wines = () => {
             setRegions(uniqueRegions)
             setWineTypes(uniqueWineTypes)
             setProviders(uniqueProviders)
+           
         } catch (error) {
             console.error(error)
         }
@@ -65,8 +66,8 @@ const Wines = () => {
                 <div className='flex items-center justify-center w-full h-screen bg-[#232323]'>
                     <img className='w-[300px]' src="./assets/copa.gif" alt="" />
                 </div>) : (
-                <div className='flex flex-wrap justify-center gap-5 my-5 relative z-10 lg:flex-col md:flex-col'>
-                    <div className="w-[60%] flex flex-col md:flex-row md:flex-wrap justify-center gap-2 mb-5 lg:flex-row  md:w-[100%] ">
+                <div className='flex  flex-col justify-center gap-5 my-5 relative z-10 lg:flex-col md:flex-col'>
+                    <div className="w-[60%] flex flex-col md:flex-row md:flex-wrap justify-center gap-2 mb-5  md:w-[100%] ">
                         <div className="flex justify-center lg:flex-col md:flex-col ">
                             <input
                                 type="text"
@@ -76,7 +77,7 @@ const Wines = () => {
                                 onChange={(e) => setSearchText(e.target.value)}
                             />
                         </div>
-                        <div className="flex md:flex justify-center flex-col lg:flex-row">
+                        <div className="flex  justify-center  flex-col lg:flex-row">
                             <select value={selectedVarietal} onChange={(e) => setSelectedVarietal(e.target.value)} name="varietal" className="focus:border-none focus:ring-0 border-none mb-2 md:mb-0 md:mr-2">
                                 <option value="">All Varietals</option>
                                 {varietals.map((varietal, index) => (
@@ -117,8 +118,8 @@ const Wines = () => {
                         {filteredWines.map(wine => {
                             if (wine.wineDescription !== null) {
 
-                                return <div className=" w-full flex justify-center mb-2 md:flex-row md:w-[30%]  ">
-                                    <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} winery={wine.provider} image={wine.image} bgColor={wine.wineDescription.wineType}></CartsWines>
+                                return <div className=" w-full flex justify-center mb-2 md:flex-row md:w-[30%] lg:w-[25%]  ">
+                                    <CartsWines key={wine.id} id={wine.id} name={wine.name} price={wine.price} provider={wine.provider} image={wine.image} bgColor={wine.wineDescription.wineType}></CartsWines>
 
                                 </div>
                             }

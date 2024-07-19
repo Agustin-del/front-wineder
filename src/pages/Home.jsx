@@ -38,7 +38,7 @@ const Home = () => {
         background: "#fff ",
         backdrop: `
           rgba(64, 30, 36, 0.4) 
-
+        
           left top
           no-repeat
         `
