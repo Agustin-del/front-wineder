@@ -261,6 +261,11 @@ const Carrito = () => {
                                             <div>
                                                 <p className="text-gray-800 font-semibold">
                                                     {item.productName}
+                                                    
+                                                </p>
+                                                <p className="text-gray-800 font-semibold">
+                                                    {item.provider}
+                                                    
                                                 </p>
                                                 {/* <p className="text-gray-600">{item.description}</p> */}
                                             </div>
