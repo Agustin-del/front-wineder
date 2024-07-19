@@ -132,7 +132,7 @@ const Client = () => {
 
 
                 <div className=''>
-                  <h3 className='text-2xl ml-5 py-6 md:text-center md:ml-0 lg:text-3xl italic'>Your orders</h3>
+                  <h3 className='text-2xl ml-5 py-6 md:text-center md:ml-0 lg:text-3xl italic'>Recent Purchases</h3>
                   <table className='rounded-lg border-2 border-gray-300 table-auto shadow-lg md:w-[400px] lg:w-[500px] xl:w-[800px]'>
 
                     <thead className='bg-[#E5D1D2] rounded-tl-lg rounded-tr-lg'>
