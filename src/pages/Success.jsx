@@ -32,10 +32,8 @@ const Success = () => {
     }
   }, [query]);
 
-  const closeBuyOrder = async (event) => {
-    event.preventDefault();
-    const token = localStorage.getItem("token");
-    
+  const closeBuyOrder = async () => { 
+    const token = localStorage.getItem("token");   
     try {
       const response = await axios.post(
         `${API_BASE_URL}/api/buyorder/closeorder`,
@@ -46,12 +44,21 @@ const Success = () => {
           }
         }
       );
-
       console.log(response);
     } catch (error) {
       console.error("Error capturando el pago:", error);
     }
   };
+
+ function handlePurchase() {
+
+  closeBuyOrder();
+
+}
+
+
+
+
 
   return (
     <div>
@@ -63,8 +70,8 @@ const Success = () => {
 
       <FormAddress/>
 
-      <button onClick={closeBuyOrder} className=" lg:text-xl flex items-center justify-center px-4    rounded-lg text-white">
-        <Anchor href="/wines" text="Go to buy more!" />
+      <button onClick={handlePurchase}  className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4">
+       FINISH PURCHASE
       </button>
     </div>
   );
