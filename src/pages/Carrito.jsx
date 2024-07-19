@@ -144,7 +144,8 @@ const Carrito = () => {
     const deleteOrderProduct = async (id) => {
         try {
 
-            //hacer la peticion al back
+            //hacer la peticion al back para eliminar el order product del array de la buy ortder!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
             setCartItems(
                 cartItems.map((item) => {
                     if (item.id === id) {

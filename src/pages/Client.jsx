@@ -14,6 +14,8 @@ const Client = () => {
   const role = useSelector(store => store.roleReducer.role)
   const [loading, setLoading] = useState(true);
 
+
+
   const calculateTotal = (items) => {
     return items.reduce((total, item) => total + item.quantity * item.price, 0);
   };
