@@ -14,6 +14,8 @@ const Client = () => {
   const role = useSelector(store => store.roleReducer.role)
   const [loading, setLoading] = useState(true);
 
+
+
   const calculateTotal = (items) => {
     return items.reduce((total, item) => total + item.quantity * item.price, 0);
   };
@@ -69,13 +71,6 @@ const Client = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role")
-   dispatch(login(token));
-   dispatch(getRole(role))
-
-
-
     getData();
     getBuyOrders();
     getNewOrders();
