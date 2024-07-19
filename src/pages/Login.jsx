@@ -47,6 +47,7 @@ const Login = () => {
             password: password
         }
         try {
+            
             const response = await axios.post(
                 // 'https://wineder-app.onrender.com/api/auth/login',
                 `${API_BASE_URL}/api/auth/login`,
@@ -54,8 +55,8 @@ const Login = () => {
 
             dispatch(login(response.data))
 
-            localStorage.setItem("token",response.data)
-            
+            localStorage.setItem("token", response.data)
+
             const current = await axios.get(
                 // 'https://wineder-app.onrender.com/api/auth/current',
                 `${API_BASE_URL}/api/auth/current`,
@@ -64,17 +65,23 @@ const Login = () => {
                         'Authorization': `Bearer ${response.data}`
                     }
                 })
-                
-                dispatch(getRole(current.data.role))
-                localStorage.setItem("role",current.data.role)
+
+            dispatch(getRole(current.data.role))
+            localStorage.setItem("role", current.data.role)
 
             if (current.data.role === "admin") {
                 navigate('/admin')
             }
 
             if (current.data.role === "client") {
+                localStorage.setItem("token",response.data)
+                localStorage.setItem("role",current.data.role)
                 navigate('/client')
             }
+
+
+
+
         } catch (e) {
             setAlert({ type: "failure", message: e.response.data })
             setTimeout(() => {
@@ -100,7 +107,7 @@ const Login = () => {
                 </div>) : (
 
 
-                <div className="flex items-center justify-center bg-red-100 relative ">
+                <div className="flex items-center justify-center bg-red-100 relative min-h-screen">
                     {/* <div className='relative w-[80%] md:w-[40%] lg:w-[30%]  my-5'>
                         <img className='rounded-xl shadow-md filter blur-[1px] lg:h-[500px] ' src="./assets/login.jpg" alt="" />
                     </div> */}

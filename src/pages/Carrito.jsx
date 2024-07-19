@@ -23,6 +23,7 @@ const Carrito = () => {
         setLoading(false);
     }, []);
 
+
     //   useEffect(() => {
     //     //fetchWishlist();
     //     console.log(wishlist);
@@ -38,7 +39,7 @@ const Carrito = () => {
     const fetchData = async () => {
 
         try {
-           
+
             const response = await axios.get(
                 `${API_BASE_URL}/api/buyorder/client/pending`,
                 {
@@ -98,7 +99,7 @@ const Carrito = () => {
 
     const setOrderProductFalse = async (id) => {
         try {
-           
+
             await axios.put(
                 `${API_BASE_URL}/api/orderproducts/update/${id}`,
                 null,
@@ -125,9 +126,7 @@ const Carrito = () => {
         for (const item of [...cartItems]) {
             // clone the array to avoid concurrent modification errors
             try {
-                await axios.delete(
-                    // `https://wineder-app.onrender.com/api/orderproducts/delete/${item.id}`,
-                    `${API_BASE_URL}/api/orderproducts/delete/${item.id}`,
+                await axios.delete(`${API_BASE_URL}/api/orderproducts/delete/${item.id}`,
                     {
                         headers: { Authorization: `Bearer ${token}` },
                     }
@@ -143,11 +142,13 @@ const Carrito = () => {
     const deleteOrderProduct = async (id) => {
         try {
 
-            //hacer la peticion al back
+            //hacer la peticion al back para eliminar el order product del array de la buy ortder!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
             setCartItems(
                 cartItems.map((item) => {
                     if (item.id === id) {
                         const newQuantity = 0;
+
                         return { ...item, quantity: newQuantity };
                     } else {
                         return item;
@@ -155,6 +156,7 @@ const Carrito = () => {
                 })
             );
 
+            checkOutClick();
 
         } catch (error) {
             console.log(error);
@@ -232,8 +234,8 @@ const Carrito = () => {
                     <img className="w-[300px]" src="/assets/copa.gif" alt="" />
                 </div>
             ) : (
-                <div className="bg-gray-100 h-min-screen">
-                    <div className="container mx-auto px-4 py-8">
+                <div className="bg-gray-100 ">
+                    <div className="container mx-auto px-4 py-8 min-h-screen">
                         <h1 className="text-4xl text-center font-semibold text-gray-800 mb-6 md:w-full lg:w-[70%] lg:ml-[20%]">
                             Shopping Cart
                         </h1>
@@ -259,6 +261,11 @@ const Carrito = () => {
                                             <div>
                                                 <p className="text-gray-800 font-semibold">
                                                     {item.productName}
+                                                    
+                                                </p>
+                                                <p className="text-gray-800 font-semibold">
+                                                    {item.provider}
+                                                    
                                                 </p>
                                                 {/* <p className="text-gray-600">{item.description}</p> */}
                                             </div>
@@ -285,19 +292,22 @@ const Carrito = () => {
                                                 <p className="text-gray-800 font-semibold">{item.stock}</p>
                                             </div> */}
                                         </div>
-                                        <div className="w-1/5 flex items-center flex-col mt-7">
+
+
+                                        <div className="w-1/5 flex items-center flex-col">
+
                                             <p className="text-gray-800 font-semibold">
                                                 $
                                                 {(item.quantity * item.price)
                                                     .toString()
                                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                             </p>
-                                            <button
+                                            {/* <button
                                                 className="w-20 hover:text-green-500"
                                                 onClick={() => setOrderProductFalse(item.id)}
                                             >
                                                 <strong className="text-blu">Buy later</strong>
-                                            </button>
+                                            </button> */}
                                         </div>
                                         <button
                                             onClick={() => deleteOrderProduct(item.id)}
@@ -330,7 +340,7 @@ const Carrito = () => {
                         <div className="flex justify-end mt-6 gap-4">
                             <button
                                 className="bg-white border-2 border-[#73383E] hover:bg-red-600 hover:text-white text-[#73383E] px-4 py-2 rounded-lg"
-                                onAbort={clearBasket}
+                                onClick={clearBasket}
                             >
                                 Clear basket
                             </button>
