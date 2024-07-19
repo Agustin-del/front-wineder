@@ -44,12 +44,13 @@ function PaymentMethods() {
 
   useEffect(() => {
     setTimeout(() => {
-     
+
       getAmountToPay();
-   
+
     }, 3000);
+
     setLoading(false);
-    
+
   }, []);
 
   //SOLICITUD AL BACK PARA SABER EL MONTO A PAGAR
@@ -57,7 +58,7 @@ function PaymentMethods() {
     try {
       const resp = await axios.get(
         // "https://wineder-app.onrender.com/api/buyorder/client/pending",
-        "http://localhost:8080/api/buyorder/client/pending",
+        `${API_BASE_URL}/api/buyorder/client/pending`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -187,10 +188,58 @@ function PaymentMethods() {
             <img className="w-[300px]" src="./assets/copa.gif" alt="" />
           </div>
         ) : (
-          <div className="container mx-auto px-4 py-8 lg:w-[80%] md:w-[60%]  ">
-            <h1 className="w-full text-center italic text-3xl font-semibold text-gray-800 mb-6 ">
+          <div className="container mx-auto px-4 py-8 lg:w-[80%] md:w-[60%] min-h-screen ">
+            <h1 className="w-full text-center italic text-3xl font-semibold text-gray-800 mb-6 lg:text-4xl ">
               Finish Your Purchase
             </h1>
+            <div className="flex flex-col  gap-6 p-4 justify-center items-center">
+              <section className="bg-[#eccdd0] shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)] rounded-lg overflow-hidden p-6 lg:w-[80%] ">
+                <h2 className="text-3xl font-semibold text-wine-800 mb-4 text-center">Test Data</h2>
+
+                {/* <article className="border-b-2 border-[#522025]">
+                        <h3 className="text-2xl font-medium text-wine-700 mt-4">Seller User</h3>
+                        <p><strong>Username: </strong>TESTUSER720792236</p>
+                        <p className="mb-4"><strong>Password: </strong>6Xz31czKT1</p>
+                      </article> */}
+                <section className="flex flex-row mx-5 lg:justify-between  ">
+                  <article className=" border-[#522025]">
+                    <h3 className="text-2xl font-medium text-wine-700 mt-4">Test Buyer</h3>
+                    <p><strong>Username: </strong>TESTUSER659438814</p>
+                    <p className="mb-4"><strong>Password: </strong>cuuklEzGTq</p>
+                  </article>
+
+                  <figure className="flex items-center justify-center lg:my-5 lg:w-[100px]">
+                    <img src="./assets/copa-wine.gif" alt="Wine glass animation" />
+                  </figure>
+
+                  <article className="border-b-2 border-[#522025]">
+                    <h3 className="text-2xl font-medium text-wine-700 mt-4">Test Card</h3>
+                    <p><strong>Number: </strong>5031 7557 3453 0604</p>
+                    <p><strong>Expiration Date: </strong>11/25</p>
+                    <p className="mb-4"><strong>CVV: </strong>123</p>
+                  </article>
+                </section>
+              </section>
+
+
+
+
+              <section className="bg-[#eccdd0] shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)] rounded-lg overflow-hidden p-6 md:w-full flex justify-center items-center italic flex-col md:justify-center md:flex md:items-center md:h-auto lg:h-auto lg:my-auto">
+                <p className="text-xl font-medium text-center">
+                  Please remember that this page is a simulation of an e-commerce wine sales platform.
+                  Transactions and orders made here are not real and will not result in the purchase or shipment of products.
+                  This platform is for demonstration and educational purposes only.
+                </p>
+                <p className="text-xl font-medium text-center">
+                  <strong>Thank you for your understanding. Enjoy the experience.</strong>
+                </p>
+                <br />
+                <p className="text-xl font-medium text-center">
+                  If you have any additional test data for Mercado Pago, you can also use it to make a test purchase.
+                </p>
+              </section>
+            </div>
+
 
             {/* <form
               //onSubmit={handleSubmit}
@@ -401,7 +450,7 @@ function PaymentMethods() {
                 Continue
               </button>
 
-              {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId}} />)}
+              {preferenceId && (<Wallet initialization={{ preferenceId: preferenceId }} />)}
 
 
 

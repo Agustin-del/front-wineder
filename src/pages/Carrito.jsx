@@ -22,6 +22,7 @@ const Carrito = () => {
 
         setLoading(false);
     }, []);
+    
 
     //   useEffect(() => {
     //     //fetchWishlist();
