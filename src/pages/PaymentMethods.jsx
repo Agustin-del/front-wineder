@@ -24,18 +24,8 @@ function PaymentMethods() {
   const [loading, setLoading] = useState(true);
   const [buyorder, setBuyorder] = useState();
 
-  const [street, setStreet] = useState("");
-  const [number, setNumber] = useState();
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zipCode, setZipCode] = useState(0);
-  const [country, setCountry] = useState();
+ 
 
-  const [cardholderName, setCardholderName] = useState("");
-  const [cardNumber, setCardNumber] = useState("");
-  const [cvv, setCvv] = useState(0);
-  const [cardType, setCardType] = useState("");
-  const [description, setDescription] = useState("");
 
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
@@ -70,22 +60,6 @@ function PaymentMethods() {
       setResponse(resp.data.orderProducts);
       console.log(resp);
 
-
-      // Multiplicar price y quantity
-      // const total = response.map((product) => product.price * product.quantity)
-      //   .reduce((acc, curr) => acc + curr, 0);
-
-
-
-      // setTotalAmount(total);
-      // setDescription("Winder purchase");
-
-      // console.log(totalAmount);
-
-      // const aux = response.map((product) => product.quantity)
-      //   .reduce((acc, curr) => acc + curr, 0);
-      // setTotalQuantity(aux);
-      // console.log(totalQuantity);
 
     } catch (error) {
       console.log(error);

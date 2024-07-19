@@ -106,15 +106,6 @@ function FormAddress() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap justify-center">
-                <button
-                
-                  className="bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4"
-                >
-                  SEND!!!
-                </button>
-
-              </div>
             </form>
            
   )
