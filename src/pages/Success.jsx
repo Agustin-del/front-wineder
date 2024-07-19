@@ -27,7 +27,7 @@ const Success = () => {
   useEffect(() => {
     setPaymentId(query.get("payment_id"));
     setStatus(query.get("status"));
-    setAvailable(false);
+    //setAvailable(false);
 
   }, [query]);
 
@@ -63,7 +63,7 @@ const Success = () => {
 
     toast("Purchase correctly done!");
     setTimeout(() => {
-      navigate("/");
+      navigate("/client");
     }, 3000);
   }
 
@@ -180,14 +180,13 @@ const Success = () => {
             > LOAD DATA
         </button> */}
 
+         
+        </form>
             <button
             onClick={handlePurchase}
             className="justify-center bg-[#5e2a30] text-white px-4 py-2 rounded-lg focus:outline-none m-4 lg:mt-10"
             > FINISH PURCHASE
         </button>
-          {/* { available && (
-      )} */}
-        </form>
 
       </div>
     </div>
