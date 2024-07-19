@@ -98,9 +98,9 @@ const Client = () => {
         </div>) : (<>
 
           <h2 className='text-3xl text-center lg:text-5xl my-8 lg:mt-10'><strong>Welcome {client.name} {client.lastName}!</strong></h2>
-          <div className='flex flex-col  my-5 lg:flex-row lg:mr-[20%]'>
-            <div className='w-full flex justify-center'>
-              <div className='flex flex-col justify-center items-center gap-5 ml-5 px-5 py-8 rounded-lg w-[80%] md:w-[400px] border-2 border-gray-300 shadow-lg'>
+          <div className='flex  flex-col  my-5 lg:flex-row lg:justify-around '>
+            <div className=' flex justify-center'>
+              <div className='flex flex-col justify-center items-center gap-5 ml-5 px-5 py-8 rounded-lg w-[80%] md:w-[400px]  lg:h-[300px] border-2 border-gray-300 shadow-lg'>
                 <h3 className='text-2xl lg:text-3xl italic'>Personal information </h3>
                 <h4><strong>Email:</strong> {client.email}</h4>
                 <div className='flex gap-5 justify-center items-center flex-col md:flex-row'>
@@ -115,32 +115,11 @@ const Client = () => {
             <div className='flex flex-col '>
 
               <section className='flex flex-wrap justify-center gap-5 my-5 relative z-10'>
-                {/* <div>
-                <h3 className='text-2xl ml-5 pt-5 lg:text-3xl italic'>Still in your Cart !!</h3>
-                <table className='rounded-lg border-2 border-gray-300 table-auto shadow-lg'>
 
-                  <thead className='bg-[#E5D1D2] rounded-tl-lg rounded-tr-lg'>
-                    <tr>
-                      <th className='px-4 py-2 border-b-2 border-gray-300 text-center font-semibold text-black'>Order Number</th>
-                      <th className='px-4 py-2 border-b-2 border-gray-300 text-center font-semibold text-black'>Total Amount</th>
-                      <th className='px-4 py-2 border-b-2 border-gray-300 text-center font-semibold text-black'>Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {buyOrders.map((buyOrder) => {
-                      return <tr key={buyOrder.id} className='hover:bg-gray-100'>
-                        <td className='px-4 py-2 border-b text-center text-gray-800'>{buyOrder.orderNumber}</td>
-                        <td className='px-4 py-2 border-b text-center text-gray-800'>{formatter.format((calculateTotal(buyOrder.orderProducts)))}</td>
-                        <td className='px-4 py-2 border-b text-center text-gray-800'>{buyOrder.orderDate}</td>
-                      </tr>
-                    })}
-                  </tbody>
-                </table>
-              </div> */}
 
                 <div className=''>
                   <h3 className='text-2xl ml-5 py-6 md:text-center md:ml-0 lg:text-3xl italic'>Your orders</h3>
-                  <table className='rounded-lg border-2 border-gray-300 table-auto shadow-lg'>
+                  <table className='rounded-lg border-2 border-gray-300 table-auto shadow-lg md:w-[400px] lg:w-[500px] xl:w-[800px]'>
 
                     <thead className='bg-[#E5D1D2] rounded-tl-lg rounded-tr-lg'>
                       <tr>
