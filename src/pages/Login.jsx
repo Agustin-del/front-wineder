@@ -6,6 +6,9 @@ import { login } from '../redux/actions/authActions';
 import { Alert } from 'flowbite-react';
 import { getRole } from '../redux/actions/roleActions';
 // import { GoogleLogin } from '@react-oauth/google';
+import { API_BASE_URL } from '../utils/config'
+
+
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -46,14 +49,16 @@ const Login = () => {
         try {
             const response = await axios.post(
                 // 'https://wineder-app.onrender.com/api/auth/login',
-                "http://localhost:8080/api/auth/login",
+                `${API_BASE_URL}/api/auth/login`,
                 requestBody)
 
             dispatch(login(response.data))
 
+            localStorage.setItem("token", response.data)
+
             const current = await axios.get(
                 // 'https://wineder-app.onrender.com/api/auth/current',
-                "http://localhost:8080/api/auth/current",
+                `${API_BASE_URL}/api/auth/current`,
                 {
                     headers: {
                         'Authorization': `Bearer ${response.data}`
@@ -61,6 +66,7 @@ const Login = () => {
                 })
 
             dispatch(getRole(current.data.role))
+            localStorage.setItem("role", current.data.role)
 
             if (current.data.role === "admin") {
                 navigate('/admin')
@@ -95,8 +101,10 @@ const Login = () => {
 
 
                 <div className="flex items-center justify-center bg-red-100 relative ">
-                   
-                    <div style={{ backgroundImage: `url('/assets/login.jpg')` }} className="shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] mx-2 bg-cover object-cover bg-center lg:h-[470px]  rounded-lg px-8 pt-6 pb-8 my-4 ">
+                    {/* <div className='relative w-[80%] md:w-[40%] lg:w-[30%]  my-5'>
+                        <img className='rounded-xl shadow-md filter blur-[1px] lg:h-[500px] ' src="./assets/login.jpg" alt="" />
+                    </div> */}
+                    <div style={{ backgroundImage: `url('/assets/login.jpg')` }} className="shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] mx-2 bg-cover object-cover bg-center lg:h-[450px]  rounded-lg px-8 pt-6 pb-8 my-4 ">
                         <form className="bg-white bg-opacity-70 shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
                             <h2 className='text-6xl text-center mb-10 text-black'><strong>Login</strong></h2>
                             <div className="mb-4">

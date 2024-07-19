@@ -6,6 +6,7 @@ import axios from 'axios'
 import StarRating from '../components/StarRating'
 import Comment from '../components/Comment'
 import { useSelector } from 'react-redux'
+import { API_BASE_URL } from '../utils/config'
 
 const WineDetails = () => {
     const { id } = useParams()
@@ -49,7 +50,7 @@ const WineDetails = () => {
         try {
             const response = await axios.post(
                 // "https://wineder-app.onrender.com/api/reviews/create",
-                "http://localhost:8080/api/reviews/create",
+                 `${API_BASE_URL}/api/reviews/create`,
                 requestBody, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -67,7 +68,7 @@ const WineDetails = () => {
         try {
             const response = await axios.get(
                 // "https://wineder-app.onrender.com/api/reviews/product/" 
-                "http://localhost:8080/api/reviews/product/"
+                `${API_BASE_URL}/api/reviews/product/`
                 + id
             )
             const reviewsWithData = response.data.map(review => ({
@@ -85,7 +86,7 @@ const WineDetails = () => {
         try {
             const response = await axios.get(
                 // "https://wineder-app.onrender.com/api/products/"
-                "http://localhost:8080/api/products/"
+                `${API_BASE_URL}/api/products/`
                 + id)
             setWine(response.data)
         }
